@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header">Autorasdd
+    <div class="card-header">Autor
         <a class="btn btn-primary btn-sm float-right text-white" href="{{route('autores.create')}}">Nuevo</a>
     </div>
     <div class="card-body">
