@@ -27,8 +27,8 @@ class EditorialController extends Controller
      */
     public function create()
     {
-        //$proveedores = Proveedor::all() ;
-    return view('editorials.create'  /*compact('proveedores')*/);
+        //$proveedores = Proveedor::all();
+        return view('editorials.create'  /*compact('proveedores')*/);
     }
 
     /**
