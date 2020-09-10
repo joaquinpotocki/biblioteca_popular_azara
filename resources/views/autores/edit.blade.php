@@ -6,7 +6,7 @@
     <div class="card card-primary card-outline">
         <div class="card-header">
             <h5>
-                Agregar un nuevo autor
+                Agregar un nuevo autorr
             </h5>
         </div>
         <div class="card-body">
