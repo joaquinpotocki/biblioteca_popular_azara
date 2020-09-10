@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-3">
+                <div class="col-4">
                     <div class="form-group ">
                         <label for="numero_serie">Numero de serie</label>
                         <input type="text" class="form-control  @error('numero_serie') is-invalid @enderror" id="numero_serie"
@@ -22,7 +22,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <div class="form-group ">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control  @error('nombre') is-invalid @enderror" id="nombre"
@@ -34,10 +34,10 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <div class="form-group ">
                         <label for="edicion">Edicion</label>
-                        <input type="text" class="form-control  @error('edicion') is-invalid @enderror" id="edicion"
+                        <input type="number" class="form-control  @error('edicion') is-invalid @enderror" id="edicion"
                             name="edicion" value="{{ old('edicion') }}" placeholder="Especifique su nombre de persona de contacto" required>
                         @error('edicion')
                         <span class="invalid-feedback" role="alert">
@@ -46,7 +46,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <div class="form-group ">
                         <label for="genero_libros" class="">Genero</label>
                         <label for="genero_libros">
@@ -63,7 +63,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <div class="form-group ">
                         <label for="autores" class="">Autor</label>
                         <label for="autores">
@@ -80,7 +80,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <div class="form-group ">
                         <label for="editorials" class="">Editorial</label>
                         <label for="editorials">
@@ -93,6 +93,23 @@
                             @foreach($editorials as $editorial)
                             <option value="{{$editorial->id}}" @if(old('editorial_id')==$editorial->id) selected
                                 @endif>{{$editorial->nombre_editorial}} {{$editorial->apellido_editorial}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group ">
+                        <label for="tipo_libros" class="">Tipo de libro</label>
+                        <label for="tipo_libros">
+                            <a role="button" type="button" href="{{route('tipo_libros.create')}}" title="Nuevo genero"><i
+                                    class="fas fa-plus-circle fa-md"></i></a>
+                        </label>
+
+                        <select class="form-control" name="tipo_libro_id" id="tipo_libro" required>
+                            <option value="" disabled selected>--Seleccione un tipo--</option>
+                            @foreach($tipo_libros as $tipo_libro)
+                            <option value="{{$tipo_libro->id}}" @if(old('tipo_libro_id')==$tipo_libro->id) selected
+                                @endif>{{$tipo_libro->nombre_tipo}}</option>
                             @endforeach
                         </select>
                     </div>

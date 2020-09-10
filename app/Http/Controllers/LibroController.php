@@ -8,6 +8,7 @@ use App\Libro;
 use App\GeneroLibro;
 use App\Autor;
 use App\Editorial;
+use App\TipoLibro;
 class LibroController extends Controller
 {
     /**
@@ -32,7 +33,8 @@ class LibroController extends Controller
         $editorials = Editorial::all();
         $autores = Autor::all();
         $genero_libros = GeneroLibro::all();
-        return view('libros.create', compact('genero_libros','autores', 'editorials'));
+        $tipo_libros = TipoLibro::all();
+        return view('libros.create', compact('genero_libros','autores', 'editorials','tipo_libros'));
     }
 
     /**
@@ -44,6 +46,7 @@ class LibroController extends Controller
     public function store(Request $request)
     {
         $data = request()->validate([
+            'tipo_libro_id'=> 'required',
             'genero_id' => 'required',
             'autor_id' => 'required',
             'editorial_id' => 'required',
@@ -54,6 +57,7 @@ class LibroController extends Controller
 
         $libro = new Libro();
         $libro->genero_id = $request->genero_id;
+        $libro->tipo_libro_id = $request->tipo_libro_id;
         $libro->autor_id = $request->autor_id;
         $libro->editorial_id = $request->editorial_id;
         $libro->numero_serie = $request->numero_serie ;
