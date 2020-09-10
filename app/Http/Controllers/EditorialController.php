@@ -54,6 +54,7 @@ class EditorialController extends Controller
         $editorial->save();
         //$editorial->proveedores()->sync($request->proveedor_id);
         return redirect(route('editorials.index'))->with('success','Nueva editorial guardada con exito!');
+    
     }
 
     /**
