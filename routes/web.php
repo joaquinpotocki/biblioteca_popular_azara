@@ -63,3 +63,13 @@ Route::get('/editorials/{editorial}/edit', 'EditorialController@edit')->name('ed
 Route::put('/editorials/{editorial}', 'EditorialController@update')->name('editorials.update'); //guardar lo que modificamos en el form de edicion
 Route::delete('editorials/{editorial}', 'EditorialController@destroy')->name('editorials.destroy'); //eliminar una autor
 
+//TipoLibro
+Route::get('/tipo_libros', 'TipoLibroController@index')->name('tipo_libros.index'); //para mostrar todos los tipo_libros
+Route::get('/tipo_libros/create', 'TipoLibroController@create')->name('tipo_libros.create'); //renderizar la vista de creacion
+Route::post('/tipo_libros', 'TipoLibroController@store')->name('tipo_libros.store'); //guardar el form (crear una direccion)
+Route::get('/tipo_libros/{tipo_libro}', 'TipoLibroController@show')->name('tipo_libros.show'); //ver datos de un solo tipo_libro
+Route::get('/tipo_libros/{tipo_libro}/edit', 'TipoLibroController@edit')->name('tipo_libros.edit'); //renderizar el form para editar un tipo_libro
+Route::put('/tipo_libros/{tipo_libro}', 'TipoLibroController@update')->name('tipo_libros.update'); //guardar lo que modificamos en el form de edicion
+Route::delete('tipo_libros/{tipo_libro}', 'TipoLibroController@destroy')->name('tipo_libros.destroy'); //eliminar una autor
+
+
