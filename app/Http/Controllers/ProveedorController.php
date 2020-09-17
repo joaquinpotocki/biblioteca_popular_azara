@@ -74,9 +74,9 @@ class ProveedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Proveedor $proveedor)
     {
-        //
+        return view('proveedores.show', compact('proveedor')) ;
     }
 
     /**
