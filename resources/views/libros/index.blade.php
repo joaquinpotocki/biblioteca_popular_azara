@@ -26,6 +26,7 @@
                     <td>{{$libro->autor->nombre_autor}} {{$libro->autor->apellido_autor}}</td>
                     <td>{{$libro->edicion}}</td>
                     <td class="text-right">
+                        <a class="btn btn-primary btn-sm" href="{{ route('libros.show', $libro->id) }}">Ver</a>
                         <a class="btn btn-light btn-sm" href="{{route('libros.edit', $libro->id)}}">Editar</a>
                         <a class="btn btn-danger btn-sm text-white delete" val-palabra={{$libro->id}}>Borrar</a>
                     </td>

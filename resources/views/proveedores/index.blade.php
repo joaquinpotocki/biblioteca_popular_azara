@@ -13,12 +13,9 @@
                     <th scope="col">Cuit</th>
                     <th scope="col">Empresa</th>
                     <th scope="col">Direccion postal</th>
-                    <th scope="col">telefono</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Nombres persona contacto</th>
-                    <th scope="col">Apellidos persona contacto</th>
+                    <th scope="col">Telefono</th>
                     <th scope="col">Editoriales con las que trabaja</th>
-                    <th scope="col">Notas generales</th>
+                    
                     <th scope="col" class="text-right">Opciones</th>
                 </tr>
             </thead>
@@ -29,9 +26,6 @@
                     <td>{{$proveedor->empresa}}</td>
                     <td>{{$proveedor->direccion_postal}}</td>
                     <td>{{$proveedor->telefono}}</td>
-                    <td>{{$proveedor->email}}</td>
-                    <td>{{$proveedor->nombre_persona_contacto}}</td>
-                    <td>{{$proveedor->apellido_persona_contacto}}</td>
                     <td>
                         @foreach ($proveedor->editoriales as $p)
                             <span class="badge badge-pill">
@@ -39,8 +33,9 @@
                             </span>
                         @endforeach
                     </td>
-                    <td>{{$proveedor->notas_generales}}</td>
+                    
                     <td class="text-right">
+                        <a class="btn btn-primary btn-sm" href="{{ route('proveedores.show', $proveedor->id) }}">Ver</a>
                         <a class="btn btn-light btn-sm" href="{{ route('proveedores.edit', $proveedor->id) }}">Editar</a>
                         <a class="btn btn-danger btn-sm text-white delete" val-palabra={{$proveedor->id}}>Borrar</a>
                     </td>

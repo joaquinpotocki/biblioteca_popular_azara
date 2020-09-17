@@ -92,7 +92,7 @@
                             <option value="" disabled selected>--Seleccione un editorial--</option>
                             @foreach($editorials as $editorial)
                             <option value="{{$editorial->id}}" @if(old('editorial_id')==$editorial->id) selected
-                                @endif>{{$editorial->nombre_editorial}} {{$editorial->apellido_editorial}}</option>
+                                @endif>{{$editorial->nombre_editorial}}</option>
                             @endforeach
                         </select>
                     </div>
