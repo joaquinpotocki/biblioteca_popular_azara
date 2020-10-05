@@ -63,7 +63,7 @@ class LibroController extends Controller
         $libro->numero_serie = $request->numero_serie ;
         $libro->nombre = $request->nombre ;
         $libro->edicion = $request->edicion ;
-        
+        $libro->stock_libro = $request->stock_libro;
         $libro->save();
         //$cliente->numero_cliente = $numero_cliente ;
         return redirect(route('libros.index'))->with('success','Libro nuevo guardado con exito!'); 

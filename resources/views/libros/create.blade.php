@@ -114,6 +114,18 @@
                         </select>
                     </div>
                 </div>
+                <div class="col-4">
+                    <div class="form-group ">
+                        <label for="stock_libro">Stock</label>
+                        <input type="number" class="form-control  @error('stock_libro') is-invalid @enderror" id="stock_libro"
+                            name="stock_libro" value="{{ old('stock_libro') }}" placeholder="Especifique su nombre de persona de contacto" required>
+                        @error('stock_libro')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card-footer float">

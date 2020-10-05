@@ -31,7 +31,7 @@
                         </dl>
                         <dl class="row" style="margin-left: 1%">
                             <dt class="col-sm-3">Edicion</dt>
-                            <dd class="col-sm-8 text-muted">{{ $libro->edicion }} Edicion</dd>
+                            <dd class="col-sm-8 text-muted">{{ $libro->edicion }}</dd>
                         </dl>
                         <dl class="row" style="margin-left: 1%">
                             <dt class="col-sm-3">Genero</dt>
@@ -52,25 +52,26 @@
 
                     </div>
                     <!-- /.tab-pane -->
-                    <div class="tab-pane" id="estado">
-
+                    <div class="tab-pane" id="partes">
                         <div class="table-responsive">
-                            <table id="datatable"
-                                class="table table-head-fixed text-nowrap table-striped table-bordered">
+                            <table id="datatable" class="table table-head-fixed text-nowrap table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        
+                                        <th>Cantidad de ejemplares disponibles</th>
+                                        <th>Cantidad de ejemplares prestados</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+                                    <tr>
+                                        <td class="text-left">
+                                            {{ $libro->stock_libro }}
+                                        </td>
+                                        <td>
+                                            Aun trabajando
+                                        </td>
+                                    </tr
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="callout" style="border-left-color: #3c8dbc;">
-                            <h5>asd</h5>
-
-                            <p>Aun trabajando de en ello</p>
                         </div>
                     </div>
                     <!-- /.tab-pane -->

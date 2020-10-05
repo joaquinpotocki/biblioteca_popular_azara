@@ -26,10 +26,7 @@
                             <dt class="col-sm-3">Empresa</dt>
                             <dd class="col-sm-8 text-muted">{{ $proveedor->empresa }}</dd>
                         </dl>
-                        <dl class="row" style="margin-left: 1%">
-                            <dt class="col-sm-3">Direccio postal</dt>
-                            <dd class="col-sm-8 text-muted">{{ $proveedor->direccion_postal }}</dd>
-                        </dl>
+                        
                         <dl class="row" style="margin-left: 1%">
                             <dt class="col-sm-3">Nombre persona contacto</dt>
                             <dd class="col-sm-8 text-muted">{{ $proveedor->nombre_persona_contacto }}</dd>
@@ -47,6 +44,35 @@
                             <dd class="col-sm-8 text-muted">{{ $proveedor->email }}</dd>
                         </dl>
                         
+                        <div class="text-muted" style="font-family: 'Open Sans', serif;">DIRECCION </div>
+                        <hr style="margin-bottom: 1%; margin-top: 0%">
+
+                            <dl class="row" style="margin-left: 1%">
+                                <dt class="col-sm-3">Direccio postal</dt>
+                                <dd class="col-sm-8 text-muted">{{ $proveedor->direccion_postal }}</dd>
+                            </dl>    
+                            <dl class="row" style="margin-left: 1%">
+                                <dt class="col-sm-3">Pais</dt>
+                                <dd class="col-sm-8 text-muted">{{ $proveedor->direccion->pais->pais }}</dd>
+                            </dl>
+                            <dl class="row" style="margin-left: 1%">
+                                <dt class="col-sm-3">Provincia</dt>
+                                <dd class="col-sm-8 text-muted">{{ $proveedor->direccion->provincia->provincia }}</dd>
+                            </dl>
+                            <dl class="row" style="margin-left: 1%">
+                                <dt class="col-sm-3">Localidad</dt>
+                                <dd class="col-sm-8 text-muted">{{ $proveedor->direccion->localidad->localidad }}</dd>
+                            </dl>
+                            <dl class="row" style="margin-left: 1%">
+                                <dt class="col-sm-3">Calle</dt>
+                                <dd class="col-sm-8 text-muted">{{ $proveedor->direccion->calle }}</dd>
+                            </dl>
+                            <dl class="row" style="margin-left: 1%">
+                                <dt class="col-sm-3">Altura</dt>
+                                <dd class="col-sm-8 text-muted">{{ $proveedor->direccion->altura}}</dd>
+                            </dl>
+                            
+                        </dl>
 
                         <div class="text-muted" style="font-family: 'Open Sans', serif;">EDITORIALES CON LAS QUE TRABAJA</div>
                         <hr style="margin-bottom: 1%; margin-top: 0%">

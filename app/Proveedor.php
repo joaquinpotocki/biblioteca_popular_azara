@@ -15,4 +15,9 @@ class Proveedor extends Model
     {
         return $this->belongsToMany(Editorial::class);
     }
+    
+     //Relaciones
+     public function direccion(){
+        return $this->belongsTo(Direccion::class);
+    }
 }

@@ -18,6 +18,7 @@ class CreateLibrosTable extends Migration
             $table->string('numero_serie');
             $table->string('edicion');
             $table->string('nombre');
+            $table->string('stock_libro');
             //Relacion con genero de los libros(Tu primer relacion en tu proyecto, VOS PODES!)
             $table->unsignedBigInteger('genero_id')->unsigned();
             $table->foreign('genero_id')->references('id')->on('genero_libros');

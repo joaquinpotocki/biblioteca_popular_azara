@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Proveedor;
 use App\Editorial;
+use App\Direccion;
+use Cardumen\ArgentinaProvinciasLocalidades\Models\Pais;
 
 class ProveedorController extends Controller
 {
@@ -29,8 +31,9 @@ class ProveedorController extends Controller
      */
     public function create()
     {
+        $paises = Pais::all();
         $editorials = Editorial::all();
-        return view('proveedores.create', compact('editorials'));
+        return view('proveedores.create', compact('editorials','paises'));
     }
 
     /**
@@ -42,7 +45,7 @@ class ProveedorController extends Controller
     public function store(Request $request)
     {
         $data = request()->validate([
-            'cuit' => 'required',
+            'cuit' => 'required|regex:/^([0-9]*)$/|min:11|max:11',
             'empresa' => 'required',
             'direccion_postal' => 'required',
             'telefono' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
@@ -50,7 +53,21 @@ class ProveedorController extends Controller
             'nombre_persona_contacto' => 'required',
             'apellido_persona_contacto' => 'required',
             'editorial_id.*' => 'required',
+            'pais_id' => 'required',
+            'provincia_id' => 'required',
+            'localidad_id' => 'required',
+            'calle' => 'required|regex:/^[a-zA-Z\s]*$/',
+            'altura' => 'required|numeric',
         ]) ;
+
+
+        $direccion = new Direccion();
+        $direccion->calle = $request->calle ;
+        $direccion->altura = $request->altura ;
+        $direccion->pais_id = $request->pais_id ;
+        $direccion->provincia_id = $request->provincia_id ;
+        $direccion->localidad_id = $request->localidad_id ;
+        $direccion->save();
 
         $proveedor = new Proveedor();
         $proveedor->cuit = $request->cuit ;
@@ -61,8 +78,11 @@ class ProveedorController extends Controller
         $proveedor->nombre_persona_contacto = $request->nombre_persona_contacto ;
         $proveedor->apellido_persona_contacto = $request->apellido_persona_contacto ;
         $proveedor->notas_generales = $request->notas_generales ;
-        
+        $proveedor->direccion_id = $direccion->id ;
         //$cliente->numero_cliente = $numero_cliente ;
+        $proveedor->save();
+        $numero_proveedor = strtoupper(substr($direccion->pais->pais,0,3).'-'.$proveedor->id);
+        $proveedor->numero_proveedor = $numero_proveedor ;
         $proveedor->save();
         $proveedor->editoriales()->sync($request->editorial_id); //Para poder entrar a una tabla intermedia
         return redirect(route('proveedores.index'))->with('success','Proveedor guardado con exito!');
@@ -76,7 +96,8 @@ class ProveedorController extends Controller
      */
     public function show(Proveedor $proveedor)
     {
-        return view('proveedores.show', compact('proveedor')) ;
+        $paises = Pais::all();  
+        return view('proveedores.show', compact('editorials','proveedor', 'paises')) ;
     }
 
     /**
@@ -87,7 +108,9 @@ class ProveedorController extends Controller
      */
     public function edit(Proveedor $proveedor)
     {
-        return view('proveedores.edit', compact('proveedor'));
+        $paises = Pais::all();
+        $editorials = Editorial::all();
+        return view('proveedores.edit', compact('editorials','proveedor','paises'));
     }
 
     /**
@@ -100,14 +123,28 @@ class ProveedorController extends Controller
     public function update(Request $request, Proveedor $proveedor)
     {
         $data = request()->validate([
-            'cuit' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'cuit' => 'required|regex:/^([0-9]*)$/|min:11|max:11',
             'empresa' => 'required',
             'direccion_postal' => 'required',
             'telefono' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'email' => 'required|email|unique:proveedores,email,'.$proveedor->id,
             'nombre_persona_contacto' => 'required',
             'apellido_persona_contacto' => 'required',
+            'editorial_id.*' => 'required',
+            'pais_id' => 'required',
+            'provincia_id' => 'required',
+            'localidad_id' => 'required',
+            'calle' => 'required|regex:/^[a-zA-Z\s]*$/',
+            'altura' => 'required|numeric',
         ]) ;
+
+        $direccion = $proveedor->direccion;
+        $direccion->calle = $request->calle ;
+        $direccion->altura = $request->altura ;
+        $direccion->pais_id = $request->pais_id ;
+        $direccion->provincia_id = $request->provincia_id ;
+        $direccion->localidad_id = $request->localidad_id ;
+        $direccion->update();
         
         $proveedor->cuit = $request->cuit ;
         $proveedor->empresa = $request->empresa ;
@@ -118,7 +155,7 @@ class ProveedorController extends Controller
         $proveedor->apellido_persona_contacto = $request->apellido_persona_contacto ;
         $proveedor->notas_generales = $request->notas_generales ;
         $proveedor->update();
-
+        $proveedor->editoriales()->sync($request->editorial_id); //Para poder entrar a una tabla intermedia   
         return redirect(route('proveedores.index'))->with('success','Proveedor guardado con exito!');
     }
 

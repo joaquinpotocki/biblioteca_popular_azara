@@ -27,4 +27,9 @@ class Libro extends Model
     public function tipo_libro(){
         return $this->belongsTo(TipoLibro::class);
     }
+
+    //Relaciones
+    public function ingreso_libros(){
+        return $this->hasMany(IngresoLibro::class);
+    }
 }

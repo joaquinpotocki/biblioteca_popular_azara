@@ -28,7 +28,7 @@
                with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-item fas fa-tasks"></i>
+                        <i class="nav-item fas fa-book"></i>
                         <p>
                             Libros
                             <i class="right fas fa-angle-left"></i>
@@ -77,7 +77,7 @@
                with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link">
-                        <i class="nav-item fas fa-tasks"></i>
+                        <i class="nav-item fas fa-dolly"></i>
                         <p>
                            Proveedores
                             <i class="right fas fa-angle-left"></i>
@@ -88,6 +88,31 @@
                             <a href="{{route('proveedores.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Ver Proveedores</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                </li>
+            </ul>
+        </nav>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-item fas fa-people-carry"></i>
+                        <p>
+                           Ingreso de stock
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: block;">
+                        <li class="nav-item">
+                            <a href="{{route('ingreso_libros.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ver Ingreso de Libros</p>
                             </a>
                         </li>
                     </ul>

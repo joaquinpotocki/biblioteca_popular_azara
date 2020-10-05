@@ -72,4 +72,18 @@ Route::get('/tipo_libros/{tipo_libro}/edit', 'TipoLibroController@edit')->name('
 Route::put('/tipo_libros/{tipo_libro}', 'TipoLibroController@update')->name('tipo_libros.update'); //guardar lo que modificamos en el form de edicion
 Route::delete('tipo_libros/{tipo_libro}', 'TipoLibroController@destroy')->name('tipo_libros.destroy'); //eliminar una autor
 
+//IngresoLibro
+Route::get('/ingreso_libros', 'IngresoLibroController@index')->name('ingreso_libros.index'); //para mostrar todos los ingreso
+Route::get('/ingreso_libros/create', 'IngresoLibroController@create')->name('ingreso_libros.create'); //renderizar la vista de creacion
+Route::post('/ingreso_libros', 'IngresoLibroController@store')->name('ingreso_libros.store'); //guardar el form (crear una direccion)
+Route::get('/ingreso_libros/{ingreso_libro}', 'IngresoLibroController@show')->name('ingreso_libros.show'); //ver datos de un solo ingreso_libro
+Route::get('/ingreso_libros/{ingreso_libro}/edit', 'IngresoLibroController@edit')->name('ingreso_libros.edit'); //renderizar el form para editar un ingreso_libro
+Route::put('/ingreso_libros/{ingreso_libro}', 'IngresoLibroController@update')->name('ingreso_libros.update'); //guardar lo que modificamos en el form de edicion
+Route::delete('ingreso_libros/{ingreso_libro}', 'IngresoLibroController@destroy')->name('ingreso_libros.destroy'); //eliminar una autor
+
+//carga de provincias con ajax
+Route::get('paises/{pais}', 'DireccionController@obtenerProvincias')->name('paises.obtenerProvincias');
+
+//carga de localidades con ajax
+Route::get('provincias/{provincia}', 'DireccionController@obtenerLocalidades')->name('provincias.obtenerLocalidades');
 

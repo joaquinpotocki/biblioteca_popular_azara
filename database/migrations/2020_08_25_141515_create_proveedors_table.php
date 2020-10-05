@@ -23,6 +23,10 @@ class CreateProveedorsTable extends Migration
             $table->string('nombre_persona_contacto');
             $table->string('apellido_persona_contacto');
             $table->text('notas_generales')->nullable();
+            $table->string('numero_proveedor')->nullable();
+
+            $table->unsignedBigInteger('direccion_id')->unsigned();
+            $table->foreign('direccion_id')->references('id')->on('direccions');
 
             $table->softDeletes();
             $table->timestamps();
