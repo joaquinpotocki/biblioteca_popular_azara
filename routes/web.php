@@ -81,9 +81,24 @@ Route::get('/ingreso_libros/{ingreso_libro}/edit', 'IngresoLibroController@edit'
 Route::put('/ingreso_libros/{ingreso_libro}', 'IngresoLibroController@update')->name('ingreso_libros.update'); //guardar lo que modificamos en el form de edicion
 Route::delete('ingreso_libros/{ingreso_libro}', 'IngresoLibroController@destroy')->name('ingreso_libros.destroy'); //eliminar una autor
 
+//TipoIngreso
+Route::get('/tipo_ingresos', 'TipoIngresoController@index')->name('tipo_ingresos.index'); //para mostrar todos los tipo_ingresos
+Route::get('/tipo_ingresos/create', 'TipoIngresoController@create')->name('tipo_ingresos.create'); //renderizar la vista de creacion
+Route::post('/tipo_ingresos', 'TipoIngresoController@store')->name('tipo_ingresos.store'); //guardar el form (crear una direccion)
+Route::get('/tipo_ingresos/{tipo_ingreso}', 'TipoIngresoController@show')->name('tipo_ingresos.show'); //ver datos de un solo tipo_ingreso
+Route::get('/tipo_ingresos/{tipo_ingreso}/edit', 'TipoIngresoController@edit')->name('tipo_ingresos.edit'); //renderizar el form para editar un tipo_ingreso
+Route::put('/tipo_ingresos/{tipo_ingreso}', 'TipoIngresoController@update')->name('tipo_ingresos.update'); //guardar lo que modificamos en el form de edicion
+Route::delete('tipo_ingresos/{tipo_ingreso}', 'TipoIngresoController@destroy')->name('tipo_ingresos.destroy'); //eliminar una autor
+
 //carga de provincias con ajax
 Route::get('paises/{pais}', 'DireccionController@obtenerProvincias')->name('paises.obtenerProvincias');
 
 //carga de localidades con ajax
 Route::get('provincias/{provincia}', 'DireccionController@obtenerLocalidades')->name('provincias.obtenerLocalidades');
 
+//configuracion
+Route::get('configuracion', 'ConfiguracionController@index')->name('configuracion.index');
+Route::put('configuracion/update', 'ConfiguracionController@update')->name('configuracion.update');
+
+//pdfs
+Route::get('/proveedorPDF', 'PdfController@proveedorPDF')->name('proveedor.pdf');

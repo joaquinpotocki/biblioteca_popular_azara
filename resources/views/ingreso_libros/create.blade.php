@@ -1,6 +1,7 @@
 @extends('admin-lte.index')
 
 @section('content')
+
 <form class="form-group " method="POST" action="{{route("ingreso_libros.store")}}">
     <div class="card card-primary card-outline">
         <div class="card-header">
@@ -54,7 +55,7 @@
                             <option value="" disabled selected>--Seleccione un libro por favor--</option>
                             @foreach($libros as $libro)
                             <option value="{{$libro->id}}" @if(old('libro_id')==$libro->id) selected
-                                @endif>{{$libro->nombre}} {{$libro->stock_libro}}</option>
+                                @endif>{{$libro->nombre}}</option>
                             @endforeach
                         </select>
                     </div>

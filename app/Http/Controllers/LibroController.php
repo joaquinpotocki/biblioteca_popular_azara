@@ -53,6 +53,7 @@ class LibroController extends Controller
             'numero_serie' => 'required',
             'nombre' => 'required',
             'edicion' => 'required',
+            'stock_libro' => 'required',
         ]) ;
 
         $libro = new Libro();
@@ -104,20 +105,25 @@ class LibroController extends Controller
     public function update(Request $request, Libro $libro)
     {
         $data = request()->validate([
+            'numero_serie' => 'required',
+            'tipo_libro_id'=> 'required',
             'genero_id' => 'required',
             'autor_id' => 'required',
-            'numero_serie' => 'required',
+            'editorial_id' => 'required',
             'nombre' => 'required',
             'edicion' => 'required',
+            'stock_libro' => 'required',
         ]) ;
 
         
         $libro->genero_id = $request->genero_id;
+        $libro->tipo_libro_id = $request->tipo_libro_id;
         $libro->autor_id = $request->autor_id;
         $libro->editorial_id = $request->editorial_id;
         $libro->numero_serie = $request->numero_serie ;
         $libro->nombre = $request->nombre ;
         $libro->edicion = $request->edicion ;
+        $libro->stock_libro = $request->stock_libro;
         $libro->update();
         
         return redirect(route('libros.index'))->with('success','Proveedor editado con exito!');

@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-3">
                     <div class="form-group ">
-                        <label for="autores" class="">Genero</label>
+                        <label for="autores" class="">Autor</label>
                         <label for="autores">
                             <a role="button" type="button" href="{{route('autores.create')}}" title="Nuevo genero"><i
                                     class="fas fa-plus-circle fa-md"></i></a>
@@ -73,6 +73,18 @@
                         <input type="text" class="form-control  @error('edicion') is-invalid @enderror" id="edicion"
                             name="edicion" value="{{ old('edicion') ?? $libro->edicion}}" placeholder="Especifique su nombre de persona de contacto" required>
                         @error('edicion')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group ">
+                        <label for="stock_libro">Stock</label>
+                        <input type="text" class="form-control  @error('stock_libro') is-invalid @enderror" id="stock_libro"
+                            name="stock_libro" value="{{ old('stock_libro') ?? $libro->stock_libro}}" placeholder="Especifique su nombre de persona de contacto" required>
+                        @error('stock_libro')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

@@ -8,6 +8,8 @@
     </div>
     <div class="card-body">
         <table id="datatable" class="table table-striped table-bordered dataTable">
+            
+            <a class="btn btn-primary btn-sm" href="{{ route('proveedor.pdf') }}">Pdf</a>
             <thead>
                 <tr>
                     <th scope="col">Cuit</th>

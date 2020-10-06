@@ -36,7 +36,7 @@ class IngresoLibroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Libro $libros)
+    public function store(Request $request)
     {
         
         $data = request()->validate([
@@ -55,10 +55,11 @@ class IngresoLibroController extends Controller
         $ingreso_libro->fecha_perdida = $request->fecha_perdida;
         $ingreso_libro->descripcion_ingreso = $request->descripcion_ingreso ;
         $ingreso_libro->save();
+        $libro = Libro::find($request->libro_id);
         //$libros = Libro::all();
         //$cantidad_sum = $request->cantidad;
-        $libros->stock_libro += $request->cantidad;
-        $libros->update();
+        $libro->stock_libro += $request->cantidad;
+        $libro->update();
         
         return redirect(route('ingreso_libros.index'))->with('success','Ingreso nuevo guardado con exito!');
     }

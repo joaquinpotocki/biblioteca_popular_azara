@@ -13,7 +13,7 @@
                 <div class="col-3">
                     <div class="form-group ">
                         <label for="cuit">Cuit</label>
-                        <input type="text" data-mask="99-99999999-9" class="form-control  @error('cuit') is-invalid @enderror" id="cuit"
+                        <input type="text"  class="form-control  @error('cuit') is-invalid @enderror" id="cuit"
                             name="cuit" value="{{ old('cuit') }}" placeholder="Especifique el nombre de su cuit" required>
                         @error('cuit')
                         <span class="invalid-feedback" role="alert">
@@ -203,6 +203,11 @@
 </form>
 @endsection
 @push('scripts')
+<script>
+    $(document).ready(function(){
+    $('#cuit').mask('00-00000000-0');
+    })
+</script>
 <script>
     $("#editorial").select2({
             placeholder: "Seleccione al menos una editorial"
