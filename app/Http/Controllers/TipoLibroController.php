@@ -69,9 +69,9 @@ class TipoLibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(TipoLibro $tipo_libros)
     {
-        //
+        return view('tipo_libros.edit', compact('tipo_libros'));
     }
 
     /**
@@ -81,9 +81,22 @@ class TipoLibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, TipoLibro $tipo_libros)
     {
-        //
+        $data = request()->validate([
+            'nombre_tipo' => 'required',
+            
+            
+        ]) ;
+
+        
+        $tipo_libro->nombre_tipo = $request->nombre_tipo;
+        $tipo_libro->update();
+        
+        //$cliente->numero_cliente = $numero_cliente ;
+        $tipo_libro->save();
+        //$editorial->proveedores()->sync($request->proveedor_id);
+        return redirect(route('tipo_libros.index'))->with('success','Nuevo tipo de libro guardada con exito!');
     }
 
     /**
@@ -92,8 +105,9 @@ class TipoLibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(TipoLibro $tipo_libros)
     {
-        //
+        $tipo_libros->delete();
+        return redirect(route('tipo_libros.index'))->with('success', 'Tipo de ingreso  '.$tipo_libros->nombre_tipo ,  'eliminado con éxito!');
     }
 }

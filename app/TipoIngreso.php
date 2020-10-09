@@ -9,5 +9,9 @@ class TipoIngreso extends Model
 {
     use SoftDeletes; //Laravel nos permite realizar un borrado logico, no definitivo
     protected $guarded = []; //podremos usar todos sus atributos
-    public $table = "tipo_ingreso"; //la tabla se llamara de esta manera
+    public $table = "tipo_ingresos"; //la tabla se llamara de esta manera
+
+    public function ingreso_libros(){
+        return $this->hasMany(IngresoLibro::class);
+    }
 }

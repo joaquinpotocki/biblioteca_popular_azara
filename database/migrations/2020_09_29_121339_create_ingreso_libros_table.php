@@ -24,6 +24,14 @@ class CreateIngresoLibrosTable extends Migration
             $table->unsignedBigInteger('libro_id')->unsigned();
             $table->foreign('libro_id')->references('id')->on('libros');
 
+            //relacion entre proveedor e ingreso de libros
+            $table->unsignedBigInteger('proveedor_id')->unsigned();
+            $table->foreign('proveedor_id')->references('id')->on('proveedores');
+
+            //relacion entre proveedor e ingreso de libros
+            $table->unsignedBigInteger('tipo_ingresos_id')->unsigned();
+            $table->foreign('tipo_ingresos_id')->references('id')->on('tipo_ingresos');
+
             $table->softDeletes();
             $table->timestamps();
         });

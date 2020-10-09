@@ -11,7 +11,17 @@ class IngresoLibro extends Model
     protected $guarded = []; //podremos usar todos sus atributos
     public $table = "ingreso_libros"; //la tabla se llamara de esta manera
 
-    public function libros(){
+    public function libro(){
         return $this->belongsTo(Libro::class);
     }
+
+    public function proveedor(){
+        return $this->belongsTo(Proveedor::class);
+    }
+
+    public function tipo_ingresos(){
+        return $this->belongsTo(TipoIngreso::class);
+    }
+
+    
 }

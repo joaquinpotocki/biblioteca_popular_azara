@@ -20,4 +20,8 @@ class Proveedor extends Model
      public function direccion(){
         return $this->belongsTo(Direccion::class);
     }
+
+    public function ingreso_libros(){
+        return $this->hasMany(IngresoLibro::class);
+    }
 }

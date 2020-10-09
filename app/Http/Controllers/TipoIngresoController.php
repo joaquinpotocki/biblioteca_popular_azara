@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\TipoIngreso;
 
 class TipoIngresoController extends Controller
 {
@@ -13,7 +14,9 @@ class TipoIngresoController extends Controller
      */
     public function index()
     {
-        //
+        $tipo_ingresos = TipoIngreso::all();
+
+        return view('tipo_ingresos.index', compact('tipo_ingresos'));
     }
 
     /**
@@ -23,7 +26,8 @@ class TipoIngresoController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('tipo_ingresos.create');
     }
 
     /**
@@ -34,7 +38,16 @@ class TipoIngresoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'nombre_ingreso' => 'required',
+            'descripcion' => 'required', 
+        ]) ;
+
+        $tipo_ingreso = new TipoIngreso();
+        $tipo_ingreso->nombre_ingreso = $request->nombre_ingreso ;
+        $tipo_ingreso->descripcion = $request->descripcion ;
+        $tipo_ingreso->save();
+        return redirect(route('tipo_ingresos.index'))->with('success','Tipo guardado con exito!');
     }
 
     /**
@@ -54,9 +67,9 @@ class TipoIngresoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(TipoIngreso $tipo_ingreso)
     {
-        //
+        return view('tipo_ingresos.edit', compact('tipo_ingreso'));
     }
 
     /**
@@ -66,9 +79,17 @@ class TipoIngresoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, TipoIngreso $tipo_ingreso)
     {
-        //
+        $data = request()->validate([
+            'nombre_ingreso' => 'required',
+            'descripcion' => 'required', 
+        ]) ;
+
+        $tipo_ingreso->nombre_ingreso = $request->nombre_ingreso ;
+        $tipo_ingreso->descripcion = $request->descripcion ;
+        $tipo_ingreso->update();
+        return redirect(route('tipo_ingresos.index'))->with('success','Tipo guardado con exito!');
     }
 
     /**
@@ -77,8 +98,9 @@ class TipoIngresoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(TipoIngreso $tipo_ingreso)
     {
-        //
+        $tipo_ingreso->delete();
+        return redirect(route('tipo_ingresos.index'))->with('success', 'Tipo '.$tipo_ingreso->nombre_ingreso.' eliminado con éxito!');
     }
 }

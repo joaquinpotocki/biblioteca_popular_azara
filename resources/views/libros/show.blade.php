@@ -43,7 +43,7 @@
                         </dl>
                         <dl class="row" style="margin-left: 1%">
                             <dt class="col-sm-3">Editorial</dt>
-                            <dd class="col-sm-8 text-muted">{{$libro->editorial->nombre_editorial}}</dd>
+                            <dd class="col-sm-8 text-muted">{{$libro->editoriales->nombre_editorial}}</dd>
                         </dl>
                         <dl class="row" style="margin-left: 1%">
                             <dt class="col-sm-3">Tipo de libro</dt>
@@ -64,7 +64,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="text-left">
-                                            {{ $libro->stock_libro }}
+                                            {{ $libro->stock_libro}}
                                         </td>
                                         <td>
                                             Aun trabajando

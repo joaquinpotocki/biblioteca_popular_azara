@@ -20,8 +20,8 @@ class Libro extends Model
         return $this->belongsTo(Autor::class);
     }
 
-    public function editorial(){
-        return $this->belongsTo(Editorial::class);
+    public function editoriales(){
+        return $this->belongsTo(Editorial::class, "editorial_id");
     }
 
     public function tipo_libro(){

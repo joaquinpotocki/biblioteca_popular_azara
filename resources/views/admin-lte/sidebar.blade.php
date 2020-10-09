@@ -96,6 +96,7 @@
                 </li>
             </ul>
         </nav>
+        
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
@@ -127,7 +128,32 @@
                with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link">
-                        <i class="nav-item fas fa-people-carry"></i>
+                        <i class="nav-item fas fa-bars"></i>
+                        <p>
+                           Parametros
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: block;">
+                        <li class="nav-item">
+                            <a href="{{route('tipo_ingresos.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ver Tipo de Ingreso</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                </li>
+            </ul>
+        </nav>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-item fas fa-cogs"></i>
                         <p>
                            Configuracion
                             <i class="right fas fa-angle-left"></i>

@@ -14,12 +14,14 @@ class CreateEditorialProveedorTable extends Migration
     public function up()
     {
         Schema::create('editorial_proveedor', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            
             $table->unsignedBigInteger('editorial_id')->unsigned();
             $table->foreign('editorial_id')->references('id')->on('editorials');
-            //Relacio con autores de los libros
+            //Relacio con proveedores de los libros
             $table->unsignedBigInteger('proveedor_id')->unsigned();
             $table->foreign('proveedor_id')->references('id')->on('proveedores');
-            $table->bigIncrements('id');
+            
 
             $table->softDeletes();
             $table->timestamps();

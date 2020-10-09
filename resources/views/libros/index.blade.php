@@ -8,6 +8,7 @@
     </div>
     <div class="card-body">
         <table id="datatable" class="table table-striped table-bordered dataTable">
+            <a class="btn btn-primary btn-sm" href="{{ route('libro.pdf') }}">Pdf</a>
             <thead>
                 <tr>
                     <th scope="col">Numero de serie</th>

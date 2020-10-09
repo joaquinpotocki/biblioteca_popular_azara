@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Proveedor;
+use App\Libro;
 use App\Configuracion;
 use PDF;
 use Illuminate\Http\Request;
@@ -20,5 +21,17 @@ class PdfController extends Controller
         $y = $pdf->getDomPDF()->get_canvas()->get_height() - 35;
         $pdf->getDomPDF()->get_canvas()->page_text(500, $y, "Pagina {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
         return $pdf->stream('proveedor.pdf');
+    }
+
+    public function libroPDF()
+    {
+        $libros = Libro::all();
+        $datos = date('d/m/Y');
+        $cant = sizeof($libros);
+        $config = Configuracion::first();
+        $pdf = PDF::loadView('pdf.libro', ['libros' => $libros, 'datos' => $datos, 'cant' => $cant, 'config' => $config]);
+        $y = $pdf->getDomPDF()->get_canvas()->get_height() - 35;
+        $pdf->getDomPDF()->get_canvas()->page_text(500, $y, "Pagina {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
+        return $pdf->stream('libro.pdf');
     }
 }

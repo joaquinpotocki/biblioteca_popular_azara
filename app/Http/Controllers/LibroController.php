@@ -46,14 +46,14 @@ class LibroController extends Controller
     public function store(Request $request)
     {
         $data = request()->validate([
-            'tipo_libro_id'=> 'required',
+            'numero_serie' => 'required',
+            'nombre' => 'required|regex:/^[a-zA-Z\s]*$/',
+            'edicion' => 'required|numeric',
+            'stock_libro' => 'required|numeric',
             'genero_id' => 'required',
             'autor_id' => 'required',
             'editorial_id' => 'required',
-            'numero_serie' => 'required',
-            'nombre' => 'required',
-            'edicion' => 'required',
-            'stock_libro' => 'required',
+            'tipo_libro_id'=> 'required',
         ]) ;
 
         $libro = new Libro();
@@ -106,13 +106,13 @@ class LibroController extends Controller
     {
         $data = request()->validate([
             'numero_serie' => 'required',
-            'tipo_libro_id'=> 'required',
+            'nombre' => 'required|regex:/^[a-zA-Z\s]*$/',
+            'edicion' => 'required|numeric',
+            'stock_libro' => 'required|numeric',
             'genero_id' => 'required',
             'autor_id' => 'required',
             'editorial_id' => 'required',
-            'nombre' => 'required',
-            'edicion' => 'required',
-            'stock_libro' => 'required',
+            'tipo_libro_id'=> 'required',
         ]) ;
 
         

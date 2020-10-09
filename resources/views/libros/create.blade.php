@@ -13,7 +13,7 @@
                 <div class="col-4">
                     <div class="form-group ">
                         <label for="numero_serie">Numero de serie</label>
-                        <input type="text" class="form-control  @error('numero_serie') is-invalid @enderror" id="numero_serie"
+                        <input type="number" class="form-control  @error('numero_serie') is-invalid @enderror" id="numero_serie"
                             name="numero_serie" value="{{ old('numero_serie') }}" placeholder="Especifique el nombre de su numero de serie" required>
                         @error('numero_serie')
                         <span class="invalid-feedback" role="alert">
@@ -116,7 +116,7 @@
                 </div>
                 <div class="col-4">
                     <div class="form-group ">
-                        <label for="stock_libro">Stock</label>
+                        <label for="stock_libro">Stock Inicial</label>
                         <input type="number" class="form-control  @error('stock_libro') is-invalid @enderror" id="stock_libro"
                             name="stock_libro" value="{{ old('stock_libro') }}" placeholder="Especifique su nombre de persona de contacto" required>
                         @error('stock_libro')

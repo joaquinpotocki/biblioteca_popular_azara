@@ -102,3 +102,4 @@ Route::put('configuracion/update', 'ConfiguracionController@update')->name('conf
 
 //pdfs
 Route::get('/proveedorPDF', 'PdfController@proveedorPDF')->name('proveedor.pdf');
+Route::get('/libroPDF', 'PdfController@libroPDF')->name('libro.pdf');

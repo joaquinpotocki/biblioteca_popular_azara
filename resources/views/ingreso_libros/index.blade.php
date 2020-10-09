@@ -10,15 +10,22 @@
         <table id="datatable" class="table table-striped table-bordered dataTable">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Fecha de Ingreso</th>
+                    <th scope="col">Libro/editorial</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Proveedor</th>
+                    <th scope="col">Tipo de Ingreso</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($ingreso_libros as $ingreso_libro)
                 <tr>
-                    <td>{{$ingreso_libro->ingreso_libro}}</td>
+                    <td>{{$ingreso_libro->fecha_ingreso}}</td>
+                    <td>{{$ingreso_libro->libro->nombre}} - {{$ingreso_libro->libro->editoriales->nombre_editorial}}</td>
+                    <td>{{$ingreso_libro->cantidad}}</td>
+                    <td>{{$ingreso_libro->proveedor->empresa}}</td>
+                    <td>{{$ingreso_libro->tipo_ingresos->nombre_ingreso}}</td>
                     <td class="text-right">
-                        <a class="btn btn-light btn-sm" href="{{route('ingreso_libros.edit', $ingreso_libro->id)}}">Editar</a>
                         <a class="btn btn-danger btn-sm text-white delete" val-palabra={{$ingreso_libro->id}}>Borrar</a>
                     </td>
                 </tr>

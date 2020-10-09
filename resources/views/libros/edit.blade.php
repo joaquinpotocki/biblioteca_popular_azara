@@ -83,7 +83,7 @@
                     <div class="form-group ">
                         <label for="stock_libro">Stock</label>
                         <input type="text" class="form-control  @error('stock_libro') is-invalid @enderror" id="stock_libro"
-                            name="stock_libro" value="{{ old('stock_libro') ?? $libro->stock_libro}}" placeholder="Especifique su nombre de persona de contacto" required>
+                            name="stock_libro" value="{{ old('stock_libro') ?? $libro->stock_libro}}" placeholder="Especifique su nombre de persona de contacto" disabled>
                         @error('stock_libro')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
