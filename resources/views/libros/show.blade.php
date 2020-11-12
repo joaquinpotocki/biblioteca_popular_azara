@@ -49,6 +49,7 @@
                             <dt class="col-sm-3">Tipo de libro</dt>
                             <dd class="col-sm-8 text-muted">{{$libro->tipo_libro->nombre_tipo}}</dd>
                         </dl>
+                        <img style="height: 300px; width: 300px; background-color: #EFEFEF; margin: 0px;" class="card-img-top mx-auto d-block"  src="{{asset("images/$libro->imagen")}}" alt="">
 
                     </div>
                     <!-- /.tab-pane -->
@@ -57,8 +58,8 @@
                             <table id="datatable" class="table table-head-fixed text-nowrap table-striped table-bordered">
                                 <thead>
                                     <tr>
+                                        <th>Cantidad de ejemplares </th>
                                         <th>Cantidad de ejemplares disponibles</th>
-                                        <th>Cantidad de ejemplares prestados</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,9 +68,13 @@
                                             {{ $libro->stock_libro}}
                                         </td>
                                         <td>
-                                            Aun trabajando
+                                            @if ($libro->stock_fantasma == 0)
+                                                <p>Ejemplares prestados</p>
+                                            @else
+                                                {{ $libro->stock_fantasma}}
+                                            @endif
                                         </td>
-                                    </tr
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

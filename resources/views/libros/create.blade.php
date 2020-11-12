@@ -1,7 +1,7 @@
 @extends('admin-lte.index')
 
 @section('content')
-<form class="form-group " method="POST" action="{{route("libros.store")}}">
+<form class="form-group " method="POST" enctype="multipart/form-data" action="{{route("libros.store")}}">
     <div class="card card-primary card-outline">
         <div class="card-header">
             <h5>
@@ -12,9 +12,9 @@
             <div class="row">
                 <div class="col-4">
                     <div class="form-group ">
-                        <label for="numero_serie">Numero de serie</label>
-                        <input type="number" class="form-control  @error('numero_serie') is-invalid @enderror" id="numero_serie"
-                            name="numero_serie" value="{{ old('numero_serie') }}" placeholder="Especifique el nombre de su numero de serie" required>
+                        <label for="numero_serie">ISBN</label>
+                        <input type="text" class="form-control  @error('numero_serie') is-invalid @enderror" id="isbn"
+                            name="numero_serie" value="{{ old('numero_serie') }}" placeholder="Especifique el numero estandar internacional" required>
                         @error('numero_serie')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -120,6 +120,18 @@
                         <input type="number" class="form-control  @error('stock_libro') is-invalid @enderror" id="stock_libro"
                             name="stock_libro" value="{{ old('stock_libro') }}" placeholder="Especifique su nombre de persona de contacto" required>
                         @error('stock_libro')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group ">
+                        <label for="imagen">Imagen</label>
+                        <input type="file" class="form-control  @error('imagen') is-invalid @enderror" id="imagen"
+                            name="imagen" accept="image/*" value="{{ old('imagen') }}" placeholder="Especifique su nombre de persona de contacto" required>
+                        @error('imagen')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

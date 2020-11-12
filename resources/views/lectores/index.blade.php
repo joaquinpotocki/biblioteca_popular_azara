@@ -3,36 +3,40 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header">Libros
-        <a class="btn btn-primary btn-sm float-right text-white" href="{{route('libros.create')}}">Nuevo</a>
+    <div class="card-header">Lectores
+        
+        <a class="btn btn-primary btn-sm float-right text-white" href="{{route('lectores.create')}}">Nuevo</a>
+
     </div>
     <div class="card-body">
         <table id="datatable" class="table table-striped table-bordered dataTable">
-            <a class="btn btn-primary btn-sm" href="{{ route('libro.pdf') }}">Pdf</a>
             <thead>
                 <tr>
-                    <th scope="col">ISBN</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Genero</th>
-                    <th scope="col">Autor</th>
-                    <th scope="col">Edicion</th>
-                    <th scope="col">Ejemplares</th>
+                    <th scope="col">Nº lector</th>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Sexo</th>
+                    <th scope="col">Cuil</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Email</th>
                     <th scope="col" class="text-right">Opciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($libros as $libro)
+                @foreach ($lectores as $lector)
                 <tr>
-                    <td>{{$libro->numero_serie}}</td>
-                    <td>{{$libro->nombre}}</td>
-                    <td>{{$libro->generolibro->genero_libros}}</td>
-                    <td>{{$libro->autor->nombre_autor}} {{$libro->autor->apellido_autor}}</td>
-                    <td>{{$libro->edicion}}</td>
-                    <td>{{$libro->stock_libro}}</td>
+                    <td>{{$lector->numero_lectores}}</td>
+                    <td>{{$lector->nombres}}</td>
+                    <td>{{$lector->apellidos}}</td>
+                    <td>{{$lector->sexo}}</td>
+                    <td>{{$lector->cuil}}</td>
+                    <td>{{$lector->telefono}}</td>
+                    <td>{{$lector->email}}</td>
                     <td class="text-right">
-                        <a class="btn btn-primary btn-sm" href="{{ route('libros.show', $libro->id) }}">Ver</a>
-                        <a class="btn btn-light btn-sm" href="{{route('libros.edit', $libro->id)}}">Editar</a>
-                        <a class="btn btn-danger btn-sm text-white delete" val-palabra={{$libro->id}}>Borrar</a>
+                        {{-- @if (Auth::user()->hasRole('atencion') || Auth::user()->hasRole('admin')) --}}
+                        <a class="btn btn-light btn-sm" href="{{ route('lectores.edit', $lector->id) }}">Editar</a>
+                        <a class="btn btn-danger btn-sm text-white delete" val-palabra={{$lector->id}}>Borrar</a>
+                        {{-- @endif --}}
                     </td>
                 </tr>
                 @endforeach
@@ -74,7 +78,7 @@
     $(document).on('click', '.delete', function(){
     id = $(this).attr('val-palabra');
 
-    url2="{{route('libros.destroy',":id")}}";
+    url2="{{route('lectores.destroy',":id")}}";
     url2=url2.replace(':id',id);
 
     $('#formDelete').attr('action',url2);

@@ -1,7 +1,8 @@
 @extends('admin-lte.index')
 
 @section('content')
-<form class="form-group " method="POST" action="{{route("libros.update",$libro->id)}}">
+<form class="form-group " method="POST" enctype="multipart/form-data" action="{{route("libros.update",$libro->id)}}" >
+    @csrf
     @method("PUT")
     <div class="card card-primary card-outline">
         <div class="card-header">
@@ -13,7 +14,7 @@
             <div class="row">
                 <div class="col-3">
                     <div class="form-group ">
-                        <label for="numero_serie">Numero de serie</label>
+                        <label for="numero_serie">ISBN</label>
                         <input type="text" class="form-control  @error('numero_serie') is-invalid @enderror" id="numero_serie"
                             name="numero_serie" value="{{ old('numero_serie') ?? $libro->numero_serie}}" placeholder="Especifique el numero_serie de su libro" required>
                         @error('numero_serie')
@@ -39,30 +40,37 @@
                     <div class="form-group ">
                         <label for="genero_libros" class="">Genero</label>
                         <label for="genero_libros">
-                            <a role="button" type="button" href="{{route('genero_libros.create')}}" title="Nuevo genero"><i
-                                    class="fas fa-plus-circle fa-md"></i></a>
+                            <a role="button" type="button" href="{{route('genero_libros.create')}}" title="Nuevo genero"><i class="fas fa-plus-circle fa-md"></i></a>
                         </label>
-                        <select class="form-control" name="genero_id" id="genero_libros" required>
+                        <select class="seleccion form-control" name="genero_id" id="genero_libros" required>
                             <option value="" disabled selected>--Seleccione un genero--</option>
                             @foreach($genero_libros as $genero_libro)
-                            <option value="{{$genero_libro->id}}" @if(old('genero_id')==$genero_libro->id) selected
-                                @endif>{{$genero_libro->genero_libros}}</option>
+                            <option value="{{$genero_libro->id}}" @if($genero_libro != null)
+                                @if($genero_libro->id==$genero_libro->id) selected
+                                @endif @endif>{{$genero_libro->genero_libros}}</option>
                             @endforeach
                         </select>
+                        {{-- DE ACA ME GUIE PARA EL FOREACH ANTERIOR --}}
+                        {{-- <option value="{{$tecnico->id}}" @if($incidencia->tecnico != null)
+                            @if($incidencia->tecnico->id==$tecnico->id) selected
+                            @endif @endif >{{$tecnico->apellidos . ' ' . $tecnico->nombres}} - {{$tecnico->cuil}}
+                        </option> --}}
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="form-group ">
                         <label for="autores" class="">Autor</label>
                         <label for="autores">
-                            <a role="button" type="button" href="{{route('autores.create')}}" title="Nuevo genero"><i
+                            <a role="button" type="button" href="{{route('autores.create')}}" title="Nuevo autor"><i
                                     class="fas fa-plus-circle fa-md"></i></a>
                         </label>
                         <select class="form-control" name="autor_id" id="autor" required>
                             <option value="" disabled selected>--Seleccione un autor--</option>
+                            
                             @foreach($autores as $autor)
-                            <option value="{{$autor->id}}" @if(old('autor_id')==$autor->id) selected
-                                @endif>{{$autor->nombre_autor}} {{$autor->apellido_autor}}</option>
+                            <option value="{{$autor->id}}" @if($autor != null)
+                                @if($autor->id==$autor->id) selected
+                                @endif @endif>{{$autor->nombre_autor}} {{$autor->apellido_autor}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -79,12 +87,43 @@
                         @enderror
                     </div>
                 </div>
+                
                 <div class="col-3">
                     <div class="form-group ">
                         <label for="stock_libro">Stock</label>
                         <input type="text" class="form-control  @error('stock_libro') is-invalid @enderror" id="stock_libro"
                             name="stock_libro" value="{{ old('stock_libro') ?? $libro->stock_libro}}" placeholder="Especifique su nombre de persona de contacto" disabled>
                         @error('stock_libro')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group ">
+                        <label for="tipo_libros" class="">Tipo de libro</label>
+                        <label for="tipo_libros">
+                            <a role="button" type="button" href="{{route('tipo_libros.create')}}" title="Nuevo genero"><i
+                                    class="fas fa-plus-circle fa-md"></i></a>
+                        </label>
+
+                        <select class="form-control" name="tipo_libro_id" id="tipo_libro" required>
+                            <option value="" disabled selected>--Seleccione un tipo--</option>
+                            @foreach($tipo_libros as $tipo_libro)
+                            <option value="{{$tipo_libro->id}}" @if($tipo_libro != null)
+                                @if($tipo_libro->id==$tipo_libro->id) selected
+                                @endif @endif>{{$tipo_libro->nombre_tipo}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group ">
+                        <label for="imagen">Imagen</label>
+                        <input type="file" class="form-control  @error('imagen') is-invalid @enderror" id="imagen"
+                            name="imagen" accept="image/*" value="{{ old('imagen') }}" placeholder="Especifique su nombre de persona de contacto" required>
+                        @error('imagen')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

@@ -1,7 +1,7 @@
 @extends('layouts.pdf2')
 
 @section('logo')
-<a><img id="imagen" class="float-left rounded " src="{{public_path('img/').$config->logo}}"> </a>
+<a><img id="imagen" class="float-left rounded " src="{{public_path('images/'.$config->logo)}}"> </a>
 @endsection
 
 @section('datos')
