@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConfiguracionsTable extends Migration
+class CreateEstadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateConfiguracionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('configuracions', function (Blueprint $table) {
+        Schema::create('estados', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('logo');
             $table->string('nombre');
-            $table->string('direccion');
-            $table->string('telefono');
-            $table->string('email');
-
-            $table->softDeletes();
+            $table->string('descripcion')->nulleable();
+            //$table->integer('nivel');
+            $table->string('color')->nulleable();
             $table->timestamps();
+            $table->softDeletes();
+        
         });
     }
 
@@ -33,6 +32,6 @@ class CreateConfiguracionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('configuracions');
+        Schema::dropIfExists('estados');
     }
 }
