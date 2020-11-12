@@ -2,12 +2,17 @@
 <aside class="main-sidebar sidebar-light-navy elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-
-        <span class="brand-text font-weight-light" style="color: #3c8dbc">
-            <img src="" class=""
-                style="opacity: 1">
+        <div align="center">
+            <span class="brand-text font-weight-light" style="color: #3c8dbc">
+                {{-- <img src="{{asset("assets/icons/poto-03.png")}}" class="brand-image img-circle" style="opacity: 1"> --}}
+                <b>Biblioteca Popular</b>
+            </span>
+            
+        </div>
+        {{-- <span class="brand-text font-weight-light" style="color: #3c8dbc">
+            <img src="{{asset("assets/icons/poto-03.png")}}" class="brand-image img-circle" style="opacity: 1">
             <b>Biblioteca Popular</b>
-        </span>
+        </span> --}}
     </a>
 
     <!-- Sidebar -->
@@ -20,7 +25,31 @@
                 <a href="#" class="d-block"></a>
             </div>
         </div>
-
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-item fas fa-book-open"></i>
+                        <p>
+                           Prestamos
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="">
+                        <li class="nav-item">
+                            <a href="{{route('movimientos.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ver Movimientos</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                </li>
+            </ul>
+        </nav>
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -75,7 +104,32 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview menu-open">
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-item fas fa-user-alt"></i>
+                        <p>
+                           Lectores
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="">
+                        <li class="nav-item">
+                            <a href="{{route('lectores.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ver Lectores</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                </li>
+            </ul>
+        </nav>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-item fas fa-dolly"></i>
                         <p>
@@ -83,7 +137,7 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview" style="display: block;">
+                    <ul class="nav nav-treeview" style="">
                         <li class="nav-item">
                             <a href="{{route('proveedores.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -101,7 +155,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview menu-open">
+                <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-item fas fa-people-carry"></i>
                         <p>
@@ -109,7 +163,7 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview" style="display: block;">
+                    <ul class="nav nav-treeview" style="">
                         <li class="nav-item">
                             <a href="{{route('ingreso_libros.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -126,19 +180,19 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview menu-open">
+                <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-item fas fa-bars"></i>
+                        <i class="nav-item fas fa-minus-square"></i>
                         <p>
-                           Parametros
+                           Baja de libros
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview" style="display: block;">
+                    <ul class="nav nav-treeview" style="">
                         <li class="nav-item">
-                            <a href="{{route('tipo_ingresos.index')}}" class="nav-link">
+                            <a href="{{route('baja_libros.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Ver Tipo de Ingreso</p>
+                                <p>Ver Baja Libros</p>
                             </a>
                         </li>
                     </ul>
@@ -151,7 +205,48 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview menu-open">
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-item fas fa-bars"></i>
+                        <p>
+                           Parametros
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="">
+                        <li class="nav-item">
+                            <a href="{{route('tipo_ingresos.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ver Tipo de Ingreso</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview" style="">
+                        <li class="nav-item">
+                            <a href="{{route('tipo_bajas.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ver Tipo de Bajas</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview" style="">
+                        <li class="nav-item">
+                            <a href="{{route('estados.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Estados</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                </li>
+            </ul>
+        </nav>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-item fas fa-cogs"></i>
                         <p>
@@ -159,7 +254,7 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview" style="display: block;">
+                    <ul class="nav nav-treeview" style="">
                         <li class="nav-item">
                             <a href="{{route('configuracion.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>

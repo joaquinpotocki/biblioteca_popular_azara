@@ -31,7 +31,6 @@
     <!-- Bootstrap4 Duallistbox -->
     <link rel="stylesheet" href="{{ asset("assets/admin-lte/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css") }}">
 
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -79,6 +78,10 @@
     <!-- Bootstrap4 Duallistbox -->
     <script src="{{ asset("assets/admin-lte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js") }}"></script>
 
+    <script src="{{ asset("https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js") }}"></script>
+    
+
+
     {{-- Si el mensaje que enviamos es success --}}
     @if (session('success'))
     <script>
@@ -94,6 +97,15 @@
 
     @stack('scripts')
     {{-- stack es para que cualquiera otra pagina tenga los scripts --}}
+
+    <script>
+        $(document).ready(function(){
+            $('#isbn').mask('000-0-00-000000-0');
+            $('#cuit-number').mask('00-00000000-0');
+        });
+    </script>
+
+    <script src="{{asset('assets/admin-lte/plugins/moment/moment-with-locales.min.js')}}"></script>
 </body>
 
 </html>
