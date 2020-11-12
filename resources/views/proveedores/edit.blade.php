@@ -100,7 +100,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-12">
                     <div class="form-group ">
                         <label for="" class="">Editoriales</label>
                         <select class="form-control" name="editorial_id[]"  id="editorial" multiple required>
@@ -108,6 +108,11 @@
                             <option value="{{$editorial->id}}" @if($proveedor->editoriales->contains($editorial->id)) selected
                                 @endif>{{$editorial->nombre_editorial}}</option>
                             @endforeach
+                            {{-- @foreach($editorials as $editorial)
+                            <option value="{{$editorial->id}}" @if($editorial != null)
+                                @if($editorial->id==$editorial->id) selected
+                                @endif @endif>{{$editorial->nombre_editorial}}</option>
+                            @endforeach --}}
                         </select>
                     </div>
                 </div>

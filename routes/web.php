@@ -90,6 +90,51 @@ Route::get('/tipo_ingresos/{tipo_ingreso}/edit', 'TipoIngresoController@edit')->
 Route::put('/tipo_ingresos/{tipo_ingreso}', 'TipoIngresoController@update')->name('tipo_ingresos.update'); //guardar lo que modificamos en el form de edicion
 Route::delete('tipo_ingresos/{tipo_ingreso}', 'TipoIngresoController@destroy')->name('tipo_ingresos.destroy'); //eliminar una autor
 
+//Lectores
+Route::get('/lectores', 'LectorController@index')->name('lectores.index'); //para mostrar todos los lectores
+Route::get('/lectores/create', 'LectorController@create')->name('lectores.create'); //renderizar la vista de creacion
+Route::post('/lectores', 'LectorController@store')->name('lectores.store'); //guardar el form (crear una direccion)
+Route::get('/lectores/{lector}', 'LectorController@show')->name('lectores.show'); //ver datos de un solo lector
+Route::get('/lectores/{lector}/edit', 'LectorController@edit')->name('lectores.edit'); //renderizar el form para editar un lector
+Route::put('/lectores/{lector}', 'LectorController@update')->name('lectores.update'); //guardar lo que modificamos en el form de edicion
+Route::delete('lectores/{lector}', 'LectorController@destroy')->name('lectores.destroy'); //eliminar una autor
+
+//TipoBaja
+Route::get('/tipo_bajas', 'TipoBajaController@index')->name('tipo_bajas.index'); //para mostrar todos los tipo_bajas
+Route::get('/tipo_bajas/create', 'TipoBajaController@create')->name('tipo_bajas.create'); //renderizar la vista de creacion
+Route::post('/tipo_bajas', 'TipoBajaController@store')->name('tipo_bajas.store'); //guardar el form (crear una direccion)
+Route::get('/tipo_bajas/{tipo_baja}', 'TipoBajaController@show')->name('tipo_bajas.show'); //ver datos de un solo tipo_baja
+Route::get('/tipo_bajas/{tipo_baja}/edit', 'TipoBajaController@edit')->name('tipo_bajas.edit'); //renderizar el form para editar un tipo_baja
+Route::put('/tipo_bajas/{tipo_baja}', 'TipoBajaController@update')->name('tipo_bajas.update'); //guardar lo que modificamos en el form de edicion
+Route::delete('tipo_bajas/{tipo_baja}', 'TipoBajaController@destroy')->name('tipo_bajas.destroy'); //eliminar una autor
+
+//BajaLibros
+Route::get('/baja_libros', 'BajaLibroController@index')->name('baja_libros.index'); //para mostrar todos los ingreso
+Route::get('/baja_libros/create', 'BajaLibroController@create')->name('baja_libros.create'); //renderizar la vista de creacion
+Route::post('/baja_libros', 'BajaLibroController@store')->name('baja_libros.store'); //guardar el form (crear una direccion)
+Route::get('/baja_libros/{baja_libro}', 'BajaLibroController@show')->name('baja_libros.show'); //ver datos de un solo baja_libro
+Route::get('/baja_libros/{baja_libro}/edit', 'BajaLibroController@edit')->name('baja_libros.edit'); //renderizar el form para editar un baja_libro
+Route::put('/baja_libros/{baja_libro}', 'BajaLibroController@update')->name('baja_libros.update'); //guardar lo que modificamos en el form de edicion
+Route::delete('baja_libros/{baja_libro}', 'BajaLibroController@destroy')->name('baja_libros.destroy');
+
+//Estado
+Route::get('/estados', 'EstadoController@index')->name('estados.index'); //para mostrar todos los estados
+Route::get('/estados/create', 'EstadoController@create')->name('estados.create'); //renderizar la vista de creacion
+Route::post('/estados', 'EstadoController@store')->name('estados.store'); //guardar el form (crear un Estado)
+Route::get('/estados/{estado}', 'EstadoController@show')->name('estados.show'); //ver datos de un solo Estado
+Route::get('/estados/{estado}/edit', 'EstadoController@edit')->name('estados.edit'); //renderizar el form para editar un Estado
+Route::put('/estados/{estado}', 'EstadoController@update')->name('estados.update'); //guardar lo que modificamos en el form de edicion
+Route::delete('estados/{estado}', 'EstadoController@destroy')->name('estados.destroy'); //eliminar un Libro
+
+//Estado
+Route::get('/movimientos', 'MovimientoController@index')->name('movimientos.index'); //para mostrar todos los movimientos
+Route::get('/movimientos/create', 'MovimientoController@create')->name('movimientos.create'); //renderizar la vista de creacion
+Route::post('/movimientos', 'MovimientoController@store')->name('movimientos.store'); //guardar el form (crear un movimiento)
+Route::get('/movimientos/{movimiento}', 'MovimientoController@show')->name('movimientos.show'); //ver datos de un solo movimiento
+Route::get('/movimientos/{movimiento}/edit', 'MovimientoController@edit')->name('movimientos.edit'); //renderizar el form para editar un movimiento
+Route::put('/movimientos/{movimiento}', 'MovimientoController@update')->name('movimientos.update'); //guardar lo que modificamos en el form de edicion
+Route::delete('movimientos/{movimiento}', 'MovimientoController@destroy')->name('movimientos.destroy'); //eliminar un Libro
+
 //carga de provincias con ajax
 Route::get('paises/{pais}', 'DireccionController@obtenerProvincias')->name('paises.obtenerProvincias');
 
@@ -103,3 +148,4 @@ Route::put('configuracion/update', 'ConfiguracionController@update')->name('conf
 //pdfs
 Route::get('/proveedorPDF', 'PdfController@proveedorPDF')->name('proveedor.pdf');
 Route::get('/libroPDF', 'PdfController@libroPDF')->name('libro.pdf');
+

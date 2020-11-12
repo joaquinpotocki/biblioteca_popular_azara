@@ -2,6 +2,10 @@
 
 @section('content')
 
+
+<!-- The rest of the form code -->
+
+
 <div class="card">
     <div class="card-header">Proveedores
         <a class="btn btn-primary btn-sm float-right text-white" href="{{route('proveedores.create')}}">Nuevo</a>
@@ -89,6 +93,12 @@
 
     $('#formDelete').on('submit',function(){
     $('#ok_delete').text('Eliminando...')
+    });
+</script>
+<script>
+    $(document).ready(function(){
+    $('#birth-date').mask('00/00/0000');
+    $('#phone-number').mask('0000-0000');
     });
 </script>
 @endpush

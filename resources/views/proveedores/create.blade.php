@@ -13,7 +13,7 @@
                 <div class="col-3">
                     <div class="form-group ">
                         <label for="cuit">Cuit</label>
-                        <input type="text"  class="form-control  @error('cuit') is-invalid @enderror" id="cuit"
+                        <input type="text"  class="form-control  @error('cuit') is-invalid @enderror" id="cuit-number"
                             name="cuit" value="{{ old('cuit') }}" placeholder="Especifique el nombre de su cuit" required>
                         @error('cuit')
                         <span class="invalid-feedback" role="alert">
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-4">
+                <div class="col-6">
                     <div class="form-group ">
                         <label for="telefono">Telefono</label>
                         <input type="number" class="form-control  @error('telefono') is-invalid @enderror"
@@ -73,7 +73,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     <div class="form-group ">
                         <label for="email">Email</label>
                         <input type="email" class="form-control  @error('email') is-invalid @enderror"
@@ -86,22 +86,10 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="form-group ">
-                        <label for="direccion_postal">Direccion postal</label>
-                        <input type="number" class="form-control  @error('direccion_postal') is-invalid @enderror" id="direccion_postal"
-                            name="direccion_postal" min="0" value="{{ old('direccion_postal') }}" placeholder="Especifique su direccion postal"
-                            required>
-                        @error('direccion_postal')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
+                
                 <div class="col-3">
                     <div class="form-group ">
-                        <label for="editorial" class=" col-form-label text-md-right">Editoriales</label>
+                        <label for="editorial" class="">Editoriales</label>
                         <label for="agregar_editorial">
                             <a role="button" type="button" href="{{route('editorials.create')}}" title="Nuevo editorial"><i
                                     class="fas fa-plus-circle fa-md"></i></a>
@@ -116,7 +104,7 @@
                 </div>
                 <div class="col-3">
                     <div class="form-group ">
-                        <label for="pais_id" class="">Pais</label>
+                        <label for="pais_id" class=" ">Pais</label>
                         <select name="pais_id" id="pais_id" class=" form-control" required>
                             <option value="" selected disabled>--Seleccione--</option>
                             @foreach ($paises as $pais)
@@ -151,6 +139,19 @@
                             <option value="" selected disabled>--Seleccione--</option>
                         </select>
                         @error('localidad_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group ">
+                        <label for="direccion_postal">Direccion postal</label>
+                        <input type="number" class="form-control  @error('direccion_postal') is-invalid @enderror" id="direccion_postal"
+                            name="direccion_postal" min="0" value="{{ old('direccion_postal') }}" placeholder="Especifique su direccion postal"
+                            required>
+                        @error('direccion_postal')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -204,14 +205,9 @@
 @endsection
 @push('scripts')
 <script>
-    $(document).ready(function(){
-    $('#cuit').mask('00-00000000-0');
-    })
-</script>
-<script>
     $("#editorial").select2({
             placeholder: "Seleccione al menos una editorial"
-        });
+    });
 </script>
 <script>
     $(document).ready(function(){
@@ -243,4 +239,5 @@
         });
     }) ;
 </script>
+
 @endpush

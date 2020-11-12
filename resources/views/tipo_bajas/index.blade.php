@@ -3,23 +3,25 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header">Tipo de libro
-        <a class="btn btn-primary btn-sm float-right text-white" href="{{route('tipo_libros.create')}}">Nuevo</a>
+    <div class="card-header">Tipos de bajas
+        <a class="btn btn-primary btn-sm float-right text-white" href="{{route('tipo_bajas.create')}}">Nuevo</a>
     </div>
     <div class="card-body">
         <table id="datatable" class="table table-striped table-bordered dataTable">
             <thead>
                 <tr>
-                    <th scope="col">Tipo</th>
+                    <th scope="col">Tipo de bajas</th>
+                    <th scope="col">Descripcion</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($tipo_libros as $tipo_libro)
+                @foreach ($tipo_bajas as $tipo_baja)
                 <tr>
-                    <td>{{$tipo_libro->nombre_tipo}}</td>
+                    <td>{{$tipo_baja->nombre_baja}}</td>
+                    <td>{{$tipo_baja->descripcion}}</td>
                     <td class="text-right">
-                        <a class="btn btn-light btn-sm" href="{{route('tipo_libros.edit', $tipo_libro->id)}}">Editar</a>
-                        <a class="btn btn-danger btn-sm text-white delete" val-palabra={{$tipo_libro->id}}>Borrar</a>
+                        <a class="btn btn-light btn-sm" href="{{route('tipo_bajas.edit', $tipo_baja->id)}}">Editar</a>
+                        <a class="btn btn-danger btn-sm text-white delete" val-palabra={{$tipo_baja->id}}>Borrar</a>
                     </td>
                 </tr>
                 @endforeach
@@ -50,10 +52,7 @@
         </div>
     </div>
 </div>
-
-
 @endsection
-
 @push('scripts')
 
 {{-- Script para eliminar --}}
@@ -61,7 +60,7 @@
     $(document).on('click', '.delete', function(){
     id = $(this).attr('val-palabra');
 
-    url2="{{route('tipo_libros.destroy',":id")}}";
+    url2="{{route('tipo_bajas.destroy',":id")}}";
     url2=url2.replace(':id',id);
 
     $('#formDelete').attr('action',url2);

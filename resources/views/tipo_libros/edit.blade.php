@@ -1,11 +1,11 @@
 @extends('admin-lte.index')
 
 @section('content')
-<form class="form-group " method="POST" action="{{route("tipo_libros.store")}}">
+<form class="form-group " method="POST" action="{{route("tipo_libros.update",$tipo_libro->id)}}">
     <div class="card card-primary card-outline">
         <div class="card-header">
             <h5>
-                Agregar un nuevo tipo de libro
+                Editar un nuevo tipo de libro
             </h5>
         </div>
         <div class="card-body">
@@ -14,7 +14,7 @@
                     <div class="form-group ">
                         <label for="nombre_tipo">Tipo de libro</label>
                         <input type="text" class="form-control  @error('nombre_tipo') is-invalid @enderror" id="nombre_tipo"
-                            name="nombre_tipo" value="{{ old('nombre_tipo') ?? $nombre_tipo->nombre_tipos}}" placeholder="Especifique el nombre de su tipo de libro" required>
+                            name="nombre_tipo" value="{{ old('nombre_tipo') ?? $tipo_libro->nombre_tipo}}" placeholder="Especifique el nombre de su tipo de libro" required>
                         @error('nombre_tipo')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

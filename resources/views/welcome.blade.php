@@ -81,7 +81,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Biblioteca Popular de Azara
+                    <img src="{{asset("assets/icons/poto-03.png")}}" width="900" height="500" class="brand-image img-circle"
+                style="opacity: 1">
                 </div>
 
                 <div class="links">
