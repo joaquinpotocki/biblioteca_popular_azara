@@ -32,4 +32,9 @@ class Libro extends Model
     public function ingreso_libros(){
         return $this->hasMany(IngresoLibro::class);
     }
+    public function movimientos()
+    {
+        return $this->belongsToMany(Movimiento::class);
+    }
+
 }

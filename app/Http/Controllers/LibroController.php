@@ -9,6 +9,8 @@ use App\GeneroLibro;
 use App\Autor;
 use App\Editorial;
 use App\TipoLibro;
+// use Illuminate\Support\Facades\Storage;
+
 class LibroController extends Controller
 {
     /**
@@ -46,7 +48,7 @@ class LibroController extends Controller
     public function store(Request $request)
     {
         $data = request()->validate([
-            'numero_serie' => 'required',
+            'numero_serie' => 'required|unique:libros|min:12',
             'nombre' => 'required|regex:/^[a-zA-Z\s]*$/',
             'edicion' => 'required|numeric',
             'stock_libro' => 'required|numeric',
@@ -55,6 +57,17 @@ class LibroController extends Controller
             'editorial_id' => 'required',
             'tipo_libro_id'=> 'required',
         ]) ;
+        if ((Libro::where('nombre', $request->nombre)->first()) &&  (Libro::where('edicion', $request->edicion)->first()) && (Libro::where('editorial_id', $request->editorial_id)->first())){
+            return redirect()->back()->with('error','Este libro ya a sido registrado');
+         }    
+
+        if ($request->hasfile('imagen')) { 
+            $file=$request->file('imagen');
+            $name=time().$file->getClientOriginalName();
+            $file->move(public_path().'/images/',$name);
+        }    
+
+        
 
         $libro = new Libro();
         $libro->genero_id = $request->genero_id;
@@ -65,7 +78,10 @@ class LibroController extends Controller
         $libro->nombre = $request->nombre ;
         $libro->edicion = $request->edicion ;
         $libro->stock_libro = $request->stock_libro;
+        $libro->stock_fantasma = $request->stock_libro; //Aqui mi sotck fantasma recibe el valor inicial de stock de libros
+        $libro->imagen = $name;
         $libro->save();
+
         //$cliente->numero_cliente = $numero_cliente ;
         return redirect(route('libros.index'))->with('success','Libro nuevo guardado con exito!'); 
     }
@@ -92,7 +108,8 @@ class LibroController extends Controller
         $editorials = Editorial::all();
         $autores = Autor::all();
         $genero_libros = GeneroLibro::all();
-        return view('libros.edit', compact('libro', 'genero_libros', 'autores', 'editorials'));
+        $tipo_libros = TipoLibro::all();
+        return view('libros.edit', compact('libro', 'genero_libros', 'autores', 'editorials','tipo_libros'));
     }
 
     /**
@@ -105,26 +122,41 @@ class LibroController extends Controller
     public function update(Request $request, Libro $libro)
     {
         $data = request()->validate([
-            'numero_serie' => 'required',
+            'numero_serie' => 'required|min:12|unique:libros,numero_serie,'.$libro->id,
             'nombre' => 'required|regex:/^[a-zA-Z\s]*$/',
             'edicion' => 'required|numeric',
-            'stock_libro' => 'required|numeric',
             'genero_id' => 'required',
             'autor_id' => 'required',
-            'editorial_id' => 'required',
+            'editorial_id' => 'required|unique:libros,'.$libro->id,
             'tipo_libro_id'=> 'required',
-        ]) ;
-
+        ]);
         
-        $libro->genero_id = $request->genero_id;
-        $libro->tipo_libro_id = $request->tipo_libro_id;
-        $libro->autor_id = $request->autor_id;
-        $libro->editorial_id = $request->editorial_id;
-        $libro->numero_serie = $request->numero_serie ;
-        $libro->nombre = $request->nombre ;
-        $libro->edicion = $request->edicion ;
-        $libro->stock_libro = $request->stock_libro;
+        $libro->fill($request->except('imagen'));
+        if ($request->hasfile('imagen')) { 
+            $file=$request->file('imagen');
+            $name=time().$file->getClientOriginalName();
+            
+            $file->move(public_path().'/images/',$name);
+        } 
+        $libro->imagen = $name;
         $libro->update();
+        // $libro->genero_id = $request->genero_id;
+        // $libro->tipo_libro_id = $request->tipo_libro_id;
+        // $libro->autor_id = $request->autor_id;
+        // $libro->editorial_id = $request->editorial_id;
+        // $libro->numero_serie = $request->numero_serie ;
+        // $libro->nombre = $request->nombre ;
+        // $libro->edicion = $request->edicion ;
+        // $libro->stock_libro = $request->stock_libro;
+        // $libro->imagen = $name;
+        
+
+        // $equipo->fill($request->all());
+        //     $libro->fill($request->all());
+        //     $libro->imagen = $name;
+        //     $libro->update();
+        
+
         
         return redirect(route('libros.index'))->with('success','Proveedor editado con exito!');
     }
@@ -137,7 +169,12 @@ class LibroController extends Controller
      */
     public function destroy(Libro $libro)
     {
-        $libro->delete();
-        return redirect(route('libros.index'))->with('success', 'Libro '.$libro->nombre ,  'eliminado con éxito!');
+        if ($libro->stock_libro == 0){
+            $libro->delete();
+            return redirect(route('libros.index'))->with('success', 'Libro '.$libro->nombre.' eliminado con éxito!');
+        }else{
+            return redirect(route('libros.index'))->with('error', 'Libro '.$libro->nombre.' no se puede eliminar, aun contamos con ejemplares!');
+        }
+        
     }
 }

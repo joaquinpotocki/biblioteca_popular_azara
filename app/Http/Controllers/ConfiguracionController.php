@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Configuracion;
+use App\TipoIngreso;
 
 class ConfiguracionController extends Controller
 {
@@ -11,21 +12,24 @@ class ConfiguracionController extends Controller
     {
 
         $config = Configuracion::first();
-        return view('configuracion.configuracion', compact('config'));
+        $tipo_ingresos = TipoIngreso::all();
+        return view('configuracion.configuracion', compact('config', 'tipo_ingresos'));
     }
 
     public function update(Request $request)
     {
 
         $config = Configuracion::first();
-        /*if ($request->hasFile('logo')) {
+        if ($request->hasFile('logo')) {
             $file = $request->file('logo');
+            // return $file;
             $name = time() . $file->getClientOriginalName();
-            $file->move(public_path('/img/'), $name);
-            $config->logo = $name;
-        }*/
+            $file->move(public_path('/images/'),$name);
+            
+        }
 
         $config->fill($request->all());
+        $config->logo = $name;
         $config->update();
 
         return redirect()->back()->with('confirmar', 'ok');

@@ -7,6 +7,7 @@ use App\IngresoLibro;
 use App\Libro;
 use App\Proveedor;
 use App\TipoIngreso;
+use Exception;
 
 class IngresoLibroController extends Controller
 {
@@ -46,33 +47,43 @@ class IngresoLibroController extends Controller
         
         $data = request()->validate([
             'tipo_ingresos_id'=> 'required',
-            'libro_select_id.*'=> 'required',
+            'libros_select_id.*'=> 'required',
             'proveedor_id'=> 'required',
-            'cantidad' => 'required',
+            'cantidad.*' => 'required',
             'fecha_ingreso' => 'required|date',
-            //'fecha_perdida' => 'required|date',
-            'descripcion_ingreso' => 'required',
         ]) ;
-          
-        for ($i = 0; $i < sizeof($request->cantidad); $i++){
-            $ingreso_libro = new IngresoLibro();
-            $ingreso_libro->tipo_ingresos_id = $request->tipo_ingresos_id;  
-            $ingreso_libro->libro_id = $request->libro_select_id[$i];
-            $ingreso_libro->proveedor_id = $request->proveedor_id;
-            $ingreso_libro->cantidad = $request->cantidad[$i];
-            $ingreso_libro->fecha_ingreso = $request->fecha_ingreso;
-            //$ingreso_libro->fecha_perdida = $request->fecha_perdida;
-            $ingreso_libro->descripcion_ingreso = $request->descripcion_ingreso ;
-            $ingreso_libro->save();
+        
+        if (($request->cantidad) == null){
+            return redirect(route('ingreso_libros.create'))->with('error','El campo CANTIDAD se encuentra vacio!');
+        }  
+        try {
+            for ($i = 0; $i < sizeof($request->cantidad); $i++){
+                // if (($request->libros_select_id[$i]) && ($request->cantidad[$i]) == null){
+                //     return redirect(route('ingreso_libros.index'))->with('success','TU VIEJA!'); 
+                // }
+                
+                $ingreso_libro = new IngresoLibro();
+                $ingreso_libro->tipo_ingresos_id = $request->tipo_ingresos_id;  
+                $ingreso_libro->libro_id = $request->libros_select_id[$i];
+                $ingreso_libro->proveedor_id = $request->proveedor_id;
+                $ingreso_libro->cantidad = $request->cantidad[$i];
+                $ingreso_libro->fecha_ingreso = $request->fecha_ingreso;
+                $ingreso_libro->fecha_perdida = $request->fecha_perdida;
+                
+                $ingreso_libro->save();
+               
+                //Update realizado en la tabla libros (se sumaron la cantidad que ingreso de este libro)
+   
+                $libro = Libro::find($request->libros_select_id[$i]);
+                $libro->stock_libro += $request->cantidad[$i];
+                $libro->stock_fantasma += $request->cantidad[$i]; //Aqui sumamos tambien asumamos el stock de llibro para que se sumen a los prestados
+                $libro->update();
+           }
+           return redirect(route('ingreso_libros.index'))->with('success','Ingreso nuevo guardado con exito!'); 
+        }catch (Exception $e){
             
-            //Update realizado en la tabla libros (se sumaron la cantidad que ingreso de este libro)
-            $libro = Libro::find($request->libro_id);
-            $libro->stock_libro += $request->cantidad[$i];
-            $libro->update();
+            return redirect(route('ingreso_libros.create'))->with('error','Cargue correctamente los datos por favor!'); 
         }
-        
-        
-        return redirect(route('ingreso_libros.index'))->with('success','Ingreso nuevo guardado con exito!'); 
     }
 
     /**
@@ -117,10 +128,9 @@ class IngresoLibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($ingreso_libros)
+    public function destroy(IngresoLibro $ingreso_libros)
     {
-        $i = IngresoLibro::find($ingreso_libros);
-        $i->delete();
-        return redirect(route('ingreso_libros.index'))->with('success', 'El ingreso se encuentra eliminado con éxito!');
+        // $ingreso_libros->delete();
+        // return redirect(route('ingreso_libros.index'))->with('success', 'Ingreso '.'eliminado con éxito!');
     }
 }

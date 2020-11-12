@@ -17,12 +17,16 @@ class CreateDireccionsTable extends Migration
             $table->string('calle');
             $table->bigInteger('altura');
             $table->bigIncrements('id');
+
             $table->unsignedInteger('pais_id');
             $table->foreign('pais_id')->references('id')->on('paises');
+
             $table->unsignedInteger('provincia_id');
             $table->foreign('provincia_id')->references('id')->on('provincias');
+
             $table->unsignedInteger('localidad_id');
             $table->foreign('localidad_id')->references('id')->on('localidades');
+            
             $table->softDeletes();
             $table->timestamps();;
         });

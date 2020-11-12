@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Estado;
 use Illuminate\Http\Request;
-use App\TipoLibro;
-class TipoLibroController extends Controller
+
+
+class EstadoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +15,9 @@ class TipoLibroController extends Controller
      */
     public function index()
     {
-        $tipo_libros = TipoLibro::all();
+        $estados = Estado::all();
 
-        return view('tipo_libros.index', compact('tipo_libros'));
+        return view('estados.index', compact('estados'));
     }
 
     /**
@@ -25,7 +27,7 @@ class TipoLibroController extends Controller
      */
     public function create()
     {
-        return view('tipo_libros.create');
+        return view('estados.create');
     }
 
     /**
@@ -37,19 +39,20 @@ class TipoLibroController extends Controller
     public function store(Request $request)
     {
         $data = request()->validate([
-            'nombre_tipo' => 'required',
-            
+            'nombre' => 'required',
+            'descripcion' => 'required',
             
         ]) ;
 
-        $tipo_libro = new TipoLibro();
-        $tipo_libro->nombre_tipo = $request->nombre_tipo;
+        $estado = new Estado();
+        $estado->nombre = $request->nombre ;
+        $estado->descripcion = $request->descripcion;
+        $estado->color = $request->color ;
+        $estado->descripcion = $request->descripcion;
         
         //$cliente->numero_cliente = $numero_cliente ;
-        $tipo_libro->save();
-        //$editorial->proveedores()->sync($request->proveedor_id);
-        return redirect(route('tipo_libros.index'))->with('success','Nuevo tipo de libro guardada con exito!');
-    
+        $estado->save();
+        return redirect(route('estados.index'))->with('success','Estado nuevo guardado con exito!'); 
     }
 
     /**
@@ -69,9 +72,9 @@ class TipoLibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(TipoLibro $tipo_libro)
+    public function edit(Estado $estado)
     {
-        return view('tipo_libros.edit', compact('tipo_libro'));
+        return view('estados.edit', compact('estado'));
     }
 
     /**
@@ -81,22 +84,22 @@ class TipoLibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TipoLibro $tipo_libros)
+    public function update(Request $request, Estado $estado)
     {
         $data = request()->validate([
-            'nombre_tipo' => 'required',
-            
+            'nombre' => 'required',
+            'descripcion' => 'required',
             
         ]) ;
 
-        
-        $tipo_libro->nombre_tipo = $request->nombre_tipo;
-        $tipo_libro->update();
+        $estado->nombre = $request->nombre ;
+        $estado->descripcion = $request->descripcion;
+        $estado->color = $request->color ;
+        $estado->descripcion = $request->descripcion;
         
         //$cliente->numero_cliente = $numero_cliente ;
-        $tipo_libro->save();
-        //$editorial->proveedores()->sync($request->proveedor_id);
-        return redirect(route('tipo_libros.index'))->with('success','Nuevo tipo de libro guardada con exito!');
+        $estado->update();
+        return redirect(route('estados.index'))->with('success','Estado editado con exito!'); 
     }
 
     /**
@@ -105,9 +108,9 @@ class TipoLibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TipoLibro $tipo_libros)
+    public function destroy(Estado $estado)
     {
-        $tipo_libros->delete();
-        return redirect(route('tipo_libros.index'))->with('success', 'Tipo de ingreso  '.$tipo_libros->nombre_tipo ,  'eliminado con éxito!');
+        $estado->delete();
+        return redirect(route('estados.index'))->with('success', 'Estado '.$estado->nombre ,  'eliminado con éxito!');
     }
 }

@@ -19,6 +19,11 @@ class Direccion extends Model
         return $this->hasOne(Proveedor::class);
     }
 
+     //Relaciones
+     public function lector(){
+        return $this->hasOne(Lector::class);
+    }
+
     public function pais(){
         return $this->belongsTo(Pais::class);
     }

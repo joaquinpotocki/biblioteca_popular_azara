@@ -76,7 +76,7 @@ class EditorialController extends Controller
      */
     public function edit(Editorial $editorial)
     {
-        return view('editorials.edit', compact('editorials'));
+        return view('editorials.edit', compact('editorial'));
     }
 
     /**

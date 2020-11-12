@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 class IngresoLibro extends Model
 {
@@ -23,5 +24,8 @@ class IngresoLibro extends Model
         return $this->belongsTo(TipoIngreso::class);
     }
 
-    
+    public function getFechaIngreso(){
+        $date = Carbon::create($this->fecha_ingreso)->format('d/m/Y');
+        return $date;
+    }
 }
