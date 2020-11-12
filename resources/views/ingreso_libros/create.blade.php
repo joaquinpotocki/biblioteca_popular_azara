@@ -28,23 +28,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-2">
-                    <div class="form-group ">
-                        <label for="" class="col-form-label text-md-right">Fecha perdida</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                {{-- <span class="input-group-text">
-                                    <i class="far fa-calendar-alt"></i>
-                                </span> --}}
-                            {{-- </div>
-                            <input type="date" name="fecha_perdida" class="form-control" required
-                                value="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
-                                min="{{ Carbon\Carbon::now()->subDay()->format('Y-m-d') }}"
-                                max="{{ Carbon\Carbon::now()->format('Y-m-d') }}" id="">
-                        </div>
-                    </div>
-                </div> --}}
-                
                 <div class="col-4">
                     <div class="form-group ">
                         <label for="proveedores" class="">Proveedor</label>
@@ -79,13 +62,6 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="form-group ">
-                        <label for="nombre">Descripcion Ingreso</label>
-                        <textarea name="descripcion_ingreso" id="descripcion_ingreso" cols="30" rows="5" class="form-control"
-                            placeholder="Ingrese las notas generales">{{ old('descripcion_ingreso') }}</textarea>
-                    </div>
-                </div>
             </div>
         </div>
         
@@ -102,7 +78,7 @@
                                     class="fas fa-plus-circle fa-md"></i></a>
                         </label>
 
-                        <select class="form-control" name="libro_id" id="libros_select_id" required>
+                        <select class="form-control" name="libros_select_id" id="libros_select_id" required>
                             <option value="" disabled selected>--Seleccione un libro por favor--</option>
                             @foreach($libros as $libro)
                             <option value="{{$libro->id}}" @if(old('libro_id')==$libro->id) selected
@@ -114,8 +90,8 @@
                 <div class="col-4">
                     <div class="form-group ">
                         <label for="cantidad">Cantidad que ingresa</label>
-                        <input type="number" class="form-control  @error('cantidad') is-invalid @enderror" id="cantidad"
-                            name="cantidad_libros" value="{{ old('cantidad') }}" placeholder="Especifique la cantidad de ingreso" >
+                        <input type="number" class="form-control  @error('cantidad') is-invalid @enderror" id="cantidades"
+                            name="cantidad" value="{{ old('cantidad') }}" placeholder="Especifique la cantidad de ingreso" >
                         @error('cantidad')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -153,57 +129,61 @@
 @endsection
 @push('scripts')
 <script>
-    $('#addRow').on('click',function(){
+        $('#addRow').on('click',function(){
         addRow();
-    });
+        });
 
-    function addRow(){
-        //Obtener los valores de los inputs
-        libro_select_id = $('#libros_select_id').val() ;
-        libro = $("#libros_select_id option:selected").text();
-        cantidad = $("#cantidad").val();
+        function addRow(){
+            //Obtener los valores de los inputs
+            libro_select_id = $('#libros_select_id').val() ;
+            libro = $("#libros_select_id option:selected").text();
+            cantidad = $("#cantidades").val();
 
-        if(libro_select_id != null ){
-            if(cantidad > 0){
-                    var fila = '<tr> <td><input type="hidden" name="libro_select_id[]" value="'+libro_select_id+'">'+libro+'</td>'+
-                                '<td style="text-align:right;"><input type="hidden" name="cantidad[]" value="'+cantidad+'">'+cantidad+' </td>'+
-                                '<td style="text-align:center;"><a href="#" class="btn btn-danger btn-xs remove"><i class="fas fa-minus"></i></a></td>' +
-                                '</tr>' ;
+            if(libro_select_id != null ){
+                if(cantidad > 0){
+                        var fila = '<tr> <td><input type="hidden" name="libros_select_id[]" value="'+libro_select_id+'">'+libro+'</td>'+
+                                    '<td style="text-align:right;"><input type="hidden" name="cantidad[]" value="'+cantidad+'">'+cantidad+' </td>'+
+                                    '<td style="text-align:center;"><a href="#" class="btn btn-danger btn-xs remove"><i class="fas fa-minus"></i></a></td>' +
+                                    '</tr>';
 
-                    $('tbody').append(fila) ;
-                    limpiar();
+                        $('tbody').append(fila) ;
+                        limpiar();
+                        if (fila = null){
+                            console.error(error);   
+                        }
+                }else{
+                    swal({
+                            title: "Error",
+                            text: "Ingrese una cantidad valida y mayor a 0",
+                            icon: "error",
+                        });
+                }
             }else{
                 swal({
-                        title: "Error",
-                        text: "Ingrese una cantidad valida y mayor a 0",
-                        icon: "error",
-                    });
+                            title: "Error",
+                            text: "Seleccione un producto",
+                            icon: "error",
+                        });
             }
-        }else{
-            swal({
-                        title: "Error",
-                        text: "Seleccione un producto",
-                        icon: "error",
-                    });
+
         }
 
-    }
+        function limpiar(){
+            $("#cantidad").val("");
+            $("#libro_select_id").val(null).trigger("change");
 
-    function limpiar(){
-		$("#cantidad").val("");
-        $("#libro_select_id").val(null).trigger("change");
+        }
 
-	}
+        $('body').on('click', '.remove',function(){
+            // var last=$('tbody tr').length;
+            // if(last==1){
+            //     alert("No es posible eliminar la ultima fila");
+            // }
+            // else{
+                $(this).parent().parent().remove();
+            //}
 
-    $('body').on('click', '.remove',function(){
-        // var last=$('tbody tr').length;
-        // if(last==1){
-        //     alert("No es posible eliminar la ultima fila");
-        // }
-        // else{
-            $(this).parent().parent().remove();
-        //}
-
-    });
+        });
+    
 </script>
 @endpush
