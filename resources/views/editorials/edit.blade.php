@@ -1,7 +1,8 @@
 @extends('admin-lte.index')
 
 @section('content')
-<form class="form-group " method="POST" action="{{route("editorials.store")}}">
+<form class="form-group " method="POST" action="{{route("editorials.update",$editorial->id)}}">
+    @method("PUT")
     @csrf
     <div class="card card-primary card-outline">
         <div class="card-header">
