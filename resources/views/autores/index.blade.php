@@ -12,6 +12,7 @@
                 <tr>
                     <th scope="col">Apellido del Autor</th>
                     <th scope="col">Nombre del Autor</th>
+                    <th scope="col">Opciones</th>
                 </tr>
             </thead>
             <tbody>

@@ -10,7 +10,19 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col">
+                <div class="col-4">
+                    <div class="form-group ">
+                        <label for="dni">CUIL</label>
+                        <input type="text" class="form-control  @error('cuil') is-invalid @enderror" id="cuit-number"
+                            name="cuil" value="{{ old('cuil') }}" placeholder="Especifique su cuil" required>
+                        @error('cuil')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-4">
                     <div class="form-group ">
                         <label for="nombres">Nombres</label>
                         <input type="text" class="form-control  @error('nombres') is-invalid @enderror" id="nombres"
@@ -22,7 +34,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-4">
                     <div class="form-group ">
                         <label for="apellidos">Apellidos</label>
                         <input type="text" class="form-control  @error('apellidos') is-invalid @enderror" id="apellidos"
@@ -66,20 +78,6 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="form-group ">
-                        <label for="dni">CUIL</label>
-                        <input type="text" class="form-control  @error('cuil') is-invalid @enderror" id="cuit-number"
-                            name="cuil" value="{{ old('cuil') }}" placeholder="Especifique su cuil" required>
-                        @error('cuil')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-3">
                     <div class="form-group ">
                         <label for="telefono">Telefono</label>

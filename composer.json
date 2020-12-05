@@ -13,7 +13,10 @@
         "cardumen/argentina-provincias-localidades": "1.1",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.18.35",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "laravel/ui": "1.*",
+        "owen-it/laravel-auditing": "^10.0",
+        "spatie/laravel-permission": "^3.18"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

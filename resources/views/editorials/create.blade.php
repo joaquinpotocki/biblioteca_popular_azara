@@ -23,6 +23,36 @@
                         @enderror
                     </div>
                 </div>
+                {{-- <div class="col-3">
+                    <div class="form-group ">
+                        <label for="editorial" class="">Editoriales</label>
+                        <label for="agregar_editorial">
+                            <a role="button" type="button" href="{{route('editorials.create')}}" title="Nuevo editorial"><i
+                                    class="fas fa-plus-circle fa-md"></i></a>
+                        </label>
+                        <select class="form-control" name="editorial_id[]"  id="editorial" multiple required>
+                            @foreach($editorials as $editorial)
+                            <option value="{{$editorial->id}}" @if(old('editorial_id')==$editorial->id) selected
+                                @endif>{{$editorial->nombre_editorial}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div> --}}
+                <div class="col-3">
+                    <div class="form-group ">
+                        <label for="proveedor" class="">proveedores</label>
+                        <label for="agregar_proveedor">
+                            <a role="button" type="button" href="{{route('proveedores.create')}}" title="Nuevo proveedor"><i
+                                    class="fas fa-plus-circle fa-md"></i></a>
+                        </label>
+                        <select class="form-control" name="proveedor_id[]" id="proveedor" multiple required>
+                            @foreach($proveedores as $proveedor)
+                            <option value="{{$proveedor->id}}" @if(old('proveedor_id')==$proveedor->id) selected
+                                @endif>{{$proveedor->empresa}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card-footer float">
@@ -36,4 +66,9 @@
 </form>
 @endsection
 @push('scripts')
+<script>
+    $("#proveedor").select2({
+            placeholder: "Seleccione al menos un proveedor"
+    });
+</script>
 @endpush

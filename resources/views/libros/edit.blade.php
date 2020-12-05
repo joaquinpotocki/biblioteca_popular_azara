@@ -12,7 +12,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-3">
+                <div class="col-4">
                     <div class="form-group ">
                         <label for="numero_serie">ISBN</label>
                         <input type="text" class="form-control  @error('numero_serie') is-invalid @enderror" id="numero_serie"
@@ -24,7 +24,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <div class="form-group ">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control  @error('nombre') is-invalid @enderror" id="nombre"
@@ -36,13 +36,26 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
+                    <div class="form-group ">
+                        <label for="edicion">Edicion</label>
+                        <input type="text" class="form-control  @error('edicion') is-invalid @enderror" id="edicion"
+                            name="edicion" value="{{ old('edicion') ?? $libro->edicion}}" placeholder="Especifique su nombre de persona de contacto" required>
+                        @error('edicion')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                
+                <div class="col-4">
                     <div class="form-group ">
                         <label for="genero_libros" class="">Genero</label>
                         <label for="genero_libros">
                             <a role="button" type="button" href="{{route('genero_libros.create')}}" title="Nuevo genero"><i class="fas fa-plus-circle fa-md"></i></a>
                         </label>
-                        <select class="seleccion form-control" name="genero_id" id="genero_libros" required>
+                        <select class="seleccion form-control" type="hidden" name="genero_id" id="genero_libros" required>
                             <option value="" disabled selected>--Seleccione un genero--</option>
                             @foreach($genero_libros as $genero_libro)
                             <option value="{{$genero_libro->id}}" @if($genero_libro != null)
@@ -57,7 +70,7 @@
                         </option> --}}
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <div class="form-group ">
                         <label for="autores" class="">Autor</label>
                         <label for="autores">
@@ -75,20 +88,26 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <div class="form-group ">
-                        <label for="edicion">Edicion</label>
-                        <input type="text" class="form-control  @error('edicion') is-invalid @enderror" id="edicion"
-                            name="edicion" value="{{ old('edicion') ?? $libro->edicion}}" placeholder="Especifique su nombre de persona de contacto" required>
-                        @error('edicion')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
+                        <label for="editorials" class="">Editorial</label>
+                        <label for="editorials">
+                            <a role="button" type="button" href="{{route('editorials.create')}}" title="Nuevo editorials"><i
+                                    class="fas fa-plus-circle fa-md"></i></a>
+                        </label>
+                        <select class="form-control" name="editorial_id" id="editorials" required>
+                            <option value="" disabled selected>--Seleccione un editorials--</option>
+                            
+                            @foreach($editorials as $editorials)
+                            <option value="{{$editorials->id}}" @if($editorials != null)
+                                @if($editorials->id==$editorials->id) selected
+                                @endif @endif>{{$editorials->nombre_editorial}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 
-                <div class="col-3">
+                <div class="col-4">
                     <div class="form-group ">
                         <label for="stock_libro">Stock</label>
                         <input type="text" class="form-control  @error('stock_libro') is-invalid @enderror" id="stock_libro"

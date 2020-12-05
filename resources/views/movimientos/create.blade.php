@@ -21,7 +21,7 @@
                                     <i class="far fa-calendar-alt"></i>
                                 </span> --}}
                             </div>
-                            <input type="date" name="fecha_prestamo" class="form-control" required
+                            <input type="date" name="fecha_prestamo" class="form-control" id="fecha_prestamo" required
                                 value="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
                                 min="{{ Carbon\Carbon::now()->subDay()->format('Y-m-d') }}"
                                 max="{{ Carbon\Carbon::now()->format('Y-m-d') }}" id="">
@@ -40,7 +40,7 @@
                             <option value="" disabled selected>--Seleccione un lector por favor--</option>
                             @foreach($lectores as $lector)
                             <option value="{{$lector->id}}" @if(old('lector_id')==$lector->id) selected
-                                @endif>{{$lector->nombres}}</option> 
+                                @endif>{{$lector->nombres}} {{$lector->apellidos}}</option> 
                             @endforeach
                         </select>
                     </div>
@@ -65,7 +65,7 @@
                             <option value="" disabled selected>--Seleccione un libro por favor--</option>
                             @foreach($libros as $libro)
                             <option value="{{$libro->id}}" @if(old('libro_id')==$libro->id) selected
-                                @endif>{{$libro->nombre}} - {{$libro->editoriales->nombre_editorial}}</option> 
+                                @endif>{{$libro->nombre}} - {{$libro->editoriales->nombre_editorial}} - {{$libro->edicion}} </option> 
                             @endforeach
                         </select>
                     </div>
@@ -111,6 +111,13 @@
 </form>
 @endsection
 @push('scripts')
+<script type="text/javascript">
+    $('#fecha_prestamo').datetimepicker({
+        format: 'YYYY/MM/DD',
+        useCurrent:true
+    });
+
+</script>
 <script>
         $('#addRow').on('click',function(){
         addRow();

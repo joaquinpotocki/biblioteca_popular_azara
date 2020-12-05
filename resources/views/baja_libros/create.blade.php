@@ -72,7 +72,7 @@
                             <option value="" disabled selected>--Seleccione un libro por favor--</option>
                             @foreach($libros as $libro)
                             <option value="{{$libro->id}}" @if(old('libro_id')==$libro->id) selected
-                                @endif>{{$libro->nombre}} - {{$libro->editoriales->nombre_editorial}}</option> 
+                                @endif>{{$libro->nombre}} - {{$libro->edicion}} - {{$libro->editoriales->nombre_editorial}}</option> 
                             @endforeach
                         </select>
                     </div>

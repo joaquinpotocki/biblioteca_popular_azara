@@ -47,7 +47,7 @@ class EstadoController extends Controller
         $estado = new Estado();
         $estado->nombre = $request->nombre ;
         $estado->descripcion = $request->descripcion;
-        $estado->color = $request->color ;
+        // $estado->color = $request->color ;
         $estado->descripcion = $request->descripcion;
         
         //$cliente->numero_cliente = $numero_cliente ;
@@ -94,8 +94,7 @@ class EstadoController extends Controller
 
         $estado->nombre = $request->nombre ;
         $estado->descripcion = $request->descripcion;
-        $estado->color = $request->color ;
-        $estado->descripcion = $request->descripcion;
+        // $estado->color = $request->color ;
         
         //$cliente->numero_cliente = $numero_cliente ;
         $estado->update();

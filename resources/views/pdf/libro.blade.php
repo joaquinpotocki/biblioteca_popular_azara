@@ -1,7 +1,7 @@
 @extends('layouts.pdf2')
 
 @section('logo')
-<a><img id="imagen" class="float-left rounded " src="{{public_path('img/').$config->logo}}"> </a>
+<a><img id="imagen" class="float-left rounded " src="{{public_path('images/'.$config->logo)}}"> </a>
 @endsection
 
 @section('datos')
@@ -48,14 +48,14 @@
 <br>
 <section>
     <div>
-        <table id="lista">
+        <table id="lista" >
             <thead>
                 <tr id="fa">
                     <th>Numero de serie</th>
                     <th>Nombre</th>
                     <th>Autor</th>
                     <th>Editorial</th>
-                    <th>Cantidad</th>
+                    <th>Ejemplares</th>
                 </tr>
             </thead>
 

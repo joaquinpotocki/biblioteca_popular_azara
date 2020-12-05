@@ -19,8 +19,9 @@ class IngresoLibroController extends Controller
     public function index()
     {
         $ingreso_libros = IngresoLibro::all();
-
-        return view('ingreso_libros.index', compact('ingreso_libros'));
+        $libros = Libro::all() ;
+        $tipos_ingresos = TipoIngreso::all() ;
+        return view('ingreso_libros.index', compact('ingreso_libros', 'libros' , 'tipos_ingresos'));
     }
 
     /**
@@ -53,14 +54,24 @@ class IngresoLibroController extends Controller
             'fecha_ingreso' => 'required|date',
         ]) ;
         
+
         if (($request->cantidad) == null){
             return redirect(route('ingreso_libros.create'))->with('error','El campo CANTIDAD se encuentra vacio!');
         }  
+        
+
+        // if(sizeof($request->cantidad) == 0){
+        //     return back();
+        // }
+        // if(Empty($request->cantidad)){
+        //      return "hola";
+        //  }
         try {
             for ($i = 0; $i < sizeof($request->cantidad); $i++){
                 // if (($request->libros_select_id[$i]) && ($request->cantidad[$i]) == null){
                 //     return redirect(route('ingreso_libros.index'))->with('success','TU VIEJA!'); 
                 // }
+                
                 
                 $ingreso_libro = new IngresoLibro();
                 $ingreso_libro->tipo_ingresos_id = $request->tipo_ingresos_id;  
@@ -92,9 +103,9 @@ class IngresoLibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(IngresoLibro $ingreso_libro)
     {
-        //
+        return view('ingreso_libros.show', compact('ingreso_libro'));
     }
 
     /**

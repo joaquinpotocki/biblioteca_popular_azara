@@ -11,6 +11,7 @@
             <thead>
                 <tr>
                     <th scope="col">Tipo</th>
+                    <th scope="col">Opciones</th>
                 </tr>
             </thead>
             <tbody>

@@ -17,6 +17,8 @@ class CreateEditorialsTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre_editorial');
             
+            
+
             $table->softDeletes();
             $table->timestamps();
 

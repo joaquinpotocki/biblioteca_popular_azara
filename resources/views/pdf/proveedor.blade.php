@@ -13,9 +13,18 @@
 </p>
 @endsection
 
-@section('content')
-@section('content')
 
+@section('content')
+{{-- <style>
+    #fac {
+        /*position: relative;*/
+        float: right;
+        margin-top: 1%;
+        margin-left: -19%;
+        margin-right: 0%;
+        font-size: 10px;
+    }
+</style> --}}
 <div>
     <table id="titulo">
         <thead>
@@ -51,7 +60,6 @@
         <table id="lista">
             <thead>
                 <tr id="fa">
-                    <th>Nr</th>
                     <th>Nombre</th>
                     <th>Cuit</th>
                     <th>Email</th>
@@ -64,12 +72,11 @@
 
                 @foreach ($proveedores as $prov)
                 <tr>
-                    <td>{{$prov->id}}</td>
                     <td>{{$prov->empresa}}</td>
-                    <td width="15%">{{$prov->cuit}}</td>
-                    <td>{{$prov->email}}</td>
-                    <td>{{$prov->telefono}}</td>
-                    <td>
+                    <td >{{$prov->cuit}}</td>
+                    <td >{{$prov->email}}</td>
+                    <td width="15%">{{$prov->telefono}}</td>
+                    <td width="15%">
                         @foreach ($prov->editoriales as $e)
                             {{$e->nombre_editorial}} <br>
                         @endforeach

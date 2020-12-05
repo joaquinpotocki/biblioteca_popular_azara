@@ -12,6 +12,7 @@
                 <tr>
                     <th scope="col">Editorial</th>
                     <th scope="col">Proveedores</th>
+                    <th scope="col">Opciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,7 +22,7 @@
                     <td>
                         @foreach ($editorial->proveedores as $p)
                             <span class="badge badge-pill">
-                                {{$p->nombre_editorial}}
+                                {{$p->empresa}}
                             </span>
                         @endforeach
                     </td>

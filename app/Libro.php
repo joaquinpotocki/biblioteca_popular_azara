@@ -4,10 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Libro extends Model
+
+class Libro extends Model  implements Auditable
 {
     use SoftDeletes; //Laravel nos permite realizar un borrado logico, no definitivo
+    use \OwenIt\Auditing\Auditable;
     protected $guarded = []; //podremos usar todos sus atributos
     public $table = "libros"; //la tabla se llamara de esta manera
     

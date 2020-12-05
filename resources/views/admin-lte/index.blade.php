@@ -24,8 +24,11 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     {{-- DataTables --}}
     <link rel="stylesheet" href="{{ asset('assets/extensiones/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset("assets/extensiones/datatables-responsive/css/responsive.bootstrap4.min.css") }}">
     {{-- Toastr --}}
     <link href="{{asset('assets/extensiones/toastr/toastr.min.css')}}" rel="stylesheet" />
+    {{-- css custom--}}
+    <link rel="stylesheet" href="{{asset('assets/admin-lte//plugins/csscustom/custom.css')}}">
 
 
     <!-- Bootstrap4 Duallistbox -->
@@ -54,7 +57,7 @@
 
     </div>
     <!-- ./wrapper -->
-
+    
 
     <!-- jQuery -->
     <script src="{{asset('assets/admin-lte/plugins/jquery/jquery.min.js')}}"></script>
@@ -69,6 +72,11 @@
     {{-- Datatable --}}
     <script src="{{asset('assets/extensiones/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/extensiones/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+
+    <script src="{{ asset("assets/extensiones/datatables-responsive/js/dataTables.responsive.min.js") }}"></script>
+    <script src="{{ asset("assets/extensiones/datatables-responsive/js/responsive.bootstrap4.min.js") }}"></script>
+    
+
     {{-- Scrip para cargar el datatable --}}
     <script src="{{asset('assets/js/incluirDatatable.js')}}"></script>
     {{-- Toastr --}}
@@ -78,9 +86,22 @@
     <!-- Bootstrap4 Duallistbox -->
     <script src="{{ asset("assets/admin-lte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js") }}"></script>
 
-    <script src="{{ asset("https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js") }}"></script>
+    {{-- Reportes y filtros --}}
     
+    <!-- InputMask -->
+    <script src="{{ asset("assets/extensiones/moment/moment.min.js") }}"></script>
+    <script src="{{ asset("assets/extensiones/inputmask/min/jquery.inputmask.bundle.min.js") }}"></script>
 
+    <!-- Datatable export -->
+    <script src="{{ asset("assets/extensiones/export-datatable/dataTables.buttons.min.js") }}"></script>
+    <script src="{{ asset("assets/extensiones/export-datatable/buttons.bootstrap4.min.js") }}"></script>
+    <script src="{{ asset("assets/extensiones/export-datatable/jszip.min.js") }}"></script>
+    <script src="{{ asset("assets/extensiones/export-datatable/pdfmake.min.js") }}"></script>
+    <script src="{{ asset("assets/extensiones/export-datatable/vfs_fonts.js") }}"></script>
+    <script src="{{ asset("assets/extensiones/export-datatable/buttons.html5.min.js") }}"></script>
+    <script src="{{ asset("assets/extensiones/export-datatable/buttons.print.min.js") }}"></script>
+    <script src="{{ asset("assets/extensiones/export-datatable/buttons.colVis.min.js") }}"></script>
+    
 
     {{-- Si el mensaje que enviamos es success --}}
     @if (session('success'))
@@ -106,6 +127,19 @@
     </script>
 
     <script src="{{asset('assets/admin-lte/plugins/moment/moment-with-locales.min.js')}}"></script>
+    
+    @include('movimientos.modal')
+   
+   {{-- <script>
+        var Mostrar = function(id){
+            var route = "{{route('movimientos.edit', $movimiento->id)}}"; 
+            $.get(route, function(data){
+                //$('#id').val(data.id);
+                // $('#fecha_prestamo').val(data.fecha_prestamo);
+                alert(id);
+            });
+        }    
+    </script> --}}
 </body>
 
 </html>

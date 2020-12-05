@@ -17,7 +17,9 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Libros
+Route::middleware(['auth'])->group(function () {
+
+    //Libros
 
 Route::get('/libros', 'LibroController@index')->name('libros.index'); //para mostrar todos los libros
 Route::get('/libros/create', 'LibroController@create')->name('libros.create'); //renderizar la vista de creacion
@@ -129,12 +131,23 @@ Route::delete('estados/{estado}', 'EstadoController@destroy')->name('estados.des
 //Estado
 Route::get('/movimientos', 'MovimientoController@index')->name('movimientos.index'); //para mostrar todos los movimientos
 Route::get('/movimientos/create', 'MovimientoController@create')->name('movimientos.create'); //renderizar la vista de creacion
+Route::get('/movimientos/entrega', 'MovimientoController@entrega')->name('movimientos.entrega'); //renderizar la vista de creacion
 Route::post('/movimientos', 'MovimientoController@store')->name('movimientos.store'); //guardar el form (crear un movimiento)
 Route::get('/movimientos/{movimiento}', 'MovimientoController@show')->name('movimientos.show'); //ver datos de un solo movimiento
 Route::get('/movimientos/{movimiento}/edit', 'MovimientoController@edit')->name('movimientos.edit'); //renderizar el form para editar un movimiento
 Route::put('/movimientos/{movimiento}', 'MovimientoController@update')->name('movimientos.update'); //guardar lo que modificamos en el form de edicion
 Route::delete('movimientos/{movimiento}', 'MovimientoController@destroy')->name('movimientos.destroy'); //eliminar un Libro
 
+//Route::get('/movimientos/{id}/getlibro', 'MovimientoController@getlibro')->name('movimientos.getlibro'); //renderizar el form para editar un movimiento
+
+//Estado
+Route::get('/estado_devolucions', 'EstadoDevolucionController@index')->name('estado_devolucions.index'); //para mostrar todos los estado_devolucions
+Route::get('/estado_devolucions/create', 'EstadoDevolucionController@create')->name('estado_devolucions.create'); //renderizar la vista de creacion
+Route::post('/estado_devolucions', 'EstadoDevolucionController@store')->name('estado_devolucions.store'); //guardar el form (crear un Estado)
+Route::get('/estado_devolucions/{estado_devolucion}', 'EstadoDevolucionController@show')->name('estado_devolucions.show'); //ver datos de un solo Estado
+Route::get('/estado_devolucions/{estado_devolucion}/edit', 'EstadoDevolucionController@edit')->name('estado_devolucions.edit'); //renderizar el form para editar un Estado
+Route::put('/estado_devolucions/{estado_devolucion}', 'EstadoDevolucionController@update')->name('estado_devolucions.update'); //guardar lo que modificamos en el form de edicion
+Route::delete('estado_devolucions/{estado_devolucion}', 'EstadoDevolucionController@destroy')->name('estado_devolucions.destroy'); //eliminar un Libro
 //carga de provincias con ajax
 Route::get('paises/{pais}', 'DireccionController@obtenerProvincias')->name('paises.obtenerProvincias');
 
@@ -148,4 +161,35 @@ Route::put('configuracion/update', 'ConfiguracionController@update')->name('conf
 //pdfs
 Route::get('/proveedorPDF', 'PdfController@proveedorPDF')->name('proveedor.pdf');
 Route::get('/libroPDF', 'PdfController@libroPDF')->name('libro.pdf');
+Route::get('/ingresoPDF', 'PdfController@ingresoPDF')->name('ingreso.pdf');
+Route::get('/devueltoPDF', 'PdfController@devueltoPDF')->name('devuelto.pdf');
+
+    //Registro completo
+    Route::get('/usuarios/registro_completo', function () {
+        return view('registro_completo');
+    })->name('usuarios.registro_completo');
+
+    //Usuarios
+    Route::get('/usuarios/administrar/', 'UserController@index')->name('usuarios.administrar');
+
+    Route::get('/usuarios/{usuario}/edit', 'UserController@edit')->name('usuarios.edit');
+
+    Route::patch('/usuarios/{usuario}', 'UserController@update')->name('usuarios.update');
+
+    Route::get('/usuarios/create', 'UserController@create')->name('usuarios.create'); //renderizar la vista de creacion
+    
+    Route::get('/usuarios', 'UserController@store')->name('usuarios.store'); //guardar el form (crear un Estado)
+
+    Route::get('auditoria', 'AuditoriaController@index')->name('auditoria.index');
+    Route::get('auditoria/prestamos/{auditoria}-{id}', 'AuditoriaController@showPrestamo')->name('auditoria.showPrestamo');
+    Route::get('auditoria/bajas/{auditoria}-{id}', 'AuditoriaController@showBaja')->name('auditoria.showBaja') ;
+    Route::get('auditoria/ingresos/{auditoria}-{id}', 'AuditoriaController@showIngreso')->name('auditoria.showIngreso');
+    Route::get('auditoria/libros/{auditoria}-{id}', 'AuditoriaController@showLibro')->name('auditoria.showLibro');
+
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 

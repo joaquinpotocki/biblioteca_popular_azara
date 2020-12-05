@@ -57,7 +57,7 @@
         float: right;
         margin-top: 1%;
         margin-left: 2%;
-        margin-right: -19%;
+        margin-right: 0%;
         font-size: 10px;
     }
 

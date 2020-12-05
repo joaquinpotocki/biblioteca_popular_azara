@@ -22,9 +22,33 @@
                 <div class="row d-flex justify-content-end">
                     <a href="#" id="editar">Editar <i class="fal fa-edit"></i></a>
                 </div>
+                <h3 class="card-title">
+                    <i class="fas fa-edit">  Semanas de entrega</i>
+                </h3>
+                <br>
+                <br>
                 <form class="form-group " method="POST" action="{{route('configuracion.update')}}"
                     enctype="multipart/form-data">
                     @method('PUT')
+                    <div class="form-group ">
+                        <label for="" class="">Semana prestamo</label>
+                        <div class="input-group">
+                            <select class="form-control" name="semana_prestamo" id="semana_prestamo" disabled>
+                                <option value=1>UNA SEMANA</option> 
+                                <option value=2>DOS SEMANAS</option>
+                                <option value=3>TRES SEMANAS</option>
+                                <option value=4>CUATRO SEMANAS</option>
+                                <option value=5>CINCO SEMANAS</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <h3 class="card-title">
+                        <i class="fas fa-file-pdf">  Reporte</i>
+                    </h3>
+                    <br>
+                    <br>
                     <div class="form-group">
                         <label for="">Nombre de la Empresa</label>
                         <input type="text" disabled class="form-control" name="nombre" id="nombre"
@@ -76,6 +100,7 @@
 
 <script>
     $('#editar').click(function(){
+        $('#semana_prestamo').prop('disabled', false);
         $('#nombre').prop('disabled', false);
         $('#direccion').prop('disabled', false);
         $('#telefono').prop('disabled', false);

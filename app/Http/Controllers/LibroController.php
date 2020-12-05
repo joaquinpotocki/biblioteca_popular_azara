@@ -57,7 +57,12 @@ class LibroController extends Controller
             'editorial_id' => 'required',
             'tipo_libro_id'=> 'required',
         ]) ;
-        if ((Libro::where('nombre', $request->nombre)->first()) &&  (Libro::where('edicion', $request->edicion)->first()) && (Libro::where('editorial_id', $request->editorial_id)->first())){
+        
+        if ((Libro::where('nombre', $request->nombre)->first()) &&  (Libro::where([
+            ['edicion', '=', $request->edicion],
+            ['nombre', '=', $request->nombre],
+            ['editorial_id', '=', $request->editorial_id]
+        ])->first()) && (Libro::where('editorial_id', $request->editorial_id)->first())){
             return redirect()->back()->with('error','Este libro ya a sido registrado');
          }    
 
@@ -127,15 +132,16 @@ class LibroController extends Controller
             'edicion' => 'required|numeric',
             'genero_id' => 'required',
             'autor_id' => 'required',
-            'editorial_id' => 'required|unique:libros,'.$libro->id,
             'tipo_libro_id'=> 'required',
         ]);
+        if ((Libro::where('nombre', $request->nombre)->first()) &&  (Libro::where('edicion', $request->edicion)->first()) && (Libro::where('editorial_id', $request->editorial_id)->first())){
+            return redirect()->back()->with('error','Este libro ya a sido registrado');
+         } 
         
         $libro->fill($request->except('imagen'));
         if ($request->hasfile('imagen')) { 
             $file=$request->file('imagen');
             $name=time().$file->getClientOriginalName();
-            
             $file->move(public_path().'/images/',$name);
         } 
         $libro->imagen = $name;

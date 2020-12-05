@@ -12,6 +12,7 @@
                 <tr>
                     <th scope="col">Nombre estado</th>
                     <th scope="col">Descripcion</th>
+                    <th scope="col">Opciones</th>
                 </tr>
             </thead>
             <tbody>

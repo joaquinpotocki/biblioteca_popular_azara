@@ -20,6 +20,7 @@ class CreateConfiguracionsTable extends Migration
             $table->string('direccion');
             $table->string('telefono');
             $table->string('email');
+            $table->integer('semana_prestamo');
 
             $table->softDeletes();
             $table->timestamps();

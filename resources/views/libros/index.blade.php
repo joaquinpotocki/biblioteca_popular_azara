@@ -14,8 +14,9 @@
                     <th scope="col">ISBN</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Genero</th>
-                    <th scope="col">Autor</th>
+                    {{-- <th scope="col">Autor</th> --}}
                     <th scope="col">Edicion</th>
+                    <th scope="col">Editorial</th>
                     <th scope="col">Ejemplares</th>
                     <th scope="col" class="text-right">Opciones</th>
                 </tr>
@@ -26,8 +27,9 @@
                     <td>{{$libro->numero_serie}}</td>
                     <td>{{$libro->nombre}}</td>
                     <td>{{$libro->generolibro->genero_libros}}</td>
-                    <td>{{$libro->autor->nombre_autor}} {{$libro->autor->apellido_autor}}</td>
+                    {{-- <td>{{$libro->autor->nombre_autor}} {{$libro->autor->apellido_autor}}</td> --}}
                     <td>{{$libro->edicion}}</td>
+                    <td>{{$libro->editoriales->nombre_editorial}}</td>
                     <td>{{$libro->stock_libro}}</td>
                     <td class="text-right">
                         <a class="btn btn-primary btn-sm" href="{{ route('libros.show', $libro->id) }}">Ver</a>

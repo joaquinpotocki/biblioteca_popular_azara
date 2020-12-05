@@ -25,6 +25,10 @@ class CreateLectorsTable extends Migration
             $table->string('telefono');
             $table->string('email');
             $table->text('notas_particulares')->nullable();
+            $table->integer('reputacion')->nullable();
+            $table->integer('contador')->nullable();
+
+            
 
             $table->unsignedBigInteger('direccion_id');
             $table->foreign('direccion_id')->references('id')->on('direccions');

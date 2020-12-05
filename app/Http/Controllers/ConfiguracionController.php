@@ -18,7 +18,6 @@ class ConfiguracionController extends Controller
 
     public function update(Request $request)
     {
-
         $config = Configuracion::first();
         if ($request->hasFile('logo')) {
             $file = $request->file('logo');
@@ -26,10 +25,10 @@ class ConfiguracionController extends Controller
             $name = time() . $file->getClientOriginalName();
             $file->move(public_path('/images/'),$name);
             
+            $config->logo = $name;
         }
-
+        
         $config->fill($request->all());
-        $config->logo = $name;
         $config->update();
 
         return redirect()->back()->with('confirmar', 'ok');

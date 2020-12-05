@@ -56,7 +56,7 @@ class ProveedorController extends Controller
             'pais_id' => 'required',
             'provincia_id' => 'required',
             'localidad_id' => 'required',
-            'calle' => 'required|regex:/^[a-zA-Z\s]*$/',
+            'calle' => 'required',
             'altura' => 'required|numeric',
         ]) ;
 
@@ -134,7 +134,7 @@ class ProveedorController extends Controller
             'pais_id' => 'required',
             'provincia_id' => 'required',
             'localidad_id' => 'required',
-            'calle' => 'required|regex:/^[a-zA-Z\s]*$/',
+            'calle' => 'required',
             'altura' => 'required|numeric',
         ]) ;
 

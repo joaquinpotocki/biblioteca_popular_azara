@@ -86,7 +86,7 @@ class TipoBajaController extends Controller
         $data = request()->validate([
             'nombre_baja' => 'required',
             'descripcion' => 'required', 
-        ]) ;
+]) ;
 
         $tipo_baja->nombre_baja = $request->nombre_baja ;
         $tipo_baja->descripcion = $request->descripcion ;

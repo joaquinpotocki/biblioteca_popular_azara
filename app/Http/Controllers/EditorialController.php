@@ -16,8 +16,9 @@ class EditorialController extends Controller
     public function index()
     {
         $editorials = Editorial::all();
+        $proveedores = Proveedor::all();
 
-        return view('editorials.index', compact('editorials'));
+        return view('editorials.index', compact('editorials', 'proveedores' ));
     }
 
     /**
@@ -27,8 +28,8 @@ class EditorialController extends Controller
      */
     public function create()
     {
-        //$proveedores = Proveedor::all();
-        return view('editorials.create'  /*compact('proveedores')*/);
+        $proveedores = Proveedor::all();
+        return view('editorials.create' , compact('proveedores'));
     }
 
     /**
@@ -42,8 +43,8 @@ class EditorialController extends Controller
         /*$editorial = new Editorial();
         return $editorial;*/
         $data = request()->validate([
-            'nombre_editorial' => 'required',
-            //'proveedor_id.*' => 'required'
+            'nombre_editorial' => 'required|unique:editorials',
+            'proveedor_id.*' => 'required'
             
         ]) ;
 
@@ -52,7 +53,7 @@ class EditorialController extends Controller
         
         //$cliente->numero_cliente = $numero_cliente ;
         $editorial->save();
-        //$editorial->proveedores()->sync($request->proveedor_id);
+        $editorial->proveedores()->sync($request->proveedor_id);
         return redirect(route('editorials.index'))->with('success','Nueva editorial guardada con exito!');
     
     }
@@ -76,7 +77,7 @@ class EditorialController extends Controller
      */
     public function edit(Editorial $editorial)
     {
-        return view('editorials.edit', compact('editorial'));
+        return view('editorials.edit', compact('editorial', 'provedores'));
     }
 
     /**
@@ -89,9 +90,8 @@ class EditorialController extends Controller
     public function update(Request $request, Editorial $editorial)
     {
         $data = request()->validate([
-            'nombre_editorial' => 'required',
+            'nombre_editorial' => 'required|unique:editorials',
             'proveedor_id' => 'required',
-            
         ]) ;
 
         $editorial->nombre_editorial = $request->nombre_editorial;

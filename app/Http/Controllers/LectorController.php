@@ -53,7 +53,7 @@ class LectorController extends Controller
             'pais_id' => 'required',
             'provincia_id' => 'required',
             'localidad_id' => 'required',
-            'calle' => 'required|regex:/^[a-zA-Z\s]*$/',
+            'calle' => 'required',
             'altura' => 'required|numeric',
         ]) ;
 
@@ -64,6 +64,7 @@ class LectorController extends Controller
         $direccion->provincia_id = $request->provincia_id ;
         $direccion->localidad_id = $request->localidad_id ;
         $direccion->save();
+
         $lector = new Lector();
         $lector->nombres = $request->nombres ;
         $lector->apellidos = $request->apellidos ;
@@ -74,10 +75,14 @@ class LectorController extends Controller
         $lector->email = $request->email ;
         $lector->notas_particulares = $request->notas_particulares ;
         $lector->direccion_id = $direccion->id ;
+        $lector->reputacion = 50 ;
+        $lector->contador = 0 ;
         $lector->save();
+
         $numero_lector = strtoupper(substr($direccion->pais->pais,0,3).'-'.$lector->id);
         $lector->numero_lectores = $numero_lector ;
         $lector->save();
+
         return redirect(route('lectores.index'))->with('success','lector guardado con exito!');
     }
 
@@ -114,6 +119,7 @@ class LectorController extends Controller
     public function update(Request $request, Lector $lector)
     {
         $data = request()->validate([
+            'cuil' => 'required|unique:lectores,id,'.$lector->id,
             'nombres' => 'required',
             'apellidos' => 'required',
             'fecha_nacimiento' => 'required|date',
@@ -126,7 +132,7 @@ class LectorController extends Controller
             'pais_id' => 'required',
             'provincia_id' => 'required',
             'localidad_id' => 'required',
-            'calle' => 'required|regex:/^[a-zA-Z\s]*$/',
+            'calle' => 'required',
             'altura' => 'required|numeric',
         ]) ;
 

@@ -27,6 +27,9 @@ class CreateMovimientosTable extends Migration
             $table->unsignedBigInteger('estado_id')->unsigned();
             $table->foreign('estado_id')->references('id')->on('estados');
 
+            $table->unsignedBigInteger('estado_devolucion_id')->unsigned();
+            $table->foreign('estado_devolucion_id')->references('id')->on('estado_devolucions');
+
             $table->softDeletes();
             $table->timestamps();
         });

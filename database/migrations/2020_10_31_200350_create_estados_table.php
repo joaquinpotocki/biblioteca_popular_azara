@@ -18,7 +18,6 @@ class CreateEstadosTable extends Migration
             $table->string('nombre');
             $table->string('descripcion')->nulleable();
             //$table->integer('nivel');
-            $table->string('color')->nulleable();
             $table->timestamps();
             $table->softDeletes();
         
