@@ -44,6 +44,15 @@
                                 <dt class="col-sm-3">Cantidad Prestamo</dt>
                                 <dd class="col-sm-8 text-muted">{{$movimiento->cantidad}}</dd>
                             </dl>
+                            <select name="lector_id" style="visibility:hidden">
+                                <option value="" disabled selected>--Seleccione un libro--</option>
+                                
+                                @foreach($lectores as $lector)
+                                <option value="{{$lector->id}}" @if($lector != null)
+                                    @if($lector->id==$lector->id) selected
+                                    @endif @endif>{{$lector->id}}</option>
+                                @endforeach
+                            </select>
                             <select name="libros_select_id" style="visibility:hidden">
                                 <option value="" disabled selected>--Seleccione un libro--</option>
                                 
