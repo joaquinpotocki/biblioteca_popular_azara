@@ -28,6 +28,8 @@ class MovimientoController extends Controller
         $configuracion = Configuracion::first() ;
         $lectores = Lector::all();
 
+      
+
         return view('movimientos.index', compact('movimientos','libros','configuracion', 'estados', 'lectores'));
     }
 
@@ -38,7 +40,13 @@ class MovimientoController extends Controller
      */
     public function create()
     {
-        $lectores = Lector::all();
+        $lectores = [];
+        $lista_lectores = Lector::all();
+        foreach($lista_lectores as $lector){
+            if($lector->reputacion > 25){
+                array_push($lectores,$lector);
+            }
+        }
         $libros = Libro::all();
         $movimientos = Movimiento::all();
         return view('movimientos.create', compact('movimientos', 'libros', 'lectores'));
@@ -160,7 +168,7 @@ class MovimientoController extends Controller
                 // // $date = Carbon::create($request->fecha_prestamo)->addWeek()->format('Y-m-d'); 
                 // $movimiento->fecha_devolucion = Carbon::create($request->fecha_prestamo)->addWeek()->format('Y-m-d'); 
                 $lector = Lector::find($request->lector_id);
-                
+                // return $request->lector_id;
                 $movimiento->fecha_devolucion_real = $request->fecha_devolucion_real;  
     
                 $movimiento->estado_id = 2;
@@ -171,29 +179,32 @@ class MovimientoController extends Controller
                 // }else{
                 //     return 'menor';
                 // }
-
-                $movimiento->save();
-
+                 
                 if($lector->contador >= 3){
-                    if (($request->fecha_devolucion_real < $movimiento->fecha_devolucion) && ($movimiento->estado_devolucion_id = 1)){
+                    // return $movimiento->estado_devolucion_id;
+                    if (($request->fecha_devolucion_real < $movimiento->fecha_devolucion) && ($movimiento->estado_devolucion_id == 1)){
                         $lector->reputacion += 10;
+                        // return 1; 
                     }
-                    if (($request->fecha_devolucion_real < $movimiento->fecha_devolucion) && ($movimiento->estado_devolucion_id = 2)){
+                    if (($request->fecha_devolucion_real < $movimiento->fecha_devolucion) && ($movimiento->estado_devolucion_id == 2)){
                         $lector->reputacion += 5;
                     }
-                    if (($request->fecha_devolucion_real < $movimiento->fecha_devolucion) && ($movimiento->estado_devolucion_id = 3)){
+                    if (($request->fecha_devolucion_real < $movimiento->fecha_devolucion) && ($movimiento->estado_devolucion_id == 3)){
                         $lector->reputacion -= 5;
                     }
-                    if (($request->fecha_devolucion_real > $movimiento->fecha_devolucion) && ($movimiento->estado_devolucion_id = 1)){
+                    if (($request->fecha_devolucion_real > $movimiento->fecha_devolucion) && ($movimiento->estado_devolucion_id == 1)){
                         $lector->reputacion += 5;
                     }
-                    if (($request->fecha_devolucion_real > $movimiento->fecha_devolucion) && ($movimiento->estado_devolucion_id = 2)){
+                    if (($request->fecha_devolucion_real > $movimiento->fecha_devolucion) && ($movimiento->estado_devolucion_id == 2)){
                         $lector->reputacion -= 10;
                     }
-                    if (($request->fecha_devolucion_real < $movimiento->fecha_devolucion) && ($movimiento->estado_devolucion_id = 3)){
+                    if (($request->fecha_devolucion_real > $movimiento->fecha_devolucion) && ($movimiento->estado_devolucion_id == 3)){
                         $lector->reputacion -= 25;
                     }
                 }
+                $movimiento->save();   
+                $lector->contador += 1;
+                $lector->update();
                 
                 //Update realizado en la tabla libros (se sumaron la cantidad que ingreso de este libro)
                 
@@ -214,5 +225,17 @@ class MovimientoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function confirmacion(Movimiento $movimiento){
+
+        $lectores = Lector::all();
+        $libros = Libro::all();
+        return view('movimientos.confirmacion', compact('movimiento', 'libros','lectores'));
+    }
+
+    public function confirmo(Movimiento $movimiento){
+        $movimiento->confirmacionMail = true;
+        $movimiento->update();
     }
 }
