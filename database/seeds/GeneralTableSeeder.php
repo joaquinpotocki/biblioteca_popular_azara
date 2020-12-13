@@ -146,6 +146,7 @@ class GeneralTableSeeder extends Seeder
             'telefono'        => '+54 3758 558877',
             'email'        => 'bibliotecaazara@gmail.com',
             'semana_prestamo'        => '1',
+            'dia_mail'        =>  3,
         ]);
         
         Direccion::create([
