@@ -34,6 +34,7 @@
                     <td>{{$lector->email}}</td>
                     <td class="text-right">
                         {{-- @if (Auth::user()->hasRole('atencion') || Auth::user()->hasRole('admin')) --}}
+                        <a class="btn btn-primary btn-sm" href="{{ route('lectores.show', $lector->id) }}">Ver</a>
                         <a class="btn btn-light btn-sm" href="{{ route('lectores.edit', $lector->id) }}">Editar</a>
                         <a class="btn btn-danger btn-sm text-white delete" val-palabra={{$lector->id}}>Borrar</a>
                         {{-- @endif --}}
