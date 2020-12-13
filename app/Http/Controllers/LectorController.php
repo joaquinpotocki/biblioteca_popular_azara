@@ -17,8 +17,12 @@ class LectorController extends Controller
     public function index()
     {
         $lectores = Lector::all();
+        foreach($lectores as $lector){
+            $lector->enviarMailAviso() ;
+        }
 
         return view('lectores.index', compact('lectores'));
+
     }
 
     /**
@@ -92,9 +96,9 @@ class LectorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Lector $lector)
     {
-        //
+        return view('lectores.show', compact('lector'));
     }
 
     /**
