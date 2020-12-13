@@ -7,6 +7,7 @@ use App\IngresoLibro;
 use App\Libro;
 use App\Proveedor;
 use App\TipoIngreso;
+use App\Lector;
 use Exception;
 
 class IngresoLibroController extends Controller
@@ -55,6 +56,7 @@ class IngresoLibroController extends Controller
         ]) ;
         
 
+
         if (($request->cantidad) == null){
             return redirect(route('ingreso_libros.create'))->with('error','El campo CANTIDAD se encuentra vacio!');
         }  
@@ -66,7 +68,8 @@ class IngresoLibroController extends Controller
         // if(Empty($request->cantidad)){
         //      return "hola";
         //  }
-        try {
+        // try {
+            $libros = collect();
             for ($i = 0; $i < sizeof($request->cantidad); $i++){
                 // if (($request->libros_select_id[$i]) && ($request->cantidad[$i]) == null){
                 //     return redirect(route('ingreso_libros.index'))->with('success','TU VIEJA!'); 
@@ -89,12 +92,27 @@ class IngresoLibroController extends Controller
                 $libro->stock_libro += $request->cantidad[$i];
                 $libro->stock_fantasma += $request->cantidad[$i]; //Aqui sumamos tambien asumamos el stock de llibro para que se sumen a los prestados
                 $libro->update();
+                $libros->add($libro);
            }
-           return redirect(route('ingreso_libros.index'))->with('success','Ingreso nuevo guardado con exito!'); 
-        }catch (Exception $e){
+
+           $lectores = Lector::all();
+           foreach($libros as $lib){
             
-            return redirect(route('ingreso_libros.create'))->with('error','Cargue correctamente los datos por favor!'); 
-        }
+                foreach ($lectores as $lector){
+                    
+                    if ($lector->getCantGenero($lib->generolibro->genero_libros) > 3 ){
+                        
+                        $lector->enviarMailRecomendacion($lib,$lib->generolibro->genero_libros);
+                    }
+                } 
+           }
+           
+
+           return redirect(route('ingreso_libros.index'))->with('success','Ingreso nuevo guardado con exito!'); 
+        // }catch (Exception $e){
+            
+        //     return redirect(route('ingreso_libros.create'))->with('error','Cargue correctamente los datos por favor!'); 
+        // }
     }
 
     /**
