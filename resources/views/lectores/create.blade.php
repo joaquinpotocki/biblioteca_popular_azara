@@ -223,4 +223,11 @@
         });
     }) ;
 </script>
+
+<script>
+    $(document).ready(function(){
+        // $('#isbn').mask('000-0-00-000000-0');
+        $('#cuit-number').mask('00-00000000-0');
+    });
+</script>
 @endpush
