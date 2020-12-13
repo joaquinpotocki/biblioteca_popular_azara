@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/gracias', 'MovimientoController@gracias')->name('gracias');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -138,6 +139,9 @@ Route::get('/movimientos/{movimiento}/edit', 'MovimientoController@edit')->name(
 Route::put('/movimientos/{movimiento}', 'MovimientoController@update')->name('movimientos.update'); //guardar lo que modificamos en el form de edicion
 Route::delete('movimientos/{movimiento}', 'MovimientoController@destroy')->name('movimientos.destroy'); //eliminar un Libro
 
+
+Route::get('/movimientos/{movimiento}', 'MovimientoController@confirmo')->name('movimientos.confirmo'); //guardar lo que modificamos en el form de edicion
+Route::get('/movimientos/{movimiento}/confirmacion', 'MovimientoController@confirmacion')->name('movimientos.confirmacion'); //renderizar la vista de confirmacion.
 //Route::get('/movimientos/{id}/getlibro', 'MovimientoController@getlibro')->name('movimientos.getlibro'); //renderizar el form para editar un movimiento
 
 //Estado
