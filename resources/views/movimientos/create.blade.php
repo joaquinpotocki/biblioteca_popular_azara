@@ -33,14 +33,19 @@
                         <label for="lectores" class="">Lector</label>
                         <label for="lectores">
                             <a role="button" type="button" href="{{route('lectores.create')}}" title="Nuevo lector"><i
-                                    class="fas fa-plus-circle fa-md"></i></a>
+                                    class="fas fa-plus-circle fa-md"></i></a><i title="Ayuda" id="popover" class="fas fa-question-circle"
+                                    data-content="">
+                                </i>
+                            
                         </label>
 
                         <select class="form-control" name="lector_id" id="lectores" required>
                             <option value="" disabled selected>--Seleccione un lector por favor--</option>
                             @foreach($lectores as $lector)
                             <option value="{{$lector->id}}" @if(old('lector_id')==$lector->id) selected
-                                @endif>{{$lector->nombres}} {{$lector->apellidos}}</option> 
+                                @endif>
+                                {{$lector->nombres}} {{$lector->apellidos}}  {{'(Reputación: '.$lector->getreputacion($lector->reputacion).')'}}
+                            </option> 
                             @endforeach
                         </select>
                     </div>
@@ -175,5 +180,23 @@
 
         });
     
+</script>
+
+<script>
+    $(function () {
+        contenidopopover = 
+        'Reputaciones:<ul>'+
+            '<li>MUY BUENO: Comportamiento ejemplar.</li>'+
+            '<li>BUENO: Buen comportamiento.</li>'+
+            '<li>MEDIO: Lector nuevo o lector promedio.</li>'+
+            '<li>MALO: Vas por mal camino a mejorar.</li>'+
+            '<li>MUY MALO: No puede realizar prestamos, no aparecera en esta lista.</li>'
+        '</ul>'
+        
+        $('#popover').popover({
+            html:true,
+            content: contenidopopover
+        });
+    })
 </script>
 @endpush
