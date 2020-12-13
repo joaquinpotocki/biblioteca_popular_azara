@@ -25,7 +25,7 @@ class CreateLectorsTable extends Migration
             $table->string('telefono');
             $table->string('email');
             $table->text('notas_particulares')->nullable();
-            $table->integer('reputacion')->nullable();
+            $table->integer('reputacion');
             $table->integer('contador')->nullable();
 
             
