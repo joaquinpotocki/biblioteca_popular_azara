@@ -19,6 +19,10 @@ class CreateBajaLibrosTable extends Migration
             $table->string('cantidad');
             $table->string('descripcion')->nulleable();
 
+            //Relacion con lector
+            $table->unsignedBigInteger('lector_id')->unsigned();
+            $table->foreign('lector_id')->references('id')->on('lectores')->nulleable();
+
             //relacion entre libro e ingreso por proveedores
             $table->unsignedBigInteger('libro_id')->unsigned();
             $table->foreign('libro_id')->references('id')->on('libros');

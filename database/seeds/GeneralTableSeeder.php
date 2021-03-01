@@ -7,6 +7,10 @@ use App\TipoLibro;
 use App\Autor;
 use App\Configuracion;
 use App\User;
+use App\Estado;
+use App\TipoIngreso;
+use App\TipoBaja;
+use App\EstadoDevolucion;
 use App\Direccion;
 
 
@@ -146,6 +150,7 @@ class GeneralTableSeeder extends Seeder
             'telefono'        => '+54 3758 558877',
             'email'        => 'bibliotecaazara@gmail.com',
             'semana_prestamo'        => '1',
+            'control_prestamo'        => '1',
             'dia_mail'        =>  3,
         ]);
         
@@ -167,5 +172,56 @@ class GeneralTableSeeder extends Seeder
             'email'        => 'admin@admin.com',
             'password'        => Hash::make('123456789'),
         ]);
+
+        Estado::create([
+            'nombre'          => 'prestado',
+            'descripcion'        => 'El libro se encuentra prestado a un Lector miembro de la biblioteca!.',
+        ]);
+        
+        Estado::create([
+            'nombre'          => 'devuelto',
+            'descripcion'        => 'El libro se encuentra devuelto por un Lector miembro de la biblioteca!.',
+        ]);
+
+        EstadoDevolucion::create([
+            'nombre'          => 'bueno',
+            'descripcion'        => 'El libro se entrego en un estado responsable y bien cuidado!.',
+        ]);
+
+        EstadoDevolucion::create([
+            'nombre'          => 'medio',
+            'descripcion'        => 'El libro se entrego de una manera un poco notoria!.',
+        ]);
+
+        EstadoDevolucion::create([
+            'nombre'          => 'malo',
+            'descripcion'        => 'La entrega del libro no muestra ningun tipo de responsabilidad!.',
+        ]);
+        
+        TipoBaja::create([
+            'nombre_baja'          => 'Desaparicion',
+            'descripcion'        => 'El libro se encuentra desaparecido, no se sabe el responsable, por lo cual se descuenta del stock!.',
+        ]);
+
+        TipoBaja::create([
+            'nombre_baja'          => 'Problema ambiental',
+            'descripcion'        => 'Por problemas ambientales, se generaron perdidadas en ejemplares!.',
+        ]);
+
+        TipoBaja::create([
+            'nombre_baja'          => 'Urto',
+            'descripcion'        => 'Se generaron perdidas por un urto de una persona desconocida!.',
+        ]);
+        
+        TipoIngreso::create([
+            'nombre_ingreso'          => 'Compra',
+            'descripcion'        => 'Se realizo una compra de material a un proveedor!.',
+        ]);
+
+        TipoIngreso::create([
+            'nombre_ingreso'          => 'Donacion',
+            'descripcion'        => 'Se reciben donaciones por parte de entidades!.',
+        ]);
+
     }   
 }

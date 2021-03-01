@@ -19,6 +19,7 @@ class CreateMovimientosTable extends Migration
             $table->date('fecha_devolucion');
             $table->date('fecha_devolucion_real');
             $table->string('cantidad');
+            
             $table->boolean('confirmacionMail')->nullable();
 
             //Relacion con lector

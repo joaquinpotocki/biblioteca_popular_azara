@@ -27,10 +27,11 @@ class CreateLectorsTable extends Migration
             $table->text('notas_particulares')->nullable();
             $table->integer('reputacion');
             $table->integer('contador')->nullable();
+            $table->integer('cantidadPrestamo')->nullable();//Atributo que va a controlar los prestamos
 
             
 
-            $table->unsignedBigInteger('direccion_id');
+            $table->unsignedBigInteger('direccion_id'); 
             $table->foreign('direccion_id')->references('id')->on('direccions');
             
             $table->softDeletes();

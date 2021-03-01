@@ -20,7 +20,8 @@ class CreateConfiguracionsTable extends Migration
             $table->string('direccion');
             $table->string('telefono');
             $table->string('email');
-            $table->integer('semana_prestamo');
+            $table->integer('semana_prestamo'); //sema que se presta
+            $table->string('control_prestamo'); //controlar la cantidad de prestamos por Lector
             $table->integer('dia_mail');
             $table->softDeletes();
             $table->timestamps();
