@@ -43,6 +43,10 @@
                                     <dd class="col-sm-8 text-muted">{{$baja_libro->lector->nombres}} {{$baja_libro->lector->apellidos}}</dd>
                                 @endif
                             </dl>
+                            <dl class="row" style="margin-left: 1%">
+                                <dt class="col-sm-3">Descripcion</dt>
+                                <dd class="col-sm-8 text-muted">{{$baja_libro->descripcion}}</dd>
+                            </dl>
                     </div>
                 </div>
                 <!-- /.tab-content -->
