@@ -8,6 +8,8 @@ use App\Libro;
 use App\TipoBaja;
 use App\Editorial;
 use App\Configuracion;
+use App\Movimiento;
+use App\Lector;
 use Exception;
 
 class BajaLibroController extends Controller
@@ -23,8 +25,11 @@ class BajaLibroController extends Controller
         $editoriales= Editorial::all();
         $baja_libros = BajaLibro::all();
         $configuracion = Configuracion::first();
+        $lectores = Lector::all();
+        
 
-        return view('baja_libros.index', compact('baja_libros','tipo_bajas','editoriales','configuracion'));
+
+        return view('baja_libros.index', compact('baja_libros','tipo_bajas','editoriales','configuracion','lectores'));
     }
 
     /**
@@ -36,7 +41,8 @@ class BajaLibroController extends Controller
     {
         $libros = Libro::all();
         $tipo_bajas = TipoBaja::all();
-        return view('baja_libros.create', compact('ingreso_libros','libros','tipo_bajas'));
+        $lectores = Lector::all();
+        return view('baja_libros.create', compact('ingreso_libros','libros','tipo_bajas','lectores'));
     }
 
     /**
@@ -52,23 +58,29 @@ class BajaLibroController extends Controller
                 // return $request;
             for ($i = 0; $i < sizeof($request->cantidad); $i++){
                 $libro = Libro::find($request->libros_select_id[$i]);
-                if (($libro->stock_libro > $request->cantidad[$i]) || ($libro->stock_fantasma > $request->cantidad[$i]) || ($libro->stock_libro != 0)){
-                    //return $request;
-                    $baja_libro = new bajaLibro();
-                    $baja_libro->tipo_bajas_id = $request->tipo_baja_id;  
-                    $baja_libro->libro_id = $request->libros_select_id[$i];
-                    $baja_libro->cantidad = $request->cantidad[$i];
-                    $baja_libro->fecha_baja = $request->fecha_baja;
-                    $baja_libro->descripcion = $request->descripcion;
-                    $baja_libro->save();
-                    //Resta del stock
-
-                    
-                    $libro->stock_libro -= $request->cantidad[$i];
-                    $libro->stock_fantasma -= $request->cantidad[$i];
+                if (($libro->stock_fantasma > 0) && ($request->cantidad[$i] <= $libro->stock_fantasma)){
+                    if (($libro->stock_libro > $request->cantidad[$i]) || ($libro->stock_fantasma > $request->cantidad[$i]) || ($libro->stock_libro != 0)){
+                        //return $request;
+                        $baja_libro = new bajaLibro();
+                        $baja_libro->tipo_bajas_id = $request->tipo_baja_id;  
+                        $baja_libro->libro_id = $request->libros_select_id[$i];
+                        $baja_libro->lector_id = $request->lector_id[$i];
+                        $baja_libro->cantidad = $request->cantidad[$i];
+                        $baja_libro->fecha_baja = $request->fecha_baja;
+                        $baja_libro->descripcion = $request->descripcion;
+                        $baja_libro->save();
+                        //Resta del stock
+    
+                        
+                        $libro->stock_libro -= $request->cantidad[$i];
+                        $libro->stock_fantasma -= $request->cantidad[$i];
+                    }else{
+                        return redirect(route('baja_libros.index'))->with('error', 'Libro '.$libro->nombre.' no se puede dar de baja!');     
+                    }
                 }else{
-                    return redirect(route('baja_libros.index'))->with('error', 'Libro '.$libro->nombre.' no se puede dar de baja!');     
+                    return redirect(route('baja_libros.index'))->with('error', 'Libro '.$libro->nombre.' se encuentra prestado o ya no hay stock');
                 }
+
             $libro->update();
             }
             return redirect(route('baja_libros.index'))->with('success'.'Ingreso nuevo guardado con exito!'); 
@@ -83,9 +95,9 @@ class BajaLibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(BajaLibro $baja_libro)
     {
-        //
+        return view('baja_libros.show', compact('baja_libro'));
     }
 
     /**

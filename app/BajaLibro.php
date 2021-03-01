@@ -20,4 +20,16 @@ class BajaLibro extends Model  implements Auditable
     public function tipo_bajas(){
         return $this->belongsTo(TipoBaja::class);
     }
+    public function lector(){
+        return $this->belongsTo(Lector::class);
+    }
+    public function gettipobaja($lector){
+        $lec = Lector::find($lector);
+        if ($lec == null){
+            return 'no tiene';
+        }
+        else{
+            return $lec->tipo_bajas->nombre_baja;
+        }
+    }
 }
