@@ -27,7 +27,7 @@ class ConfiguracionController extends Controller
             
             $config->logo = $name;
         }
-        
+        // return $config->control_prestamo;
         $config->fill($request->all());
         $config->update();
 
