@@ -35,6 +35,8 @@ class Movimiento extends Model  implements Auditable
         $date = Carbon::create($this->fecha_devolucion)->format('d/m/Y');
         return $date;
     }
+    
+    
     // public function getDevolucion(){
     //     $date = Carbon::create($this->fecha_prestamo); //2015-01-01 00:00:00
         

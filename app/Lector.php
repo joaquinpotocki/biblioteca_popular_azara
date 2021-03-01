@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
+// use App\Movimiento;
 class Lector extends Model
 {
     use SoftDeletes; //Laravel nos permite realizar un borrado logico, no definitivo
@@ -22,6 +23,17 @@ class Lector extends Model
         return $this->hasMany(Movimiento::class);
     }
     
+    public function perdons(){
+        return $this->hasMany(Perdon::class);
+    }
+    public function baja_libros(){
+        return $this->hasMany(BajaLibro::class);
+    }
+
+    public function bajalibrolectors(){
+        return $this->hasMany(BajaLibroLector::class);
+    }
+    
     public function getreputacion($reputacion){
         if($reputacion >= 75)
             return 'MUY BUENO';
@@ -34,6 +46,9 @@ class Lector extends Model
         if ($reputacion < 25)
             return 'MUY MALO';
     }
+
+    
+
 
     public function enviarMailAviso()
     {
