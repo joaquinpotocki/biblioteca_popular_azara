@@ -47,11 +47,11 @@ class LectorController extends Controller
     public function store(Request $request)
     {
         $data = request()->validate([
-            'nombres' => 'required',
-            'apellidos' => 'required',
+            'nombres' => 'required|regex:/^[\pL\s\-]+$/u',
+            'apellidos' => 'required|regex:/^[\pL\s\-]+$/u',
             'fecha_nacimiento' => 'required|date',
             'sexo' => 'required',
-            'cuil' => 'required|unique:lectores',
+            'cuil' => 'required|unique:lectores|max:9',
             'telefono' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'email' => 'required|email|unique:lectores',
             'pais_id' => 'required',
@@ -89,6 +89,14 @@ class LectorController extends Controller
 
         return redirect(route('lectores.index'))->with('success','lector guardado con exito!');
     }
+    //  //Funcion Perdonar
+    //  public function perdonar(Lector $lector)
+    //  {
+    //      //Simplemente volvemos la reputacion a la normalidad para poder perdonar al lector
+    //      $lector->reputacion = 50 ;
+    //      $lector->update();
+    //      return redirect(route('lectores.index'))->with('success', 'Lector '.$lector->nombres ,  'eliminado con éxito!');
+    //  }
 
     /**
      * Display the specified resource.
@@ -123,9 +131,9 @@ class LectorController extends Controller
     public function update(Request $request, Lector $lector)
     {
         $data = request()->validate([
-            'cuil' => 'required|unique:lectores,id,'.$lector->id,
-            'nombres' => 'required',
-            'apellidos' => 'required',
+            'cuil' => 'required||max:9|unique:lectores,id,'.$lector->id,
+            'nombres' => 'required|regex:/^[\pL\s\-]+$/u',
+            'apellidos' => 'required|regex:/^[\pL\s\-]+$/u',
             'fecha_nacimiento' => 'required|date',
             'sexo' => 'required',
             'cuil' => 'required|unique:lectores,id,'.$lector->id,
@@ -170,4 +178,6 @@ class LectorController extends Controller
         $lector->delete();
         return redirect(route('lectores.index'))->with('success', 'Lector '.$lector->nombres ,  'eliminado con éxito!');
     }
+
+   
 }

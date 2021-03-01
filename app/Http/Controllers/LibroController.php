@@ -48,7 +48,7 @@ class LibroController extends Controller
     public function store(Request $request)
     {
         $data = request()->validate([
-            'numero_serie' => 'required|unique:libros|min:12',
+            'numero_serie' => 'required|unique:libros|min:17',
             'nombre' => 'required|regex:/^[a-zA-Z\s]*$/',
             'edicion' => 'required|numeric',
             'stock_libro' => 'required|numeric',
@@ -72,7 +72,8 @@ class LibroController extends Controller
             $file->move(public_path().'/images/',$name);
         }    
 
-        
+        // $genero = new GeneroLibro();
+        // // $genero = save();
 
         $libro = new Libro();
         $libro->genero_id = $request->genero_id;
@@ -87,7 +88,12 @@ class LibroController extends Controller
         $libro->imagen = $name;
         $libro->save();
 
-        //$cliente->numero_cliente = $numero_cliente ;
+        
+        // $numero_libro = strtoupper(substr($genero->genero_libros,0,3).'-'.$libro->id);
+        // $libro->numero_libro = $numero_libro ;
+        // $libro->save();
+
+        
         return redirect(route('libros.index'))->with('success','Libro nuevo guardado con exito!'); 
     }
 
@@ -164,7 +170,7 @@ class LibroController extends Controller
         
 
         
-        return redirect(route('libros.index'))->with('success','Proveedor editado con exito!');
+        return redirect(route('libros.index'))->with('success','Libro editado con exito!');
     }
 
     /**
