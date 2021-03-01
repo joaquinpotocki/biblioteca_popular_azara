@@ -34,6 +34,9 @@
     <!-- Bootstrap4 Duallistbox -->
     <link rel="stylesheet" href="{{ asset("assets/admin-lte/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css") }}">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> 
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -76,6 +79,8 @@
 
     <script src="{{ asset("assets/extensiones/datatables-responsive/js/dataTables.responsive.min.js") }}"></script>
     <script src="{{ asset("assets/extensiones/datatables-responsive/js/responsive.bootstrap4.min.js") }}"></script>
+
+    
     
 
     {{-- Scrip para cargar el datatable --}}
@@ -120,13 +125,7 @@
     @stack('scripts')
     {{-- stack es para que cualquiera otra pagina tenga los scripts --}}
 
-    <script>
-        $(document).ready(function(){
-            $('#isbn').mask('000-0-00-000000-0');
-            // $('#cuit-number').mask('00-00000000-0');
-        });
-    </script>
-    <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js')}}"></script>
+ 
     <script src="{{asset('assets/admin-lte/plugins/moment/moment-with-locales.min.js')}}"></script>
     
     @include('movimientos.modal')

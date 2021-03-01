@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-3">
                     <div class="form-group ">
                         <label for="telefono">Telefono</label>
                         <input type="number" class="form-control  @error('telefono') is-invalid @enderror"
@@ -73,7 +73,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-3">
                     <div class="form-group ">
                         <label for="email">Email</label>
                         <input type="email" class="form-control  @error('email') is-invalid @enderror"
@@ -145,7 +145,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-2">
                     <div class="form-group ">
                         <label for="direccion_postal">Direccion postal</label>
                         <input type="number" class="form-control  @error('direccion_postal') is-invalid @enderror" id="direccion_postal"
@@ -170,7 +170,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-1">
+                <div class="col-2">
                     <div class="form-group ">
                         <label for="altura">Altura</label>
                         <input type="number" class="form-control  @error('altura') is-invalid @enderror" id="altura"
@@ -204,11 +204,21 @@
 </form>
 @endsection
 @push('scripts')
+
+<script>
+    $(document).ready(function(){
+        $('#isbn').mask('000-0-00-000000-0');
+        $('#cuit-number').mask('00-00000000-0');
+    });
+</script>
+<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js')}}"></script>
+
 <script>
     $("#editorial").select2({
             placeholder: "Seleccione al menos una editorial"
     });
 </script>
+
 <script>
     $(document).ready(function(){
         $('#pais_id').change(function(){

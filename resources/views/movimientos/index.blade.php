@@ -63,7 +63,7 @@
                 <tr>
                     <th scope="col">Fecha de Prestamo</th>
                     <th scope="col">Lector</th>
-                    <th scope="col">Libro</th>
+                    <th scope="col">Libro/Editorial/Edicion</th>
                     {{-- <th scope="col">Cantidad</th> --}}
                     <th scope="col">Estado</th>
                     <th scope="col">Fecha a devolver</th>
@@ -90,11 +90,21 @@
                         
                     </td>
                     <td>{{$movimiento->getFechaDev()}}</td>
+                    {{-- <td>
+                      {{-- @foreach ($movimiento->lector->baja_libros->tipo_bajas as $p)
+                            <span class="badge badge-pill">
+                                {{$p->nombre_baja}}
+                            </span>
+                        @endforeach --}}
+                          {{-- <span class="badge badge-pill">
+                              {{$movimiento->lector->baja_libros->gettipobaja($movimiento->lector->id)}}
+                          </span> --}}
+                    {{-- </td> --}}
                     <td class="text-right">
                         @if ($movimiento->estado->nombre == 'prestado')
                             <a class="btn btn-success btn-sm" href="{{route('movimientos.edit', $movimiento->id)}}">Devolver</a> 
                         @endif
-                        <a class="btn btn-primary btn-sm" href="#">Ver</a> 
+                        {{-- <a class="btn btn-primary btn-sm" href="#">Ver</a>  --}}
                         
                         <a class="btn btn-danger btn-sm text-white delete" >Borrar</a>
                     </td>
@@ -152,7 +162,7 @@
         </div>
     </div>
 </div>
-
+<input type="hidden" id="filtros" value="Ningun filtro aplicado.">
 
 
 @endsection

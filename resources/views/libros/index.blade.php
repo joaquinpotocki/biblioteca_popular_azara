@@ -4,13 +4,14 @@
 
 <div class="card">
     <div class="card-header">Libros
+        <a class="btn btn-secondary btn-sm float-right " href="{{route('libro.pdf') }}">Pdf</a>
         <a class="btn btn-primary btn-sm float-right text-white" href="{{route('libros.create')}}">Nuevo</a>
     </div>
     <div class="card-body">
         <table id="datatable" class="table table-striped table-bordered dataTable">
-            <a class="btn btn-primary btn-sm" href="{{ route('libro.pdf') }}">Pdf</a>
             <thead>
                 <tr>
+                    {{-- <th scope="col">Nº Libro</th> --}}
                     <th scope="col">ISBN</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Genero</th>
@@ -24,6 +25,7 @@
             <tbody>
                 @foreach ($libros as $libro)
                 <tr>
+                    {{-- <td>{{$libro->numero_libro}}</td> --}}
                     <td>{{$libro->numero_serie}}</td>
                     <td>{{$libro->nombre}}</td>
                     <td>{{$libro->generolibro->genero_libros}}</td>

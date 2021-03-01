@@ -14,7 +14,7 @@
                 <div class="col-3">
                     <div class="form-group ">
                         <label for="cuit">Cuit</label>
-                        <input type="text" class="form-control  @error('cuit') is-invalid @enderror" id="cuit"
+                        <input type="text" class="form-control  @error('cuit') is-invalid @enderror" id="cuit-number"
                             name="cuit" value="{{ old('cuit') ?? $proveedor->cuit}}" placeholder="Especifique el nombre de su cuit" required>
                         @error('cuit')
                         <span class="invalid-feedback" role="alert">
@@ -208,6 +208,15 @@
 </form>
 @endsection
 @push('scripts')
+
+<script>
+    $(document).ready(function(){
+        $('#isbn').mask('000-0-00-000000-0');
+        $('#cuit-number').mask('00-00000000-0');
+    });
+</script>
+<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js')}}"></script>
+
 <script>
     $(document).ready(function(){
 

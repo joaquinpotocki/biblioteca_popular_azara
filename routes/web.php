@@ -97,10 +97,12 @@ Route::delete('tipo_ingresos/{tipo_ingreso}', 'TipoIngresoController@destroy')->
 Route::get('/lectores', 'LectorController@index')->name('lectores.index'); //para mostrar todos los lectores
 Route::get('/lectores/create', 'LectorController@create')->name('lectores.create'); //renderizar la vista de creacion
 Route::post('/lectores', 'LectorController@store')->name('lectores.store'); //guardar el form (crear una direccion)
+Route::post('lectores/{lector}', 'LectorController@perdonar')->name('lectores.perdonar'); //
 Route::get('/lectores/{lector}', 'LectorController@show')->name('lectores.show'); //ver datos de un solo lector
 Route::get('/lectores/{lector}/edit', 'LectorController@edit')->name('lectores.edit'); //renderizar el form para editar un lector
 Route::put('/lectores/{lector}', 'LectorController@update')->name('lectores.update'); //guardar lo que modificamos en el form de edicion
 Route::delete('lectores/{lector}', 'LectorController@destroy')->name('lectores.destroy'); //eliminar una autor
+
 
 //TipoBaja
 Route::get('/tipo_bajas', 'TipoBajaController@index')->name('tipo_bajas.index'); //para mostrar todos los tipo_bajas
@@ -152,6 +154,20 @@ Route::get('/estado_devolucions/{estado_devolucion}', 'EstadoDevolucionControlle
 Route::get('/estado_devolucions/{estado_devolucion}/edit', 'EstadoDevolucionController@edit')->name('estado_devolucions.edit'); //renderizar el form para editar un Estado
 Route::put('/estado_devolucions/{estado_devolucion}', 'EstadoDevolucionController@update')->name('estado_devolucions.update'); //guardar lo que modificamos en el form de edicion
 Route::delete('estado_devolucions/{estado_devolucion}', 'EstadoDevolucionController@destroy')->name('estado_devolucions.destroy'); //eliminar un Libro
+
+
+//IngresoLibro
+Route::get('/perdons', 'PerdonController@index')->name('perdons.index'); //para mostrar todos los ingreso
+Route::get('/perdons/create', 'PerdonController@create')->name('perdons.create'); //renderizar la vista de creacion
+Route::post('/perdons', 'PerdonController@store')->name('perdons.store'); //guardar el form (crear una direccion)
+Route::get('/perdons/{perdon}', 'PerdonController@show')->name('perdons.show'); //ver datos de un solo perdon
+Route::get('/perdons/{perdon}/edit', 'PerdonController@edit')->name('perdons.edit'); //renderizar el form para editar un perdon
+Route::put('/perdons/{perdon}', 'PerdonController@update')->name('perdons.update'); //guardar lo que modificamos en el form de edicion
+Route::delete('perdons/{perdon}', 'PerdonController@destroy')->name('perdons.destroy'); //eliminar una autor
+
+//estadisticas
+Route::get('/estadisticas', 'EstadisticaController@index')->name('estadistica.index');
+
 //carga de provincias con ajax
 Route::get('paises/{pais}', 'DireccionController@obtenerProvincias')->name('paises.obtenerProvincias');
 

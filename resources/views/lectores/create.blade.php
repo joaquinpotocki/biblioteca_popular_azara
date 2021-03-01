@@ -12,9 +12,9 @@
             <div class="row">
                 <div class="col-4">
                     <div class="form-group ">
-                        <label for="dni">CUIL</label>
+                        <label for="dni">DNI</label>
                         <input type="text" class="form-control  @error('cuil') is-invalid @enderror" id="cuit-number"
-                            name="cuil" value="{{ old('cuil') }}" placeholder="Especifique su cuil" required>
+                            name="cuil" value="{{ old('cuil') }}" placeholder="Especifique su dni" required>
                         @error('cuil')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -190,6 +190,15 @@
 </form>
 @endsection
 @push('scripts')
+
+<script>
+    $(document).ready(function(){
+        $('#isbn').mask('000-0-00-000000-0');
+        $('#cuit-number').mask('000000000');
+    });
+</script>
+<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js')}}"></script>
+
 <script type="text/javascript">
     document.getElementById("fecha_nacimiento").max = new Date().toISOString().split("T")[0];
 </script>
@@ -224,10 +233,10 @@
     }) ;
 </script>
 
-<script>
+{{-- <script>
     $(document).ready(function(){
         // $('#isbn').mask('000-0-00-000000-0');
         $('#cuit-number').mask('00-00000000-0');
     });
-</script>
+</script> --}}
 @endpush

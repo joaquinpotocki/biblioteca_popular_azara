@@ -6,8 +6,15 @@
     <title>Biblioteca</title>
 </head>
 <body>
+    <p id="encabezado">
+        <b>Biblioteca Popular de Azara</b><br>
+        Calle Independencia y Maria de Haubier<br>
+        Telefono: +54 3758 558877<br>
+        Email: bibliotecaazara@gmail.com
+    </p>
+    <hr>
     <p>
-        Hola {{$nombre}} queriamos informarle que el/los siguientes libros del genero {{$generolibro}} ingresaron:
+        Hola {{$nombre}} queriamos informarle que el/los siguientes libros del genero <b>{{$generolibro}}</b> ingresaron:
     </p>
     {{-- @foreach ($libros as $lib) --}}
         <p>
@@ -16,7 +23,6 @@
             
             <br>
         </p>
-    {{-- @endforeach --}}
-    
+    {{-- @endforeach --}} 
 </body>
 </html>

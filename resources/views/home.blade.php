@@ -3,7 +3,7 @@
 @section('content')
 <div class="content-header">
     <div class="container-fuid">
-        <h3>Inicio</h3>
+        <h3>Bienvenidos</h3>
     </div>
 
 </div>
@@ -13,7 +13,7 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-        <h3>{{$movimientos}}</h3>
+        <h3>{{$enero}}</h3>
 
           <p>Prestamos</p>
         </div>
@@ -70,4 +70,59 @@
     </div>
     <!-- ./col -->
   </div>
+  <style>
+    .mySlides {display:none;}
+  </style>
+  <div class="w3-content w3-section" style="max-width:1400px">
+    <img class="mySlides" src="{{asset("assets/icons/poto-03.png")}}" style="width:100%">
+    <img class="mySlides" src="{{asset("assets/icons/poto-02.png")}}" style="width:100%">
+    <img class="mySlides" src="{{asset("assets/icons/poto-03.png")}}" style="width:100%">
+  </div>
+  
+  <script>
+  var myIndex = 0;
+  carousel();
+  
+  function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 2000); // Change image every 2 seconds
+  }
+  </script>
+  {{-- <div class="w3-content w3-display-container">
+    <img class="mySlides" src="{{asset("assets/icons/poto-03.png")}}" style="width:100%">
+    <img class="mySlides" src="{{asset("assets/icons/poto-03.png")}}" style="width:100%">
+    <img class="mySlides" src="{{asset("assets/icons/poto-03.png")}}" style="width:100%">
+    <img class="mySlides" src="{{asset("assets/icons/poto-03.png")}}" style="width:100%">
+  
+    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+  </div>
+@push('scripts')
+  <script>
+  var slideIndex = 1;
+  showDivs(slideIndex);
+  
+  function plusDivs(n) {
+    showDivs(slideIndex += n);
+  }
+  
+  function showDivs(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length}
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    x[slideIndex-1].style.display = "block";  
+  }
+  </script> --}}
+{{-- @endpush --}}
 @endsection

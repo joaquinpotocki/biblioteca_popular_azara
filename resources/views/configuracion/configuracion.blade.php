@@ -30,6 +30,7 @@
                 <form class="form-group " method="POST" action="{{route('configuracion.update')}}"
                     enctype="multipart/form-data">
                     @method('PUT')
+                    
                     <div class="form-group ">
                         <label for="" class="">Semana prestamo</label>
                         <div class="input-group">
@@ -41,6 +42,18 @@
                                 <option value=5>CINCO SEMANAS</option>
                             </select>
                         </div>
+                    </div>
+                    <br>
+                    <br>
+                    <h3 class="card-title">
+                        <i class="fas fa-file-signature">  Control de prestamos</i>
+                    </h3>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="">Cantidad a prestar</label>
+                        <input type="number" disabled class="form-control" name="control_prestamo" id="control_id"
+                            value="{{$config->control_prestamo}}">
                     </div>
                     <br>
                     <br>
@@ -106,6 +119,7 @@
         $('#telefono').prop('disabled', false);
         $('#email').prop('disabled', false);
         $('#logoEmpresa').prop('disabled', false);
+        $('#control_id').prop('disabled', false);
         $('#actualizar').prop('disabled', false);
     });
 </script>

@@ -32,14 +32,14 @@
                     <div class="form-group ">
                         <label for="lectores" class="">Lector</label>
                         <label for="lectores">
-                            <a role="button" type="button" href="{{route('lectores.create')}}" title="Nuevo lector"><i
+                            <a role="button" type="button" name="lector_id" href="{{route('lectores.create')}}" title="Nuevo lector"><i
                                     class="fas fa-plus-circle fa-md"></i></a><i title="Ayuda" id="popover" class="fas fa-question-circle"
                                     data-content="">
                                 </i>
                             
                         </label>
 
-                        <select class="form-control" name="lector_id" id="lectores" required>
+                        <select class="form-control mi-selector" name="lector_id" id="lectores" required>
                             <option value="" disabled selected>--Seleccione un lector por favor--</option>
                             @foreach($lectores as $lector)
                             <option value="{{$lector->id}}" @if(old('lector_id')==$lector->id) selected
@@ -66,8 +66,8 @@
                                     class="fas fa-plus-circle fa-md"></i></a>
                         </label>
 
-                        <select class="form-control" name="libros_select_id" id="libros_select_id" required>
-                            <option value="" disabled selected>--Seleccione un libro por favor--</option>
+                        <select class="mi-selector form-control" name="libros_select_id" id="libros_select_id" required>
+                            <option value="" disabled selected >Busque un libro</option>
                             @foreach($libros as $libro)
                             <option value="{{$libro->id}}" @if(old('libro_id')==$libro->id) selected
                                 @endif>{{$libro->nombre}} - {{$libro->editoriales->nombre_editorial}} - {{$libro->edicion}} </option> 
@@ -116,6 +116,15 @@
 </form>
 @endsection
 @push('scripts')
+
+<script>
+    jQuery(document).ready(function($){
+        $(document).ready(function() {
+            $('.mi-selector').select2();
+        });
+    });
+</script>
+
 <script type="text/javascript">
     $('#fecha_prestamo').datetimepicker({
         format: 'YYYY/MM/DD',

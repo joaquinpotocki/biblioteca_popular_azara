@@ -3,75 +3,15 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header">
-        <div class="card-title">
-            Filtros
-        </div>
-        <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fal fa-minus"></i>
-            </button>
-        </div>
-    </div>
-    <div class="card-body">
-        <form class="form-group " method="GET" action="#">
+    
 
-            <div class="row d-flex justify-content-around">
-                <div class=" col-sm-2">
-                    <label for="">Tabla</label>
-                    <select name="tabla" id="tabla" class="form-control">
-                        <option value="" selected disabled>--Seleccione--</option>
-                        <option value="1">PRESTAMOS</option>
-                        <option value="2">INGRESOS</option>
-                        <option value="3">BAJAS</option>
-                        <option value="4">LIBROS</option>
-
-                    </select>
-                </div>
-                <div class=" col-sm-2">
-                    <label for="">Usuario</label>
-                    <select name="empleado_id" id="user" class="form-control">
-                        <option value="" selected disabled>--Seleccione--</option>
-                        @foreach ($users as $user)
-                        <option value="{{$user->id}}">{{$user->apellido}} {{$user->name}}</option>
-                        @endforeach
-
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label>Desde</label>
-                        <input type="date" id="min" name="fecha1" value="" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label>Hasta</label>
-                        <input type="date" id="max" name="fecha2" value="" class="form-control">
-                    </div>
-                </div>
-
-
-                {{-- <div class="col-md-1">
-                <button type="submit" class="btn btn-xs btn-danger ">Generar <i class="fa fa-file-pdf"></i></button>
-            </div> --}}
-            </div>
-
-            <div class="row d-flex justify-content-center">
-                <button type="button" class="btn btn-secondary btn-xs mr-1" id="limpiar">Limpiar <i
-                        class="fas fa-redo "></i></button>
-                <button type="button" class="btn btn-primary btn-xs" id="filtrar">Filtrar <i
-                        class="fas fa-filter "></i></button>
-
-            </div>
-    </div>
 
 </div>
 
 <div class="card">
     <div class="card-header">
         <h3>Auditoria
-            <button type="submit" class="btn btn-xs btn-danger ">Generar <i class="fa fa-file-pdf"></i></button>
+            
         </h3>
         @csrf
         </form>

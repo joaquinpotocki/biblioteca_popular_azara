@@ -12,7 +12,7 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Roles</th>
-                    <th>Permisos</th>
+                    {{-- <th>Permisos</th> --}}
                     <th class="text-right">Opciones</th>
                 </tr>
             </thead>
@@ -25,16 +25,16 @@
                         <span class="badge badge-pill badge-light">{{ $rol->name }}</span>
                         @endforeach
                     </td>
-                    <td>
+                    {{-- <td>
                         @foreach ($usuario->permissions as $permiso)
                         <span class="badge badge-pill badge-light">{{ $permiso->name }}</span>
                         @endforeach
-                    </td>
+                    </td> --}}
                     <td class="text-right" style="">
                         @if (Auth::user()->hasRole('admin'))
-                        @if ($usuario->id != Auth::id())
-                        <a class="btn btn-light btn-sm" href="{{ route('usuarios.edit', [$usuario->id]) }}">Editar</a>
-                        @endif
+                            @if ($usuario->id != Auth::id())
+                                <a class="btn btn-light btn-sm" href="{{ route('usuarios.edit', [$usuario->id]) }}">Editar</a>
+                            @endif
                         @endif
                     </td>
 

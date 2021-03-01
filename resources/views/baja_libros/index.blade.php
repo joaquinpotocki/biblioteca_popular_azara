@@ -59,10 +59,10 @@
             <thead>
                 <tr>
                     <th scope="col">Fecha de Baja</th>
-                    <th scope="col">Libro/edicion</th>
-                    <th scope="col">Editorial</th>
+                    <th scope="col">Libro</th>
                     <th scope="col">Cantidad</th>
                     <th scope="col">Tipo de baja</th>
+                    <th scope="col">Lector responsable</th>
                     <th scope="col">Opciones</th>
                 </tr>
             </thead>
@@ -70,12 +70,17 @@
                 @foreach ($baja_libros as $baja_libro)
                 <tr>
                     <td>{{ \Carbon\Carbon::create($baja_libro->fecha_baja)->format('d/m/Y')}}</td>
-                    <td>{{$baja_libro->libro->nombre}} - {{$baja_libro->libro->edicion}}</td>
-                    <td>{{$baja_libro->libro->editoriales->nombre_editorial}}</td>
+                    <td>{{$baja_libro->libro->nombre}}</td>
                     <td>{{$baja_libro->cantidad}}</td>
                     <td>{{$baja_libro->tipo_bajas->nombre_baja}}</td>
+                    @if ($baja_libro->lector_id == null)
+                      <td>No tiene un lector relacionado</td>
+                    @else
+                      <td>{{$baja_libro->lector->nombres}} {{$baja_libro->lector->apellidos}}</td>
+                    @endif
                     <td class="text-right">
-                        <a class="btn btn-danger btn-sm text-white delete" val-palabra={{$baja_libro->id}}>Borrar</a>
+                      <a class="btn btn-primary btn-sm" href="{{ route('baja_libros.show', $baja_libro->id) }}">Ver</a>
+                      <a class="btn btn-danger btn-sm text-white delete" val-palabra={{$baja_libro->id}}>Borrar</a>
                     </td>
                 </tr>
                 @endforeach

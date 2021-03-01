@@ -16,7 +16,7 @@
                     <th scope="col">Nombres</th>
                     <th scope="col">Apellidos</th>
                     <th scope="col">Sexo</th>
-                    <th scope="col">Cuil</th>
+                    <th scope="col">DNI</th>
                     <th scope="col">Teléfono</th>
                     <th scope="col">Email</th>
                     <th scope="col" class="text-right">Opciones</th>
@@ -37,6 +37,7 @@
                         <a class="btn btn-primary btn-sm" href="{{ route('lectores.show', $lector->id) }}">Ver</a>
                         <a class="btn btn-light btn-sm" href="{{ route('lectores.edit', $lector->id) }}">Editar</a>
                         <a class="btn btn-danger btn-sm text-white delete" val-palabra={{$lector->id}}>Borrar</a>
+                        
                         {{-- @endif --}}
                     </td>
                 </tr>
@@ -90,4 +91,5 @@
     $('#ok_delete').text('Eliminando...')
     });
 </script>
+
 @endpush

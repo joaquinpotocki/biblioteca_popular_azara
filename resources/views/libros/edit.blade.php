@@ -15,7 +15,7 @@
                 <div class="col-4">
                     <div class="form-group ">
                         <label for="numero_serie">ISBN</label>
-                        <input type="text" class="form-control  @error('numero_serie') is-invalid @enderror" id="numero_serie"
+                        <input type="text" class="form-control  @error('numero_serie') is-invalid @enderror" id="isbn"
                             name="numero_serie" value="{{ old('numero_serie') ?? $libro->numero_serie}}" placeholder="Especifique el numero_serie de su libro" required>
                         @error('numero_serie')
                         <span class="invalid-feedback" role="alert">
@@ -162,4 +162,13 @@
 </form>
 @endsection
 @push('scripts')
+
+<script>
+    $(document).ready(function(){
+        $('#isbn').mask('000-0-00-000000-0');
+        $('#cuit-number').mask('00-00000000-0');
+    });
+</script>
+<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js')}}"></script>
+
 @endpush

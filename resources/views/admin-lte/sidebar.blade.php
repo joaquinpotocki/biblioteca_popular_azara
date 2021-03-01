@@ -5,7 +5,7 @@
         <div align="center">
             <span class="brand-text font-weight-light" style="color: #3c8dbc">
                 {{-- <img src="{{asset("assets/icons/poto-03.png")}}" class="brand-image img-circle" style="opacity: 1"> --}}
-                <b>Biblioteca Popular</b>
+                <b>SystBook</b>
             </span>
             
         </div>
@@ -142,6 +142,14 @@
                             <a href="{{route('lectores.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Ver Lectores</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview" style="">
+                        <li class="nav-item">
+                            <a href="{{route('perdons.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ver Perdonados</p>
                             </a>
                         </li>
                     </ul>
@@ -334,6 +342,31 @@
                 with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
+                            <i class="nav-item fas fa-chart-pie"></i>
+                            <p>
+                            Estadisticas
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="">
+                            <li class="nav-item">
+                                <a href="{{route('estadistica.index')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver Estadistica</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                    </li>
+                </ul>
+            </nav>
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
                             <i class="nav-item fas fa-cogs"></i>
                             <p>
                             Configuracion
@@ -353,6 +386,7 @@
                     </li>
                 </ul>
             </nav>
+            
         {{-- @endcan --}}
         @endif
         <!-- /.sidebar-menu -->

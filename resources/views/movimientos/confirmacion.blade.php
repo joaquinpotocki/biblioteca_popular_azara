@@ -21,10 +21,12 @@
     <div class="col-md-9">
         <div class="card">
             <div class="card-header p-12">
+                
                 <ul class="nav nav-pills">
                     <h1>Notificacion</h1>
                 </ul>
             </div><!-- /.card-header -->
+            @if ($movimiento->confirmacionMail != 1)
             <div class="card-body">
                 <div class="tab-content">
                     <dl class="row" style="margin-left: 1%">
@@ -49,6 +51,17 @@
                 </div>
                 <!-- /.tab-content -->
             </div><!-- /.card-body -->
+
+                
+            @else
+            <div class="card-body">
+                <div class="tab-content">
+                    <dl class="row" style="margin-left: 1%">
+                        <dt class="col-sm-3">Su respuesta ha sido enviada! Muchas Gracias lo esperamos.</dt>
+                    </div>
+                </div>
+
+            @endif
 
         </div>
         <!-- /.nav-tabs-custom -->

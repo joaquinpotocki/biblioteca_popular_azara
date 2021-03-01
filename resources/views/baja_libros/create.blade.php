@@ -10,7 +10,11 @@
                 Agregar una nueva Baja
             </h5>
         </div>
+        
         <div class="card-body">
+            {{-- <div class="row d-flex justify-content-end">
+                <a href="#" id="editar">Seleccionar lector <i class="fal fa-edit"></i></a>
+            </div> --}}
             <div class="row">
                 <div class="col-2">
                     <div class="form-group ">
@@ -45,6 +49,28 @@
                         </select>
                     </div>
                 </div>
+                <div class="col-4">
+                    <div class="form-group ">
+                        <label for="lectores" class="">Lector</label>
+                        <label for="lectores">
+                            <a role="button" type="button" name="lector_id"  href="{{route('lectores.create')}}" title="Nuevo lector"><i
+                                    class="fas fa-plus-circle fa-md"></i></a><i title="Ayuda" id="popover" class="fas fa-question-circle"
+                                    data-content="">
+                                </i>
+                            
+                        </label>
+
+                        <select class="form-control mi-selector"  name="lector_id" id="lectores">
+                            <option value="" disabled selected>--Seleccione un lector por favor--</option>
+                            @foreach($lectores as $lector)
+                            <option value="{{$lector->id}}" @if(old('lector_id')==$lector->id) selected
+                                @endif>
+                                {{$lector->nombres}} {{$lector->apellidos}} 
+                            </option> 
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <div class="col-8">
                     <div class="form-group ">
                         <label for="nombre">Descripcion de la baja</label>
@@ -68,7 +94,7 @@
                                     class="fas fa-plus-circle fa-md"></i></a>
                         </label>
 
-                        <select class="form-control" name="libros_select_id" id="libros_select_id" required>
+                        <select class="form-control mi-selector" name="libros_select_id" id="libros_select_id" required>
                             <option value="" disabled selected>--Seleccione un libro por favor--</option>
                             @foreach($libros as $libro)
                             <option value="{{$libro->id}}" @if(old('libro_id')==$libro->id) selected
@@ -118,6 +144,13 @@
 </form>
 @endsection
 @push('scripts')
+<script>
+    jQuery(document).ready(function($){
+    $(document).ready(function() {
+        $('.mi-selector').select2();
+    });
+});
+</script>
 <script>
     $('#addRow').on('click',function(){
         addRow();
@@ -172,4 +205,24 @@
 
     });
 </script>
+<script>
+    $(function () {
+        contenidopopover = 
+        '<ul>'+
+            '<li>Aqui puede seleccionar el Lector en caso de dar baja por parte de lector o dejarlo vacio en caso contrario.</li>'+
+            
+        '</ul>'
+        
+        $('#popover').popover({
+            html:true,
+            content: contenidopopover
+        });
+    })
+</script>
+{{-- <script>
+    $('#editar').click(function(){
+        $('#lectores').prop('disabled', false);
+        
+    });
+</script> --}}
 @endpush    

@@ -8,12 +8,13 @@
 
 <div class="card">
     <div class="card-header">Proveedores
+        <a class="btn btn-secondary btn-sm float-right " href="{{route('proveedor.pdf') }}">Pdf</a>
         <a class="btn btn-primary btn-sm float-right text-white" href="{{route('proveedores.create')}}">Nuevo</a>
     </div>
     <div class="card-body">
         <table id="datatable" class="table table-striped table-bordered dataTable">
             
-            <a class="btn btn-primary btn-sm" href="{{route('proveedor.pdf') }}">Pdf</a>
+           
             <thead>
                 <tr>
                     <th scope="col">Cuit</th>

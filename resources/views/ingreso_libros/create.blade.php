@@ -78,7 +78,7 @@
                                     class="fas fa-plus-circle fa-md"></i></a>
                         </label>
 
-                        <select class="form-control" name="libros_select_id" id="libros_select_id" required>
+                        <select class="form-control mi-selector" name="libros_select_id" id="libros_select_id" required>
                             <option value="" disabled selected>--Seleccione un libro por favor--</option>
                             @foreach($libros as $libro)
                             <option value="{{$libro->id}}" @if(old('libro_id')==$libro->id) selected
@@ -128,6 +128,13 @@
 </form>
 @endsection
 @push('scripts')
+<script>
+    jQuery(document).ready(function($){
+    $(document).ready(function() {
+        $('.mi-selector').select2();
+    });
+});
+</script>
 <script>
         $('#addRow').on('click',function(){
         addRow();

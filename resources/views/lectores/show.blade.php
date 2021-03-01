@@ -43,6 +43,10 @@
                         <br>
                         <br>
                         <dl class="row" style="margin-left: 1%">
+                            <dt class="col-sm-3">Numero de Lector</dt>
+                            <dd class="col-sm-8 text-muted">{{ $lector->numero_lectores }}</dd>
+                        </dl>
+                        <dl class="row" style="margin-left: 1%">
                             <dt class="col-sm-3">CUIL</dt>
                             <dd class="col-sm-8 text-muted">{{ $lector->cuil }}</dd>
                         </dl>
@@ -50,6 +54,17 @@
                             <dt class="col-sm-3">Email</dt>
                             <dd class="col-sm-8 text-muted">{{ $lector->email }}</dd>
                         </dl>
+                        <dl class="row" style="margin-left: 1%">
+                            <dt class="col-sm-3">Correo</dt>
+                            <dd class="col-sm-8 text-muted">{{ $lector->email }}</dd>
+                        </dl>
+                        <dl class="row" style="margin-left: 1%">
+                            <dt class="col-sm-3">Sexo</dt>
+                            <dd class="col-sm-8 text-muted">{{ $lector->sexo }}</dd>
+                        </dl>
+                        <dl class="row" style="margin-left: 1%">
+                            <dt class="col-sm-3">Telefono</dt>
+                            <dd class="col-sm-8 text-muted">{{ $lector->telefono }}</dd>
                         </dl>
                     </div>
                 </div>

@@ -44,26 +44,32 @@
                                 <dt class="col-sm-3">Cantidad Prestamo</dt>
                                 <dd class="col-sm-8 text-muted">{{$movimiento->cantidad}}</dd>
                             </dl>
-                            <select name="lector_id" style="visibility:hidden">
-                                <option value="" disabled selected>--Seleccione un libro--</option>
+                            <input type="hidden" name="lector_id" value="{{$movimiento->lector->id}}">
+                            
+                            {{-- <input type="text" name="libros_select_id" value="{{$movimiento->libro->id}}"> --}}
+                            {{-- <select class="form-control" name="lector_id"   >
+                                <option value="" disabled selected>--Seleccione un lector por favor--</option>
+                                @foreach($lectores as $lector)
+                                <option value="{{$lector->id}}" @if(old('lector_id')==$lector->id) selected
+                                    @endif>{{$lector->id}}</option> 
+                                @endforeach
+                            </select> --}}
+                            {{-- <select name="lector_id" >
+                                <option value="" disabled selected>--Seleccione un lector--</option>
                                 
                                 @foreach($lectores as $lector)
                                 <option value="{{$lector->id}}" @if($lector != null)
                                     @if($lector->id==$lector->id) selected
                                     @endif @endif>{{$lector->id}}</option>
                                 @endforeach
-                            </select>
-                            <select name="libros_select_id" style="visibility:hidden">
-                                <option value="" disabled selected>--Seleccione un libro--</option>
+                            </select> --}}
                                 
-                                @foreach($libros as $libro)
-                                <option value="{{$libro->id}}" @if($libro != null)
-                                    @if($libro->id==$libro->id) selected
-                                    @endif @endif>{{$libro->id}}</option>
-                                @endforeach
-                            </select>
+                            @foreach($movimiento->libro as $libro)
+                                <input type="hidden" name="libros_select_id"  value="{{$libro->id}}">
+                            @endforeach
                         </div>
                     </div>
+
                     <!-- /.tab-content -->
                     <div class="card">
                         <div class="card-header">
