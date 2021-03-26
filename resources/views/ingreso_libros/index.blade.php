@@ -1,20 +1,20 @@
 @extends('admin-lte.index')
 
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <div class="card-title">
+<div class="card " >
+    <div class="card-header  " >
+        <div class="card-title " >
             Filtros
         </div>
-        <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <div class="card-tools ">
+            <button type="button" class="btn btn-tool  " data-card-widget="collapse">
                 <i class="nav-item fas fa-filter" width="" height=""></i>
             </button>
         </div>
     </div>
-    <div class="card-body">
+    <div class="card-body collapse" >
         <form class="form-group " method="GET" action="{{route('ingreso.pdf')}}">
-        <div class="row d-flex justify-content-around">
+        <div class="row d-flex justify-content-around ">
 
                 <div class="col-2">
                     <div class="form-group ">
@@ -41,9 +41,7 @@
                                         <i class="far fa-calendar-alt"></i>
                                     </span> --}}
                             </div>
-                            <input type="date" name="fecha2" id="max" class="form-control" 
-                                
-                                >
+                            <input type="date" name="fecha2" id="max" class="form-control">
                         </div>
                             {{-- <a class="btn btn-primary btn-sm float-right text-white"  href="#" id="filtrar">Filtrar</a> --}}
                     </div>
@@ -51,7 +49,7 @@
                 
                 <div class=" col-sm-4">
                     <label for="">Libro</label>
-                    <select name="libro_id" id="libro" class="form-control">
+                    <select name="libro_id" id="libro" class="form-control  mi-selector">
                         <option value="" selected disabled>--Seleccione--</option>
                         @foreach ($libros as $libro)
                         <option value="{{$libro->id}}">{{$libro->nombre}} - {{$libro->editoriales->nombre_editorial}} - {{$libro->edicion}}</option>
@@ -60,7 +58,7 @@
                 </div>
                 <div class=" col-sm-3">
                     <label for="">Tipo de Ingreso</label>
-                    <select name="tipo_ingreso_id" id="tipo_ingreso" class="form-control">
+                    <select name="tipo_ingreso_id" id="tipo_ingreso" class="form-control  mi-selector">
                         <option value="" selected disabled>--Seleccione--</option>
                         @foreach ($tipos_ingresos as $tipo_ingreso)
                         <option value="{{$tipo_ingreso->id}}">{{$tipo_ingreso->nombre_ingreso}}</option>
@@ -153,6 +151,13 @@
 @endsection
 
 @push('scripts')
+<script>
+    jQuery(document).ready(function($){
+    $(document).ready(function() {
+        $('.mi-selector').select2();
+    });
+});
+</script>
 {{-- <script>
     $(function () {
           $('#datatable').DataTable({

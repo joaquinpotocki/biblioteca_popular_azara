@@ -167,6 +167,8 @@ Route::delete('perdons/{perdon}', 'PerdonController@destroy')->name('perdons.des
 
 //estadisticas
 Route::get('/estadisticas', 'EstadisticaController@index')->name('estadistica.index');
+//estadisticas
+Route::get('/estadisticas/index2', 'EstadisticaController@index2')->name('estadistica.index2');
 
 //carga de provincias con ajax
 Route::get('paises/{pais}', 'DireccionController@obtenerProvincias')->name('paises.obtenerProvincias');
@@ -183,6 +185,7 @@ Route::get('/proveedorPDF', 'PdfController@proveedorPDF')->name('proveedor.pdf')
 Route::get('/libroPDF', 'PdfController@libroPDF')->name('libro.pdf');
 Route::get('/ingresoPDF', 'PdfController@ingresoPDF')->name('ingreso.pdf');
 Route::get('/devueltoPDF', 'PdfController@devueltoPDF')->name('devuelto.pdf');
+Route::get('/auditoriaPDF', 'PdfController@auditoriaPDF')->name('auditoria.pdf');
 
     //Registro completo
     Route::get('/usuarios/registro_completo', function () {

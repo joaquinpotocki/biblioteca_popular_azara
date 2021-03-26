@@ -36,7 +36,7 @@
                                     class="fas fa-plus-circle fa-md"></i></a>
                         </label>
 
-                        <select class="form-control" name="proveedor_id" id="proveedores" required>
+                        <select class="form-control mi-selector" name="proveedor_id" id="proveedores" required>
                             <option value="" disabled selected>--Seleccione un proveedor por favor--</option>
                             @foreach($proveedores as $proveedor)
                             <option value="{{$proveedor->id}}" @if(old('proveedor_id')==$proveedor->id) selected
@@ -53,7 +53,7 @@
                                     class="fas fa-plus-circle fa-md"></i></a>
                         </label>
 
-                        <select class="form-control" name="tipo_ingresos_id" id="tipo_ingresos_id" required>
+                        <select class="form-control mi-selector" name="tipo_ingresos_id" id="tipo_ingresos_id" required>
                             <option value="" disabled selected>--Seleccione un proveedor por favor--</option>
                             @foreach($tipo_ingresos as $tipo_ingreso)
                             <option value="{{$tipo_ingreso->id}}" @if(old('tipo_ingresos_id')==$tipo_ingreso->id) selected

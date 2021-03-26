@@ -55,7 +55,7 @@
                         <label for="genero_libros">
                             <a role="button" type="button" href="{{route('genero_libros.create')}}" title="Nuevo genero"><i class="fas fa-plus-circle fa-md"></i></a>
                         </label>
-                        <select class="seleccion form-control" type="hidden" name="genero_id" id="genero_libros" required>
+                        <select class="seleccion form-control mi-selector" type="hidden" name="genero_id" id="genero_libros" required>
                             <option value="" disabled selected>--Seleccione un genero--</option>
                             @foreach($genero_libros as $genero_libro)
                             <option value="{{$genero_libro->id}}" @if($genero_libro != null)
@@ -77,7 +77,7 @@
                             <a role="button" type="button" href="{{route('autores.create')}}" title="Nuevo autor"><i
                                     class="fas fa-plus-circle fa-md"></i></a>
                         </label>
-                        <select class="form-control" name="autor_id" id="autor" required>
+                        <select class="form-control mi-selector" name="autor_id" id="autor" required>
                             <option value="" disabled selected>--Seleccione un autor--</option>
                             
                             @foreach($autores as $autor)
@@ -95,7 +95,7 @@
                             <a role="button" type="button" href="{{route('editorials.create')}}" title="Nuevo editorials"><i
                                     class="fas fa-plus-circle fa-md"></i></a>
                         </label>
-                        <select class="form-control" name="editorial_id" id="editorials" required>
+                        <select class="form-control mi-selector" name="editorial_id" id="editorials" required>
                             <option value="" disabled selected>--Seleccione un editorials--</option>
                             
                             @foreach($editorials as $editorials)
@@ -106,7 +106,24 @@
                         </select>
                     </div>
                 </div>
-                
+                <div class="col-4">
+                    <div class="form-group ">
+                        <label for="tipo_libros" class="">Tipo de libro</label>
+                        <label for="tipo_libros">
+                            <a role="button" type="button" href="{{route('tipo_libros.create')}}" title="Nuevo genero"><i
+                                    class="fas fa-plus-circle fa-md"></i></a>
+                        </label>
+
+                        <select class="form-control mi-selector" name="tipo_libro_id" id="tipo_libro" required>
+                            <option value="" disabled selected>--Seleccione un tipo--</option>
+                            @foreach($tipo_libros as $tipo_libro)
+                            <option value="{{$tipo_libro->id}}" @if($tipo_libro != null)
+                                @if($tipo_libro->id==$tipo_libro->id) selected
+                                @endif @endif>{{$tipo_libro->nombre_tipo}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>                
                 <div class="col-4">
                     <div class="form-group ">
                         <label for="stock_libro">Stock</label>
@@ -119,24 +136,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="form-group ">
-                        <label for="tipo_libros" class="">Tipo de libro</label>
-                        <label for="tipo_libros">
-                            <a role="button" type="button" href="{{route('tipo_libros.create')}}" title="Nuevo genero"><i
-                                    class="fas fa-plus-circle fa-md"></i></a>
-                        </label>
 
-                        <select class="form-control" name="tipo_libro_id" id="tipo_libro" required>
-                            <option value="" disabled selected>--Seleccione un tipo--</option>
-                            @foreach($tipo_libros as $tipo_libro)
-                            <option value="{{$tipo_libro->id}}" @if($tipo_libro != null)
-                                @if($tipo_libro->id==$tipo_libro->id) selected
-                                @endif @endif>{{$tipo_libro->nombre_tipo}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
                 <div class="col-4">
                     <div class="form-group ">
                         <label for="imagen">Imagen</label>
@@ -162,6 +162,14 @@
 </form>
 @endsection
 @push('scripts')
+
+<script>
+    jQuery(document).ready(function($){
+        $(document).ready(function() {
+            $('.mi-selector').select2();
+        });
+    });
+</script>
 
 <script>
     $(document).ready(function(){

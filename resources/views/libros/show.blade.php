@@ -68,11 +68,15 @@
                                             {{ $libro->stock_libro}}
                                         </td>
                                         <td>
-                                            @if ($libro->stock_fantasma == 0)
+                                            @if ($libro->stock_fantasma == 0  && $libro->stock_libro == 0)
+                                                <p>No contamos con Ejemplares para prestar</p>
+                                            @elseif ( $libro->stock_fantasma== 0)
                                                 <p>Ejemplares prestados</p>
-                                            @else
+                                            @endif
+                                            @if ($libro->stock_fantasma > 0)
                                                 {{ $libro->stock_fantasma}}
                                             @endif
+                                            
                                         </td>
                                     </tr>
                                 </tbody>

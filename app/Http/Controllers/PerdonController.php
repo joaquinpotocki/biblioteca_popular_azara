@@ -28,7 +28,13 @@ class PerdonController extends Controller
     public function create()
     {
         $perdon = Perdon::all();
-        $lectores = Lector::all() ;
+        $lectores = [];
+        $lista_lectores = Lector::all();
+        foreach($lista_lectores as $lector){
+            if($lector->reputacion <= 25){
+                array_push($lectores,$lector);
+            }
+        }
         return view('perdons.create', compact('perdon', 'lectores'));
     }
 

@@ -30,6 +30,11 @@ class Lector extends Model
         return $this->hasMany(BajaLibro::class);
     }
 
+    public function getFechaNacimiento(){
+        $date = Carbon::create($this->fecha_nacimiento)->format('d/m/Y');
+        return $date;
+    }
+
     public function bajalibrolectors(){
         return $this->hasMany(BajaLibroLector::class);
     }

@@ -326,7 +326,7 @@
                         <ul class="nav nav-treeview" style="">
                             <li class="nav-item">
                                 <a href="{{route('auditoria.index')}}" class="nav-link">
-                                    <i class="far fa-search nav-icon"></i>
+                                    <i class="far fa-circle nav-icon"></i>
                                     <p>Ver Auditorias</p>
                                 </a>
                             </li>
@@ -348,11 +348,20 @@
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
+                        
+                        <ul class="nav nav-treeview" style="">
+                            <li class="nav-item">
+                                <a href="{{route('estadistica.index2')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver Prestamos por lector</p>
+                                </a>
+                            </li>
+                        </ul>
                         <ul class="nav nav-treeview" style="">
                             <li class="nav-item">
                                 <a href="{{route('estadistica.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Ver Estadistica</p>
+                                    <p>Ver Ingresos y Bajas por mes</p>
                                 </a>
                             </li>
                         </ul>

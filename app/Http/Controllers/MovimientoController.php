@@ -114,6 +114,10 @@ class MovimientoController extends Controller
                         $libro = Libro::find($request->libros_select_id[$i]);
                         
                         if($libro->stock_fantasma > 0 && $libro->stock_fantasma > $request->cantidad[$i]  || $libro->stock_fantasma == $request->cantidad[$i] ){
+                            $movimiento->slug = substr($movimiento->lector->nombres,0,3).'-'.substr($movimiento->lector->apellidos,0,3);
+                            
+                            $lector->save();
+
                             $movimiento->save();
                             // $movimiento->libros->sync($request->libros_select_id[$i]);
                             $movimiento->libro()->attach($request->libros_select_id[$i]); //Para poder entrar a una tabla intermedia
@@ -220,6 +224,7 @@ class MovimientoController extends Controller
                         $lector->reputacion -= 25;
                     }
                 }
+                $movimiento->confirmacionMail = true;
                 $movimiento->save();   
 
                 $lector->contador += 1;
@@ -247,10 +252,11 @@ class MovimientoController extends Controller
         //
     }
 
-    public function confirmacion(Movimiento $movimiento){
+    public function confirmacion($slug){
 
         $lectores = Lector::all();
         $libros = Libro::all();
+        $movimiento = Movimiento::where('slug','=',$slug)->firstOrFail();
         return view('movimientos.confirmacion', compact('movimiento', 'libros','lectores'));
     }
 

@@ -40,7 +40,7 @@
                                     class="fas fa-plus-circle fa-md"></i></a>
                         </label>
 
-                        <select class="form-control" name="tipo_baja_id" id="tipo_baja_id" required>
+                        <select class="form-control mi-selector" name="tipo_baja_id" id="tipo_baja_id" required>
                             <option value="" disabled selected>--Seleccione un tipo de baja por favor--</option>
                             @foreach($tipo_bajas as $tipo_baja)
                             <option value="{{ $tipo_baja->id}}" @if(old('tipo_baja_id')== $tipo_baja->id) selected

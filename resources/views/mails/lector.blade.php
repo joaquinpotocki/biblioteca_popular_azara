@@ -28,7 +28,9 @@
             @endforeach
             <br>
         </p>
-        <p>http://127.0.0.1:8000/movimientos/{{$mov->id}}/confirmacion</p>
+        
+        
+        <p>http://127.0.0.1:8000/movimientos/{{$mov->slug}}/confirmacion</p>
     @endforeach
     <div class="center">
 

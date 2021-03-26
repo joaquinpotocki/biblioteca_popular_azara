@@ -28,11 +28,11 @@
                       data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" placeholder="dd/mm/yyyy">
                   </div>
                   <div class="col-md-3">
-                    <label for="editoriales" class=" col-form-label text-md-right">Editoriales</label>
+                    <label for="libros" class=" col-form-label text-md-right">Libros</label>
                     <select class="select2bs4 select2-hidden-accessible" multiple=""
-                      data-placeholder="Seleccione editoriales" style="width: 100%;" aria-hidden="true" id="editoriales">
-                      @foreach ($editoriales as $editorial)
-                      <option value="{{$editorial->nombre_editorial}}">{{$editorial->nombre_editorial}}</option>
+                      data-placeholder="Seleccione libros" style="width: 100%;" aria-hidden="true" id="libros">
+                      @foreach ($libros as $libro)
+                      <option value="{{$libro->nombre}}">{{$libro->nombre}} </option>
                       @endforeach
                     </select>
                   </div>
@@ -60,7 +60,7 @@
                 <tr>
                     <th scope="col">Fecha de Baja</th>
                     <th scope="col">Libro</th>
-                    <th scope="col">Cantidad</th>
+                   
                     <th scope="col">Tipo de baja</th>
                     <th scope="col">Lector responsable</th>
                     <th scope="col">Opciones</th>
@@ -71,7 +71,7 @@
                 <tr>
                     <td>{{ \Carbon\Carbon::create($baja_libro->fecha_baja)->format('d/m/Y')}}</td>
                     <td>{{$baja_libro->libro->nombre}}</td>
-                    <td>{{$baja_libro->cantidad}}</td>
+                    
                     <td>{{$baja_libro->tipo_bajas->nombre_baja}}</td>
                     @if ($baja_libro->lector_id == null)
                       <td>No tiene un lector relacionado</td>
@@ -390,7 +390,7 @@ $('.dt-buttons').css({
     
             //aca se obtienen los valores
             var filtro3 = [];
-            filtro3 = $('#editoriales').val();
+            filtro3 = $('#libros').val();
     
             var filtro4 = [];
             filtro4 = $('#tipo_bajas').val();
@@ -421,8 +421,8 @@ $('.dt-buttons').css({
             table.draw();
     
             if (filtro3 != "") {
-              var editoriales = filtro3;
-              console.log(editoriales);
+              var libros = filtro3;
+              console.log(libros);
             }
             if (filtro4 != "") {
               var tipo_bajas = filtro4;
@@ -499,11 +499,11 @@ $('.dt-buttons').css({
     
             else if (filtro1 != "" && filtro2 != "" && filtro3 != "" && filtro4 == "") {
               console.log('filtro 3');
-              var filtros = "F. desde: " + filtro1Titulo+", F. hasta: " + filtro2Titulo +" y Editoriales: "+String(filtro3);
+              var filtros = "F. desde: " + filtro1Titulo+", F. hasta: " + filtro2Titulo +" y Libros: "+String(filtro3);
               var filtradoTabla = function FuncionFiltrado(settings, data, dataIndex) {
                 var datearray1 = data[0].split("/");
                 var newdate1 =   datearray1[2] + datearray1[1] + datearray1[0];
-                if (desde <= newdate1 && hasta >= newdate1 && editoriales.includes(data[2])) {
+                if (desde <= newdate1 && hasta >= newdate1 && libros.includes(data[1])) {
                   return true;
     
                 } else {
@@ -519,11 +519,11 @@ $('.dt-buttons').css({
             }
             else if (filtro1 != "" && filtro2 != "" && filtro3 != "" && filtro4 != "") {
               console.log('filtro 4');
-              var filtros = "F. desde: " + filtro1Titulo+", F. hasta: " + filtro2Titulo +", Editoriales: "+String(filtro3) +" y Tipo de Bajas: "+ String(filtro4);
+              var filtros = "F. desde: " + filtro1Titulo+", F. hasta: " + filtro2Titulo +", Libros: "+String(filtro3) +" y Tipo de Bajas: "+ String(filtro4);
               var filtradoTabla = function FuncionFiltrado(settings, data, dataIndex) {
                 var datearray1 = data[0].split("/");
                 var newdate1 =   datearray1[2] + datearray1[1] + datearray1[0];
-                if (desde <= newdate1 && hasta >= newdate1 && editoriales.includes(data[2]) && tipo_bajas.includes(data[4])) {
+                if (desde <= newdate1 && hasta >= newdate1 && libros.includes(data[1]) && tipo_bajas.includes(data[4])) {
                   return true;
     
                 } else {
@@ -539,11 +539,11 @@ $('.dt-buttons').css({
             }
             else if (filtro1 == "" && filtro2 != "" && filtro3 != "" && filtro4 != "") {
               console.log('filtro 5');
-              var filtros = "F. hasta: "+filtro2Titulo+", Editoriales: "+String(filtro3)+" y Tipo de Bajas: "+String(filtro4); 
+              var filtros = "F. hasta: "+filtro2Titulo+", Libros: "+String(filtro3)+" y Tipo de Bajas: "+String(filtro4); 
               var filtradoTabla = function FuncionFiltrado(settings, data, dataIndex) {
                 var datearray1 = data[0].split("/");
                 var newdate1 =   datearray1[2] + datearray1[1] + datearray1[0];
-                if (hasta >= newdate1 && editoriales.includes(data[2]) && tipo_bajas.includes(data[4])) {
+                if (hasta >= newdate1 && libros.includes(data[1]) && tipo_bajas.includes(data[4])) {
                   return true;
     
                 } else {
@@ -600,10 +600,10 @@ $('.dt-buttons').css({
     
             else if (filtro1 == "" && filtro2 == "" && filtro3 != "" && filtro4 != "") {
               console.log('filtro 8');
-              var filtros = "Editoriales: "+String(filtro3)+" y Tipo de Bajas: "+String(filtro4);
+              var filtros = "libros: "+String(filtro3)+" y Tipo de Bajas: "+String(filtro4);
               console.log(filtros);
               var filtradoTabla = function FuncionFiltrado(settings, data, dataIndex) {
-                if (editoriales.includes(data[2]) && tipo_bajas.includes(data[4])) {
+                if (libros.includes(data[1]) && tipo_bajas.includes(data[4])) {
                   return true;
     
                 } else {
@@ -619,9 +619,9 @@ $('.dt-buttons').css({
             }
             else if (filtro1 == "" && filtro2 == "" && filtro3 != "" && filtro4 == "") {
               console.log('filtro 9');
-              var filtros = "Editoriales: "+String(filtro3);
+              var filtros = "libros: "+String(filtro3);
               var filtradoTabla = function FuncionFiltrado(settings, data, dataIndex) {
-                if (editoriales.includes(data[2])) {
+                if (libros.includes(data[1])) {
                   return true;
     
                 } else {
@@ -637,11 +637,11 @@ $('.dt-buttons').css({
             }
             else if (filtro1 != "" && filtro2 == "" && filtro3 != "" && filtro4 == "") {
               console.log('filtro 10');
-              var filtros = "F. desde: " + filtro1Titulo+"y Editoriales: "+String(filtro3)+".";
+              var filtros = "F. desde: " + filtro1Titulo+"y libros: "+String(filtro3)+".";
               var filtradoTabla = function FuncionFiltrado(settings, data, dataIndex) {
                 var datearray1 = data[0].split("/");
                 var newdate1 =   datearray1[2] + datearray1[1] + datearray1[0];
-                if (desde <= newdate1 && editoriales.includes(data[2])) {
+                if (desde <= newdate1 && libros.includes(data[1])) {
                   return true;
     
                 } else {
@@ -657,11 +657,11 @@ $('.dt-buttons').css({
             }
             else if (filtro1 == "" && filtro2 != "" && filtro3 != "" && filtro4 == "") {
               console.log('filtro 11');
-              var filtros = "F. hasta: "+filtro2Titulo+"y Editoriales: "+String(filtro3)+".";
+              var filtros = "F. hasta: "+filtro2Titulo+"y libros: "+String(filtro3)+".";
               var filtradoTabla = function FuncionFiltrado(settings, data, dataIndex) {
                 var datearray1 = data[0].split("/");
                 var newdate1 =   datearray1[2] + datearray1[1] + datearray1[0];
-                if (hasta >= newdate1 && editoriales.includes(data[2])) {
+                if (hasta >= newdate1 && libros.includes(data[1])) {
                   return true;
     
                 } else {
@@ -736,11 +736,11 @@ $('.dt-buttons').css({
             }
             else if (filtro1 != "" && filtro2 == "" && filtro3 != "" && filtro4 != "") {
               console.log('filtro 15');
-              var filtros = "F. desde: " + filtro1Titulo+", Editoriales: " + String(filtro3) +" y Tipo de Bajas: "+String(filtro4);
+              var filtros = "F. desde: " + filtro1Titulo+", libros: " + String(filtro3) +" y Tipo de Bajas: "+String(filtro4);
               var filtradoTabla = function FuncionFiltrado(settings, data, dataIndex) {
                 var datearray1 = data[0].split("/");
                 var newdate1 =   datearray1[2] + datearray1[1] + datearray1[0];
-                if (desde <= newdate1 && editoriales.includes(data[2]) && tipo_bajas.includes(data[4])) {
+                if (desde <= newdate1 && libros.includes(data[1]) && tipo_bajas.includes(data[4])) {
                   return true;
     
                 } else {

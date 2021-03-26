@@ -26,7 +26,56 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-4">
+                    <div class="form-group ">
+                        <label for="lectores" class="">Lector</label>
+                        <label for="lectores">
+                            <a role="button" type="button" name="lector_id" href="{{route('lectores.create')}}" title="Nuevo lector"><i
+                                    class="fas fa-plus-circle fa-md"></i></a><i title="Ayuda" id="popover" class="fas fa-question-circle"
+                                    data-content="">
+                                </i>
+                            
+                        </label>
+                        
+                        
+                        <select class="form-control mi-selector" name="lector_id" id="lectores" required>
+                            <option value="" disabled selected>--Seleccione un lector a perdonar--</option>
+                            @foreach($lectores as $lector)
+                            <option value="{{$lector->id}}"  @if(old('lector_id')==$lector->id) selected
+                                @endif>
+                                {{$lector->nombres}} {{$lector->apellidos}}  {{'(Reputación: '.$lector->getreputacion($lector->reputacion).')'}}
+                            </option> 
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                {{-- <div class="col-4">
+                    <div class="form-group ">
+                        <label for="lectores" class="">Lector</label>
+                        <label for="lectores">
+                            <a role="button" type="button" name="lector_id" href="{{route('lectores.create')}}" title="Nuevo lector"><i
+                                    class="fas fa-plus-circle fa-md"></i></a><i title="Ayuda" id="popover" class="fas fa-question-circle"
+                                    data-content="">
+                                </i>
+                            
+                        </label>
+
+                        <select class="form-control mi-selector" name="lector_id" id="lectores" required>
+                            <option value="" disabled selected>--Seleccione un lector por favor--</option>
+                            @foreach($lectores as $lector)
+                            <option value="{{$lector->id}}" @if(old('lector_id')==$lector->id) selected
+                                @endif>
+                                {{$lector->nombres}} {{$lector->apellidos}}  {{'(Reputación: '.$lector->getreputacion($lector->reputacion).')'}}
+                            </option> 
+                            @endforeach
+                        </select>
+                    </div>
+                </div> --}}
+
+
+                {{-- <div class="col-4">
                     <div class="form-group ">
                         <label for="lectores" class="">Lector</label>
                         <label for="lectores">
@@ -42,7 +91,7 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="row">
                 <div class="col-8">
@@ -66,6 +115,13 @@
 @endsection
 @push('scripts')
 
+<script>
+    jQuery(document).ready(function($){
+        $(document).ready(function() {
+            $('.mi-selector').select2();
+        });
+    });
+</script>
 {{-- <script>
     
     $(document).ready(function(){

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Movimiento;
 use App\IngresoLibro;
 use App\BajaLibro;
+use App\Libro;
+use App\Lector;
+
 
 use Illuminate\Http\Request;
 
@@ -16,172 +19,234 @@ class EstadisticaController extends Controller
      */
     public function index(Request $request)
     {
-        
-        $x = $request->anio_id ;
-        
-        $valores = [];
-        for ($i = 1; $i <= 12; $i++) {
-            switch ($i) {
-                case 1:
-                    $data = Movimiento::whereMonth('fecha_prestamo','01')->whereYear('fecha_prestamo', $x)->count();
-                    $valores[1] = $data;
-                    break;
-                case 2:
-                    $data = Movimiento::whereMonth('fecha_prestamo','02')->whereYear('fecha_prestamo', $x)->count();
-                    $valores[2] = $data;
-                    break;
-                case 3:
-                    $data = Movimiento::whereMonth('fecha_prestamo','03')->whereYear('fecha_prestamo', $x)->count();
-                    $valores[3] = $data;
-                    break;
-                case 4:
-                    $data = Movimiento::whereMonth('fecha_prestamo','04')->whereYear('fecha_prestamo', $x)->count();
-                    $valores[4] = $data;
-                    break;
-                case 5:
-                    $data = Movimiento::whereMonth('fecha_prestamo','05')->whereYear('fecha_prestamo', $x)->count();
-                    $valores[5] = $data;
-                    break;
-                case 6:
-                    $data = Movimiento::whereMonth('fecha_prestamo','06')->whereYear('fecha_prestamo', $x)->count();
-                    $valores[6] = $data;
-                    break;
-                case 7:
-                    $data = Movimiento::whereMonth('fecha_prestamo','07')->whereYear('fecha_prestamo', $x)->count();
-                    $valores[7] = $data;
-                    break;
-                case 8:
-                    $data = Movimiento::whereMonth('fecha_prestamo','08')->whereYear('fecha_prestamo', $x)->count();
-                    $valores[8] = $data;
-                    break;
-                case 9:
-                    $data = Movimiento::whereMonth('fecha_prestamo','09')->whereYear('fecha_prestamo', $x)->count();
-                    $valores[9] = $data;
-                    break;
-                case 10:
-                    $data = Movimiento::whereMonth('fecha_prestamo','10')->whereYear('fecha_prestamo', $x)->count();
-                    $valores[10] = $data;
-                    break;
-                case 11:
-                    $data = Movimiento::whereMonth('fecha_prestamo','11')->whereYear('fecha_prestamo', $x)->count();
-                    $valores[11] = $data;
-                    break;
-                case 12:
-                    $data = Movimiento::whereMonth('fecha_prestamo','12')->whereYear('fecha_prestamo', $x)->count();
-                    $valores[12] = $data;
-                    break;
+        // $data = Modelo::whereBetween('created_at', ['2018/11/10 12:00', '2018/11/11 10:30'])->get();
+       
+        // $data = Modelo::whereBetween('created_at', ['2018/11/10 12:00', '2018/11/11 10:30'])->get();
+
+        //estadistica serciios tecnicos
+
+   
+
+        //#####################################################################################################################################
+        //Estadistica de Ingreso y Bajas en los meses
+        if($request->fecha1 == null && $request->fecha2 == null ){
+            $valores2 = [];
+            for ($i = 1; $i <= 12; $i++) {
+                switch ($i) {
+                    case 1:
+                        $data = IngresoLibro::whereMonth('fecha_ingreso','01')->count();
+                        $valores2[1] = $data;
+                        break;
+                    case 2:
+                        $data = IngresoLibro::whereMonth('fecha_ingreso','02')->count();
+                        $valores2[2] = $data;
+                        break;
+                    case 3:
+                        $data = IngresoLibro::whereMonth('fecha_ingreso','03')->count();
+                        $valores2[3] = $data;
+                        break;
+                    case 4:
+                        $data = IngresoLibro::whereMonth('fecha_ingreso','04')->count();
+                        $valores2[4] = $data;
+                        break;
+                    case 5:
+                        $data = IngresoLibro::whereMonth('fecha_ingreso','05')->count();
+                        $valores2[5] = $data;
+                        break;
+                    case 6:
+                        $data = IngresoLibro::whereMonth('fecha_ingreso','06')->count();
+                        $valores2[6] = $data;
+                        break;
+                    case 7:
+                        $data = IngresoLibro::whereMonth('fecha_ingreso','07')->count();
+                        $valores2[7] = $data;
+                        break;
+                    case 8:
+                        $data = IngresoLibro::whereMonth('fecha_ingreso','08')->count();
+                        $valores2[8] = $data;
+                        break;
+                    case 9:
+                        $data = IngresoLibro::whereMonth('fecha_ingreso','09')->count();
+                        $valores2[9] = $data;
+                        break;
+                    case 10:
+                        $data = IngresoLibro::whereMonth('fecha_ingreso','10')->count();
+                        $valores2[10] = $data;
+                        break;
+                    case 11:
+                        $data = IngresoLibro::whereMonth('fecha_ingreso','11')->count();
+                        $valores2[11] = $data;
+                        break;
+                    case 12:
+                        $data = IngresoLibro::whereMonth('fecha_ingreso','12')->count();
+                        $valores2[12] = $data;
+                        break;
+                }
+            }
+    
+            $valores3 = [];
+            for ($i = 1; $i <= 12; $i++) {
+                switch ($i) {
+                    case 1:
+                        $data = BajaLibro::whereMonth('fecha_baja','01')->count();
+                        $valores3[1] = $data;
+                        break;
+                    case 2:
+                        $data = BajaLibro::whereMonth('fecha_baja','02')->count();
+                        $valores3[2] = $data;
+                        break;
+                    case 3:
+                        $data = BajaLibro::whereMonth('fecha_baja','03')->count();
+                        $valores3[3] = $data;
+                        break;
+                    case 4:
+                        $data = BajaLibro::whereMonth('fecha_baja','04')->count();
+                        $valores3[4] = $data;
+                        break;
+                    case 5:
+                        $data = BajaLibro::whereMonth('fecha_baja','05')->count();
+                        $valores3[5] = $data;
+                        break;
+                    case 6:
+                        $data = BajaLibro::whereMonth('fecha_baja','06')->count();
+                        $valores3[6] = $data;
+                        break;
+                    case 7:
+                        $data = BajaLibro::whereMonth('fecha_baja','07')->count();
+                        $valores3[7] = $data;
+                        break;
+                    case 8:
+                        $data = BajaLibro::whereMonth('fecha_baja','08')->count();
+                        $valores3[8] = $data;
+                        break;
+                    case 9:
+                        $data = BajaLibro::whereMonth('fecha_baja','09')->count();
+                        $valores3[9] = $data;
+                        break;
+                    case 10:
+                        $data = BajaLibro::whereMonth('fecha_baja','10')->count();
+                        $valores3[10] = $data;
+                        break;
+                    case 11:
+                        $data = BajaLibro::whereMonth('fecha_baja','11')->count();
+                        $valores3[11] = $data;
+                        break;
+                    case 12:
+                        $data = BajaLibro::whereMonth('fecha_baja','12')->count();
+                        $valores3[12] = $data;
+                        break;
+                }
+            }
+        }else{
+            $valores2 = [];
+            for ($i = 1; $i <= 12; $i++) {
+                switch ($i) {
+                    case 1:
+                        $data = IngresoLibro::whereBetween('fecha_ingreso', [$request->fecha1, $request->fecha2])->whereMonth('fecha_ingreso','01')->count();
+                        $valores2[1] = $data;
+                        break;
+                    case 2:
+                        $data = IngresoLibro::whereBetween('fecha_ingreso', [$request->fecha1, $request->fecha2])->whereMonth('fecha_ingreso','02')->count();
+                        $valores2[2] = $data;
+                        break;
+                    case 3:
+                        $data = IngresoLibro::whereBetween('fecha_ingreso', [$request->fecha1, $request->fecha2])->whereMonth('fecha_ingreso','03')->count();
+                        $valores2[3] = $data;
+                        break;
+                    case 4:
+                        $data = IngresoLibro::whereBetween('fecha_ingreso', [$request->fecha1, $request->fecha2])->whereMonth('fecha_ingreso','04')->count();
+                        $valores2[4] = $data;
+                        break;
+                    case 5:
+                        $data = IngresoLibro::whereBetween('fecha_ingreso', [$request->fecha1, $request->fecha2])->whereMonth('fecha_ingreso','05')->count();
+                        $valores2[5] = $data;
+                        break;
+                    case 6:
+                        $data = IngresoLibro::whereBetween('fecha_ingreso', [$request->fecha1, $request->fecha2])->whereMonth('fecha_ingreso','06')->count();
+                        $valores2[6] = $data;
+                        break;
+                    case 7:
+                        $data = IngresoLibro::whereBetween('fecha_ingreso', [$request->fecha1, $request->fecha2])->whereMonth('fecha_ingreso','07')->count();
+                        $valores2[7] = $data;
+                        break;
+                    case 8:
+                        $data = IngresoLibro::whereBetween('fecha_ingreso', [$request->fecha1, $request->fecha2])->whereMonth('fecha_ingreso','08')->count();
+                        $valores2[8] = $data;
+                        break;
+                    case 9:
+                        $data = IngresoLibro::whereBetween('fecha_ingreso', [$request->fecha1, $request->fecha2])->whereMonth('fecha_ingreso','09')->count();
+                        $valores2[9] = $data;
+                        break;
+                    case 10:
+                        $data = IngresoLibro::whereBetween('fecha_ingreso', [$request->fecha1, $request->fecha2])->whereMonth('fecha_ingreso','10')->count();
+                        $valores2[10] = $data;
+                        break;
+                    case 11:
+                        $data = IngresoLibro::whereBetween('fecha_ingreso', [$request->fecha1, $request->fecha2])->whereMonth('fecha_ingreso','11')->count();
+                        $valores2[11] = $data;
+                        break;
+                    case 12:
+                        $data = IngresoLibro::whereBetween('fecha_ingreso', [$request->fecha1, $request->fecha2])->whereMonth('fecha_ingreso','12')->count();
+                        $valores2[12] = $data;
+                        break;
+                }
+            }
+    
+            $valores3 = [];
+            for ($i = 1; $i <= 12; $i++) {
+                switch ($i) {
+                    case 1:
+                        $data = BajaLibro::whereBetween('fecha_baja', [$request->fecha1, $request->fecha2])->whereMonth('fecha_baja','01')->count();
+                        $valores3[1] = $data;
+                        break;
+                    case 2:
+                        $data = BajaLibro::whereBetween('fecha_baja', [$request->fecha1, $request->fecha2])->whereMonth('fecha_baja','02')->count();
+                        $valores3[2] = $data;
+                        break;
+                    case 3:
+                        $data = BajaLibro::whereBetween('fecha_baja', [$request->fecha1, $request->fecha2])->whereMonth('fecha_baja','03')->count();
+                        $valores3[3] = $data;
+                        break;
+                    case 4:
+                        $data = BajaLibro::whereBetween('fecha_baja', [$request->fecha1, $request->fecha2])->whereMonth('fecha_baja','04')->count();
+                        $valores3[4] = $data;
+                        break;
+                    case 5:
+                        $data = BajaLibro::whereBetween('fecha_baja', [$request->fecha1, $request->fecha2])->whereMonth('fecha_baja','05')->count();
+                        $valores3[5] = $data;
+                        break;
+                    case 6:
+                        $data = BajaLibro::whereBetween('fecha_baja', [$request->fecha1, $request->fecha2])->whereMonth('fecha_baja','06')->count();
+                        $valores3[6] = $data;
+                        break;
+                    case 7:
+                        $data = BajaLibro::whereBetween('fecha_baja', [$request->fecha1, $request->fecha2])->whereMonth('fecha_baja','07')->count();
+                        $valores3[7] = $data;
+                        break;
+                    case 8:
+                        $data = BajaLibro::whereBetween('fecha_baja', [$request->fecha1, $request->fecha2])->whereMonth('fecha_baja','08')->count();
+                        $valores3[8] = $data;
+                        break;
+                    case 9:
+                        $data = BajaLibro::whereBetween('fecha_baja', [$request->fecha1, $request->fecha2])->whereMonth('fecha_baja','09')->count();
+                        $valores3[9] = $data;
+                        break;
+                    case 10:
+                        $data = BajaLibro::whereBetween('fecha_baja', [$request->fecha1, $request->fecha2])->whereMonth('fecha_baja','10')->count();
+                        $valores3[10] = $data;
+                        break;
+                    case 11:
+                        $data = BajaLibro::whereBetween('fecha_baja', [$request->fecha1, $request->fecha2])->whereMonth('fecha_baja','11')->count();
+                        $valores3[11] = $data;
+                        break;
+                    case 12:
+                        $data = BajaLibro::whereBetween('fecha_baja', [$request->fecha1, $request->fecha2])->whereMonth('fecha_baja','12')->count();
+                        $valores3[12] = $data;
+                        break;
+                }
             }
         }
 
-        
-        
-        $valores2 = [];
-        for ($i = 1; $i <= 12; $i++) {
-            switch ($i) {
-                case 1:
-                    $data = IngresoLibro::whereMonth('fecha_ingreso','01')->whereYear('fecha_ingreso', $x)->count();
-                    $valores2[1] = $data;
-                    break;
-                case 2:
-                    $data = IngresoLibro::whereMonth('fecha_ingreso','02')->whereYear('fecha_ingreso', $x)->count();
-                    $valores2[2] = $data;
-                    break;
-                case 3:
-                    $data = IngresoLibro::whereMonth('fecha_ingreso','03')->whereYear('fecha_ingreso', $x)->count();
-                    $valores2[3] = $data;
-                    break;
-                case 4:
-                    $data = IngresoLibro::whereMonth('fecha_ingreso','04')->whereYear('fecha_ingreso', $x)->count();
-                    $valores2[4] = $data;
-                    break;
-                case 5:
-                    $data = IngresoLibro::whereMonth('fecha_ingreso','05')->whereYear('fecha_ingreso', $x)->count();
-                    $valores2[5] = $data;
-                    break;
-                case 6:
-                    $data = IngresoLibro::whereMonth('fecha_ingreso','06')->whereYear('fecha_ingreso', $x)->count();
-                    $valores2[6] = $data;
-                    break;
-                case 7:
-                    $data = IngresoLibro::whereMonth('fecha_ingreso','07')->whereYear('fecha_ingreso', $x)->count();
-                    $valores2[7] = $data;
-                    break;
-                case 8:
-                    $data = IngresoLibro::whereMonth('fecha_ingreso','08')->whereYear('fecha_ingreso', $x)->count();
-                    $valores2[8] = $data;
-                    break;
-                case 9:
-                    $data = IngresoLibro::whereMonth('fecha_ingreso','09')->whereYear('fecha_ingreso', $x)->count();
-                    $valores2[9] = $data;
-                    break;
-                case 10:
-                    $data = IngresoLibro::whereMonth('fecha_ingreso','10')->whereYear('fecha_ingreso', $x)->count();
-                    $valores2[10] = $data;
-                    break;
-                case 11:
-                    $data = IngresoLibro::whereMonth('fecha_ingreso','11')->whereYear('fecha_ingreso', $x)->count();
-                    $valores2[11] = $data;
-                    break;
-                case 12:
-                    $data = IngresoLibro::whereMonth('fecha_ingreso','12')->whereYear('fecha_ingreso', $x)->count();
-                    $valores2[12] = $data;
-                    break;
-            }
-        }
-
-        $valores3 = [];
-        for ($i = 1; $i <= 12; $i++) {
-            switch ($i) {
-                case 1:
-                    $data = BajaLibro::whereMonth('fecha_baja','01')->whereYear('fecha_baja', $x)->count();
-                    $valores3[1] = $data;
-                    break;
-                case 2:
-                    $data = BajaLibro::whereMonth('fecha_baja','02')->whereYear('fecha_baja', $x)->count();
-                    $valores3[2] = $data;
-                    break;
-                case 3:
-                    $data = BajaLibro::whereMonth('fecha_baja','03')->whereYear('fecha_baja', $x)->count();
-                    $valores3[3] = $data;
-                    break;
-                case 4:
-                    $data = BajaLibro::whereMonth('fecha_baja','04')->whereYear('fecha_baja', $x)->count();
-                    $valores3[4] = $data;
-                    break;
-                case 5:
-                    $data = BajaLibro::whereMonth('fecha_baja','05')->whereYear('fecha_baja', $x)->count();
-                    $valores3[5] = $data;
-                    break;
-                case 6:
-                    $data = BajaLibro::whereMonth('fecha_baja','06')->whereYear('fecha_baja', $x)->count();
-                    $valores3[6] = $data;
-                    break;
-                case 7:
-                    $data = BajaLibro::whereMonth('fecha_baja','07')->whereYear('fecha_baja', $x)->count();
-                    $valores3[7] = $data;
-                    break;
-                case 8:
-                    $data = BajaLibro::whereMonth('fecha_baja','08')->whereYear('fecha_baja', $x)->count();
-                    $valores3[8] = $data;
-                    break;
-                case 9:
-                    $data = BajaLibro::whereMonth('fecha_baja','09')->whereYear('fecha_baja', $x)->count();
-                    $valores3[9] = $data;
-                    break;
-                case 10:
-                    $data = BajaLibro::whereMonth('fecha_baja','10')->whereYear('fecha_baja', $x)->count();
-                    $valores3[10] = $data;
-                    break;
-                case 11:
-                    $data = BajaLibro::whereMonth('fecha_baja','11')->whereYear('fecha_baja', $x)->count();
-                    $valores3[11] = $data;
-                    break;
-                case 12:
-                    $data = BajaLibro::whereMonth('fecha_baja','12')->whereYear('fecha_baja', $x)->count();
-                    $valores3[12] = $data;
-                    break;
-            }
-        }
 
         //fin de codigo para tecnicos
 
@@ -207,7 +272,42 @@ class EstadisticaController extends Controller
                 
 
 
-        return view('estadistica.index', compact('valores','valores2','valores3'));
+            return view('estadistica.index', compact('valores2','valores3'));
+        }
+
+
+    public function index2(Request $request){
+    
+    //codigo para Libros y prestamos
+    if($request->fecha1 == null && $request->fecha2 == null ){
+        $lectoresList = Lector::all();
+        $lectores = [];
+    
+        foreach ($lectoresList as $lector){
+           $cantMovimiento = 0;
+           $movimientoLector = Movimiento::where(['lector_id'=>$lector->id])->get();
+          // return $movimientolector;
+           foreach ($movimientoLector as $movimiento){
+                   $cantMovimiento ++;
+           }
+           $lectores[$lector->nombres.' '.$lector->apellidos] = $cantMovimiento;
+           
+        }
+    }else{
+        $lectoresList = Lector::all();
+        $lectores = [];
+        foreach ($lectoresList as $lector){
+            $cantMovimiento = 0;
+            $movimientoLector = Movimiento::where(['lector_id'=>$lector->id])->whereBetween('fecha_prestamo', [$request->fecha1, $request->fecha2])->get();
+           // return $movimientolector;
+            foreach ($movimientoLector as $movimiento){
+                    $cantMovimiento ++;
+            }
+            $lectores[$lector->nombres.' '.$lector->apellidos] = $cantMovimiento;
+            
+         }
+    }
+    return view('estadistica.index2', compact('lectores'));
     }
 
     /**
@@ -276,3 +376,4 @@ class EstadisticaController extends Controller
         //
     }
 }
+

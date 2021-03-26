@@ -54,7 +54,7 @@
                                     class="fas fa-plus-circle fa-md"></i></a>
                         </label>
 
-                        <select class="form-control" name="genero_id" id="genero_libros" required>
+                        <select class="form-control mi-selector" name="genero_id" id="genero_libros" required>
                             <option value="" disabled selected>--Seleccione un genero_libros--</option>
                             @foreach($genero_libros as $genero_libro)
                             <option value="{{$genero_libro->id}}" @if(old('genero_id')==$genero_libro->id) selected
@@ -71,7 +71,7 @@
                                     class="fas fa-plus-circle fa-md"></i></a>
                         </label>
 
-                        <select class="form-control" name="autor_id" id="autor" required>
+                        <select class="form-control mi-selector" name="autor_id" id="autor" required>
                             <option value="" disabled selected>--Seleccione un autor--</option>
                             @foreach($autores as $autor)
                             <option value="{{$autor->id}}" @if(old('autor_id')==$autor->id) selected
@@ -82,13 +82,13 @@
                 </div>
                 <div class="col-4">
                     <div class="form-group ">
-                        <label for="editorials" class="">Editorial</label>
+                        <label for="editorials " class="">Editorial</label>
                         <label for="editorials">
                             <a role="button" type="button" href="{{route('editorials.create')}}" title="Nuevo genero"><i
                                     class="fas fa-plus-circle fa-md"></i></a>
                         </label>
 
-                        <select class="form-control" name="editorial_id" id="editorial" required>
+                        <select class="form-control mi-selector" name="editorial_id" id="editorial" required>
                             <option value="" disabled selected>--Seleccione un editorial--</option>
                             @foreach($editorials as $editorial)
                             <option value="{{$editorial->id}}" @if(old('editorial_id')==$editorial->id) selected
@@ -105,7 +105,7 @@
                                     class="fas fa-plus-circle fa-md"></i></a>
                         </label>
 
-                        <select class="form-control" name="tipo_libro_id" id="tipo_libro" required>
+                        <select class="form-control mi-selector" name="tipo_libro_id" id="tipo_libro" required>
                             <option value="" disabled selected>--Seleccione un tipo--</option>
                             @foreach($tipo_libros as $tipo_libro)
                             <option value="{{$tipo_libro->id}}" @if(old('tipo_libro_id')==$tipo_libro->id) selected
@@ -151,6 +151,14 @@
 </form>
 @endsection
 @push('scripts')
+
+<script>
+    jQuery(document).ready(function($){
+        $(document).ready(function() {
+            $('.mi-selector').select2();
+        });
+    });
+</script>
 
 <script>
     

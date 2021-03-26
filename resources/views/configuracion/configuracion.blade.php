@@ -24,6 +24,7 @@
                 </div>
                 <h3 class="card-title">
                     <i class="fas fa-edit">  Semanas de entrega</i>
+                    
                 </h3>
                 <br>
                 <br>

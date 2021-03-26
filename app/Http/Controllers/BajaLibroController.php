@@ -22,14 +22,14 @@ class BajaLibroController extends Controller
     public function index()
     {
         $tipo_bajas = TipoBaja::all();
-        $editoriales= Editorial::all();
+        $libros = Libro::all();
         $baja_libros = BajaLibro::all();
         $configuracion = Configuracion::first();
         $lectores = Lector::all();
         
 
 
-        return view('baja_libros.index', compact('baja_libros','tipo_bajas','editoriales','configuracion','lectores'));
+        return view('baja_libros.index', compact('baja_libros','tipo_bajas','libros','configuracion','lectores'));
     }
 
     /**
@@ -53,39 +53,40 @@ class BajaLibroController extends Controller
      */
     public function store(Request $request)
     {
-        
         try{
                 // return $request;
-            for ($i = 0; $i < sizeof($request->cantidad); $i++){
-                $libro = Libro::find($request->libros_select_id[$i]);
-                if (($libro->stock_fantasma > 0) && ($request->cantidad[$i] <= $libro->stock_fantasma)){
-                    if (($libro->stock_libro > $request->cantidad[$i]) || ($libro->stock_fantasma > $request->cantidad[$i]) || ($libro->stock_libro != 0)){
-                        //return $request;
-                        $baja_libro = new bajaLibro();
-                        $baja_libro->tipo_bajas_id = $request->tipo_baja_id;  
-                        $baja_libro->libro_id = $request->libros_select_id[$i];
-                        $baja_libro->lector_id = $request->lector_id[$i];
-                        $baja_libro->cantidad = $request->cantidad[$i];
-                        $baja_libro->fecha_baja = $request->fecha_baja;
-                        $baja_libro->descripcion = $request->descripcion;
-                        $baja_libro->save();
-                        //Resta del stock
+                for ($i = 0; $i < sizeof($request->cantidad); $i++){
+                    $libro = Libro::find($request->libros_select_id[$i]);
+                    if (($libro->stock_fantasma > 0) && ($request->cantidad[$i] <= $libro->stock_fantasma)){
+                        if (($libro->stock_libro > $request->cantidad[$i]) || ($libro->stock_fantasma > $request->cantidad[$i]) || ($libro->stock_libro != 0)){
+                            //return $request;
+                            $baja_libro = new bajaLibro();
     
-                        
-                        $libro->stock_libro -= $request->cantidad[$i];
-                        $libro->stock_fantasma -= $request->cantidad[$i];
+                                $baja_libro->tipo_bajas_id = $request->tipo_baja_id;  
+                                $baja_libro->libro_id = $request->libros_select_id[$i];
+                                $baja_libro->lector_id = $request->lector_id[$i];
+                                $baja_libro->cantidad = $request->cantidad[$i];
+                                $baja_libro->fecha_baja = $request->fecha_baja;
+                                $baja_libro->descripcion = $request->descripcion;
+                                $baja_libro->save();
+                                //Resta del stock
+            
+                                
+                                $libro->stock_libro -= $request->cantidad[$i];
+                                $libro->stock_fantasma -= $request->cantidad[$i];                            
+    
+                        }
                     }else{
-                        return redirect(route('baja_libros.index'))->with('error', 'Libro '.$libro->nombre.' no se puede dar de baja!');     
+                        return redirect(route('baja_libros.index'))->with('error', 'Libro '.$libro->nombre.' se encuentra prestado o ya no hay stock');
                     }
-                }else{
-                    return redirect(route('baja_libros.index'))->with('error', 'Libro '.$libro->nombre.' se encuentra prestado o ya no hay stock');
+    
+                $libro->update();
+                return redirect(route('baja_libros.index'))->with('success'.'Baja nueva guardado con exito!'); 
                 }
 
-            $libro->update();
-            }
-            return redirect(route('baja_libros.index'))->with('success'.'Ingreso nuevo guardado con exito!'); 
+            
         }catch(Exception $e){
-            return redirect(route('baja_libros.index'))->with('error', 'Libro '.$libro->nombre.' no se puede dar de baja!');
+            return redirect(route('baja_libros.index'))->with('error', 'No se puede dar de baja!');
         }
     }
 
